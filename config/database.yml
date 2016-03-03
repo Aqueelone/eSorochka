@@ -1,6 +1,6 @@
 development:
   adapter: postgresql
-  database: sitesupportDev
+  database: eSorochkaDev
   encoding: unicode
   pool: 16
   username: su
@@ -9,7 +9,7 @@ development:
 
 test: &TEST
   adapter: postgresql
-  database: sitesupportTest
+  database: eSorochkaTest
   encoding: unicode
   pool: 16
   username: su
@@ -18,7 +18,7 @@ test: &TEST
 
 production:
   adapter: postgresql
-  database: sitesupport
+  database: eSorochka
   pool: 16
   encoding: su
   username: su
