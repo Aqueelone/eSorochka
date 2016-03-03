@@ -1,0 +1,29 @@
+development:
+  adapter: postgresql
+  database: sitesupportDev
+  encoding: unicode
+  pool: 16
+  username: su
+  password: su
+  host: localhost
+
+test: &TEST
+  adapter: postgresql
+  database: sitesupportTest
+  encoding: unicode
+  pool: 16
+  username: su
+  password: su
+  host: localhost
+
+production:
+  adapter: postgresql
+  database: sitesupport
+  pool: 16
+  encoding: su
+  username: su
+  password: su
+  host: localhost
+
+cucumber:
+  <<: *TEST

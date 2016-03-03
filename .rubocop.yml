@@ -1,0 +1,47 @@
+AllCops:
+  RunRailsCops: true
+  Include:
+    - 'app/models/*.rb'
+    - 'app/controllers/*.rb'
+    - 'app/viewa/*.rb'
+    - 'spec/**/*.rb'
+    - 'test/**/*'
+    - 'features/**/*'
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+
+Documentation:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+StringLiterals:
+   AutoCorrect: true
+
+Style/RegexpLiteral:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+# Commonly used screens these days easily fit more than 80 characters.
+Metrics/LineLength:
+  Max: 140
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class
+Metrics/MethodLength: 
+  Max: 20
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+Metrics/ClassLength:
+  Max: 1500
+  
+# Raise AbcSize from 15 to 20
+Metrics/AbcSize:
+  Max: 20
+
+# Reset some HoundCI changes back to Rubocop defaults
+Style/DotPosition:
+  EnforcedStyle: leading

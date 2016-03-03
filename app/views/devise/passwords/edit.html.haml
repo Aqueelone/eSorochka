@@ -1,0 +1,25 @@
+.add-comment.add-comment-velvet.styled.col-ss450-row
+  .add-comment-title
+    %h3 Change your password
+  .comment-form
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      .form-inner
+        = devise_error_messages!
+        = f.hidden_field :reset_password_token
+        .field.field_text
+          = f.label :password, "New password"
+          %br/
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} characters minimum)
+            %br/
+          = f.password_field :password, autofocus: true, autocomplete: "off"
+        .field.field_text
+          = f.label :password_confirmation, "Confirm new password"
+          %br/
+          = f.password_field :password_confirmation, autocomplete: "off"
+      .rowSubmit
+        .left
+          = render "devise/shared/links"
+        %span.actions.btn.btn-send
+          = f.submit "Change my password", class: 'gradient'

@@ -1,0 +1,28 @@
+.add-comment.add-comment-velvet.styled.col-ss450-row
+  .add-comment-title
+    %h3 Log in
+  .comment-form
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-inner
+        .field.field_text
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true
+        .field.field_text
+          = f.label :password
+          %br/
+          = f.password_field :password, autocomplete: "off"
+        - if devise_mapping.rememberable?
+          .field.field_text
+            = f.label :remember_me
+            %br/
+            .rowCheckbox.checkbox-large
+              .custom-checkbox
+                = f.check_box :remember_me, class: 'gradient', value: 'user_remember_me'
+                %label{for: 'user_remember_me', class: 'turnedable checked'}
+      .rowSubmit
+        .left
+          = render "devise/shared/links"
+        %span.actions.btn.btn-send
+          = f.submit "Log in", class: 'gradient'
+

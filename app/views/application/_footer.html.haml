@@ -1,0 +1,14 @@
+%section
+  .divider
+  .site-info
+    Sitesupport by Sergy Nazarevich
+  .divider
+  .bottom_button
+    %a{class: ['button', 'large', 'btn_yellow'], href: 'https://github.com/Aqueelone/sitesupport', target: 'blank'} #{content_tag(:span, '', class: 'github')} Find us on GITHUB!
+  .copyright
+    %p
+      \&copy; #{Time.now.year}
+      %a{href: root_path, title: ENV["APP_NAME"]} All Rights Reserved
+    %p
+      Rails #{Rails.version} | Env #{Rails.env}
+      = debug(params) if Rails.env.development?

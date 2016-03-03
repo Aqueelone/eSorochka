@@ -1,0 +1,27 @@
+.add-comment.add-comment-velvet.styled.col-ss450-row
+  .add-comment-title
+    %h3 Sign up
+  .comment-form  
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .form-inner
+        = devise_error_messages!
+        .field.field_text
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true
+        .field.field_text
+          = f.label :password
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} characters minimum)
+          %br/
+          = f.password_field :password, autocomplete: "off"
+        .field.field_text
+          = f.label :password_confirmation
+          %br/
+          = f.password_field :password_confirmation, autocomplete: "off"
+      .rowSubmit
+        .left
+          = render "devise/shared/links"
+        %span.actions.btn.btn-send
+          = f.submit "Sign up", class: 'gradient'

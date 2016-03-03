@@ -1,0 +1,22 @@
+.add-comment.add-comment-velvet.styled.col-ss450-row
+  .add-comment-title
+    %h3 List of Users
+  .comment-form
+    .form-inner
+      %table.table.table-striped.table-bordered.table-condensed
+        %thead
+          %tr.rowSubmit
+            %th
+              Email
+            %th
+              Tickets
+            %th
+              Created at
+        %tbody
+          - @users.each do |user|
+            %tr.rowSubmit
+              %td
+                = user.email
+              %td
+              %td
+                = user.created_at

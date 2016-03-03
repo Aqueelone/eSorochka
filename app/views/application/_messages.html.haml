@@ -1,0 +1,9 @@
+- flash.each do |name, msg|
+  - if msg.is_a?(String)
+    - type = 'info'
+    - msgd = msg.downcase
+    - msgd['success'] && type = 'success'
+    - ( msgd['error'] || msgd['fail'] || msgd['invalid'] ) && type= 'danger'
+    %div{:class => "alert alert-#{type}"}
+      %a.close{"data-dismiss" => "alert"} ×
+      = content_tag :div, msg, :id => "flash_#{name}"
