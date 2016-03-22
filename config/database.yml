@@ -20,7 +20,7 @@ production:
   adapter: postgresql
   database: eSorochka
   pool: 16
-  encoding: su
+  encoding: unicode
   username: su
   password: su
   host: localhost

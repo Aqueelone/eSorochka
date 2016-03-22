@@ -1,27 +1,37 @@
-.add-comment.add-comment-velvet.styled.col-ss450-row
-  .add-comment-title
-    %h3 Sign up
-  .comment-form  
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      .form-inner
+.col-sm-3
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    .widget-container.widget-profile.boxed.blue-line
+      .widget-title.abs
+        %h3 Sign up
+      .avatar
+        %img{src: '../no-gravatar.jpg'}
+      .inner
         = devise_error_messages!
-        .field.field_text
+        .field.field_text.clearfix
           = f.label :email
           %br/
           = f.email_field :email, autofocus: true
-        .field.field_text
+        .field.field_text.clearfix
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true
+        .field.field_text.clearfix
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true
+        .field.field_text.clearfix
           = f.label :password
           - if @minimum_password_length
             %em
               (#{@minimum_password_length} characters minimum)
           %br/
           = f.password_field :password, autocomplete: "off"
-        .field.field_text
+        .field.field_text.clearfix
           = f.label :password_confirmation
           %br/
           = f.password_field :password_confirmation, autocomplete: "off"
-      .rowSubmit
-        .left
+      .follow.clearfix
+        .left.widget-shared
           = render "devise/shared/links"
-        %span.actions.btn.btn-send
-          = f.submit "Sign up", class: 'gradient'
+        %span.btn.btn-icon.btn-icon-right.btn-icon-signup.btn-green.right
+          = f.submit "Sign up", class: 'submit'

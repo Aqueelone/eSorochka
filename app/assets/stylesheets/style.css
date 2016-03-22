@@ -1,0 +1,430 @@
+/*
+*   Style file for sorochka.com
+*   author: Sergy Nazarevich aka Aqueelone
+*   e-mail: aqueelone@gmail.com
+*/
+html {
+    margin: 0px 0px 0px -15px;
+    width: 103%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-family: 'OpenSans', sans-serif;
+}
+.navbar-brand {
+    position: absolute;
+    top: 3px;
+    left: 80px;
+    padding: 0px;
+}
+.title-box{
+    margin: 0px auto;
+}
+.title-box .city-break{
+    display: inline-block;
+}
+.title-box .col-sm-12{
+    float: right;
+    width: 50%;
+}
+.title-box .menu{
+    margin: 40px 0px 0px 0px;
+    text-shadow: 1px 1px 2px #04205B;
+}
+.submenu-1 .menu-level-1 a, .submenu-2 .menu-level-2 a{
+    text-transform: lowercase;
+}
+.note {
+    position: absolute;
+    border: #81D5FF solid 1px;
+    width: 30px;
+    height: 20px;
+    border-radius: 10px;
+    right: 10px;
+    top: 3px;
+    color: #81D5FF;
+    box-shadow: 0px 0px 2px #81D5FF;
+}
+a:hover .note{
+    border: #9cd70e solid 1px;
+    color: #9cd70e;
+    box-shadow: 0px 0px 2px #9cd70e;
+}
+#home-slider{
+    background-image: url('homeback.jpg');
+    min-height: 650px;
+}
+#home-slider > img {
+    width: 100%;
+    margin: 25px 0px 0px 0px;
+}
+#home-slider .title1{
+    position: relative;
+    top: 250px;
+    left: 100px;
+    font-size: 52px;
+    font-family: 'okolaksbolditalic', sans-serif;
+    color: white;
+}
+#home-slider .title2{
+     position: relative;
+     top: 280px;
+     left: 250px;
+     font-size: 52px;
+     font-family: 'okolaksbolditalic', sans-serif;
+     color: lightblue;
+ }
+#home-slider .title3{
+    position: relative;
+    top: 185px;
+    left: 800px;
+    font: normal normal normal 62px/1.2em 'anonymous_probold',sans-serif;
+    color: red;
+    display: inline;
+    padding: 20px 10px 10px 10px;
+    font-family: 'anonymous_probold';
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 40px white;
+    border-radius: 10px;
+  }
+#home-slider .title3 span{
+    margin: 0px 0px 0px 102px;
+}
+#about .heading{
+    background: rgba(84,42,24,0.2);
+    margin-top: 30px;
+}
+#contact{
+    background-image: url('feedback.jpg');
+    min-height: 850px;
+    margin-top: -60px;
+}
+#contact h2, #contact p, #contact span,  #contact li, #about h2, #about p {
+    font-family: 'okolaksbold', sans-serif;
+    color: #F3F7F7;text-shadow: 1px 1px 5px #000, 2px 2px 10px #605950, 3px 3px 30px #352914;
+    font-size: 16px;
+}
+#contact h2{
+    padding: 20px 0px 0px 0px;
+}
+#contact p{
+    padding: 0px 0px 0px 0px;
+    margin: -20px 0px 0px 0px;
+}
+#contact ul.address{
+    margin: 120px 0px 0px 80px;
+}
+#contact .contact-feedback{
+    border-radius: 20px;
+    padding: 0px 20px;
+    margin: 10px 10px 10px 60px;
+    background: rgba(84,42,24,0.2);
+}
+#contact .contact-feedback .form-group{
+    clear: both;
+    min-height: 60px;
+    margin-bottom: 10px;
+}
+#contact .contact-feedback .form-group.last{
+    margin: 0px -5px 10px 5px;
+}
+#contact .contact-feedback input, #contact .contact-feedback textarea{
+    color: #04205D;
+    text-shadow: 0px 0px 3px #fff;
+    float: left;
+    padding: 5px;
+    margin: 0px 0px 0px 5px;
+}
+#contact .contact-feedback .wysihtml5-sandbox{
+    min-height: 250px;
+    color: #000;
+    text-shadow: 1px 1px 2px #fff, 0px 0px 10px #ccc;
+}
+span.wisiwig-color-silver {color: silver !important;}
+span.wisiwig-color-gray {color: gray !important;}
+span.wisiwig-color-maroon {color: maroon !important;}
+span.wisiwig-color-red {color: red !important;}
+span.wisiwig-color-purple {color: purple !important;}
+span.wisiwig-color-green {color: green !important;}
+span.wisiwig-color-olive {color: olive !important;}
+span.wisiwig-color-navy {color: navy !important;}
+span.wisiwig-color-blue {color: blue !important;}
+span.wisiwig-color-orange {color: orange !important;}
+.wysihtml5-toolbar li.dropdown.open a.wysihtml5-colors-title{
+    color: black !important;
+}
+#contact .contact-feedback .wysihtml5-toolbar.focused{
+    background: rgba(102,175,233,0.86);
+    border: #66afe9;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    box-shadow: 0px 0px 2px #66afe9;
+    -webkit-transition: background-color .5s linear, opacity .5s linear;
+    -moz-transition: background-color .5s linear, opacity .5s linear;
+    -o-transition: background-color .5s linear, opacity .5s linear;
+    transition: background-color .5s linear, opacity .5s linear;
+}
+#contact .contact-feedback .wysihtml5-sandbox:focus{
+    background: rgba(102,175,233,0.5);
+}
+#contact .contact-feedback input::-webkit-input-placeholder {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+#contact .contact-feedback input::-moz-placeholder          {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+#contact .contact-feedback input:-moz-placeholder           {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+#contact .contact-feedback input:-ms-input-placeholder      {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+#contact .contact-feedback textarea::-webkit-input-placeholder {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+#contact .contact-feedback textarea::-moz-placeholder          {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+#contact .contact-feedback textarea:-moz-placeholder           {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+#contact .contact-feedback textarea:-ms-input-placeholder      {color:rgba(255, 255, 255,0.7); text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;}
+
+#contact .contact-feedback input#name{
+    border-top-left-radius: 10px;
+    width:48%;
+}
+#contact .contact-feedback input#email{
+    border-top-right-radius: 10px;
+    width:48%;
+    float: right;
+}
+textarea.form-control {
+    min-height: 180px;
+    resize: none;
+}
+#contact .contact-feedback .btn-default{
+    background: none;
+}
+#contact .contact-feedback .wysihtml5-toolbar span, #contact .contact-feedback .wysihtml5-toolbar a{
+    color:rgba(255, 255, 255,0.5);
+    text-shadow: 1px 1px 10px #000, 2px 2px 20px #605950;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+#contact .contact-feedback .wysihtml5-toolbar.focused span, #contact .contact-feedback .wysihtml5-toolbar.focused a{
+     color:rgba(255, 255, 255, 1);
+    font-weight: bold;
+    text-shadow: 0px 1px 2px #000, 2px 2px 10px #605950;
+    -webkit-transition: background-color .5s linear, opacity .5s linear;
+    -moz-transition: background-color .5s linear, opacity .5s linear;
+    -o-transition: background-color .5s linear, opacity .5s linear;
+    transition: background-color .5s linear, opacity .5s linear;
+}
+#about{
+    background-image: url('about.jpg');
+    min-height: 650px;
+    margin-top: -60px;
+}
+.icon-catalog{
+    width: 92px;
+    height: 92px;
+    background-image: url('icon-catalog.png');
+    position: relative;
+    background-position: center 0;
+    top: 20px;
+    display: inline-block;
+    margin: 0px -70px 0px 0px;
+}
+#catalog {
+    margin: -60px 0px 0px 0px;
+    min-height: 850px;
+    width: 110%;
+    position: relative;
+}
+#catalog .topbutton{
+    margin: -300px 0px 0px 500px;
+    color: white;
+    border: #777 1px solid;
+}
+#contact .topbutton{
+    color:rgba(255, 255, 255,0.8);
+    border: 1px solid rgba(204,204,204,0.5);
+}
+#catalog .topbutton, #contact .topbutton{
+    position: relative;
+    font: normal normal normal 32px/1.2em 'okolaksregularitalic',sans-serif;
+    border-radius: 10px;
+    padding: 0px 10px 10px 10px;
+    opacity: 0.8;
+}
+#catalog .topbutton:hover, #contact .topbutton:hover{
+    border-color: #028fcc;
+    background-color: #028fcc;
+    opacity: 1;
+    color: white;
+    -webkit-transition: background-color .5s linear, opacity .5s linear;
+    -moz-transition: background-color .5s linear, opacity .5s linear;
+    -o-transition: background-color .5s linear, opacity .5s linear;
+    transition: background-color .5s linear, opacity .5s linear;
+}
+#product{
+    background-image: url('product.jpg');
+    min-height: 650px;
+    display:none;
+    margin-top: -60px;
+}
+
+#order{
+    min-height: 650px;
+    background: rgba(255, 255, 255, 0.8);
+    margin-top: -60px;
+}
+.topwhite{
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    position: relative;
+}
+.col-60perc-right{
+    height: 400px;
+    width: 540px;
+    margin: 0px 0px 0px 40px;
+    display: inline-block;
+}
+.tf-gallery{
+    height: 400px;
+}
+.gallery-thumbs-wrap{
+    float: left;
+    margin: -60px 0px 0px 0px;
+}
+.contact-form{
+    padding: 20px;
+}
+.widget-shared{
+    padding: 5px 0px 0px 3px;
+    font: normal normal normal 12px/1em 'Open Sans',sans-serif;
+    color: #4BB4E8;
+    text-shadow: 1px 1px 1px #000;
+    width: 130px;
+}
+.contact-btn {
+    position: fixed;
+    top: 48%;
+    z-index: 9999;
+    margin-left: -35px;
+    transform: translate(0, -50%);
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.contact-btn:hover{
+    margin-left: 0px;
+    transform: translate(0, 0%);
+    -ms-transform: rotate(00deg);
+    -webkit-transform: rotate(00deg);
+    transform: rotate(00deg);
+}
+.btn-contact{
+    font-weight: bold;
+}
+.fb-btn{
+    position: fixed;
+    top: 70%;
+    z-index: 9999;
+    margin-left: -10px;
+}
+#navpanel3{
+    margin-top: -40px;
+    height: 30px;
+    padding: 30px;
+}
+footer {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+}
+footer section {
+    padding: 10px 10px 0px 0px;
+    border-top: #1E86B5 solid 1px;
+    margin: 20px 0px 0px 0px;
+}
+footer .copyright{
+    float: right;
+}
+footer .copyright p {
+    font: normal normal normal 14px/1.4em 'Open Sans',sans-serif;
+    color: #1E86B5;
+}
+footer .menu {
+    border-radius: 0px;
+    background: none;
+    text-align: center;
+    border: none;
+    box-shadow: none;
+    width: 70%;
+    background: none;
+    display: inline-block;
+}
+footer .menu li {
+    border-left: none;
+}
+footer .menu li a{
+    padding: 10px;
+}
+footer .menu > li a.active, footer .dropdown > li a:hover {
+    color: rgba(211, 2, 148, 1);
+    padding: 10px;
+    background: none;
+    transition: background-color 0.4s ease 0s;
+    border: none;
+    transition: background-color 0.4s ease 0s;
+    text-shadow: none;
+}
+footer .menu > li{
+    border-top: none;
+}
+footer .menu > li > a{
+    border-top:none;
+}
+footer .menu > li > a:hover{
+    border-top:none;
+}
+footer .menu > li > ul{
+    display: none;
+}
+.debug_dump{
+    width: 250px;
+    font-size: 10px;
+    background: none;
+    color: #1E86B5;
+    margin: -30px 0px 0px 0px;
+    padding: 2px 10px 0px 10px;
+}
+.debug {
+    color: #1E86B5;
+}
+.clearfix{
+    clear: both;
+}
+.right{
+    float: right;
+}
+.left{
+    float: left;
+}
+.abs{
+    position: absolute;
+}
+.alert{
+    position: absolute;
+    right: 630px;
+    top: 50px;
+    font-size: 14px;
+}
+.top25{
+    min-height: 25px;
+}
+.text-left{
+    text-align: left;
+}
+.ps-theme-sorochka {
+@include ps-container(map-merge($ps-theme-default, (
+border-radius: 5px,
+scrollbar-x-rail-height: 20px,
+scrollbar-x-height: 20px,
+scrollbar-y-rail-width: 20px,
+scrollbar-y-width: 20px
+)));
+}
+.ps-scrollbar-x-rail, .ps-scrollbar-y-rail{
+    display: none;
+}
+
+.container {
+        width: 100% !important;
+    }

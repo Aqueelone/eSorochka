@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="ec2-52-29-207-123.eu-central-1.compute.amazonaws.com" traceLevel="ERRORS">
+    <serverData>
+      <paths name="ec2-52-29-207-123.eu-central-1.compute.amazonaws.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/work/eSorochka" local="$PROJECT_DIR$" web="http://ec2-52-29-207-123.eu-central-1.compute.amazonaws.com/work/eSorochka" />
+            <mapping local="" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

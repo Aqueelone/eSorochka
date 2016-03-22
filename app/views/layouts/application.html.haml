@@ -4,9 +4,9 @@
     %meta{charset: "utf-8"}
     %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
-    %meta{:content => content_for?(:description) ? yield(:description) : "Sitesupport", :name => "description"}
+    %meta{:content => content_for?(:description) ? yield(:description) : "Сорочка ОПТ", :name => "description"}
     %meta{content: "Sergy Nazarevich", name: "author"}
-    %title= content_for?(:title) ? "Sitesupport | " + yield(:title) : "Sitesupport"
+    %title= content_for?(:title) ? "Сорочка ОПТ | " + yield(:title) : "Сорочка ОПТ"
 
     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
     /[if lt IE 9]
@@ -16,13 +16,39 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    .body_wrap.gradient{style: 'min-height: 433px;'}
-      .navbar-header
-        .site-info
-          = link_to "Sitesupport", "/", class: "navbar-brand site-info"
-        = render partial: 'menu'
-      .container
-        = render partial: 'messages'
-        = yield
-      %footer.footer
-        = render partial: 'footer'
+    %header#home
+      %nav.navbar.navbar-transparent.navbar-fixed-top
+        .main-nav
+          .container
+            .navbar-header
+              .button{type: 'button', class: 'navbar-toggle', data: {:toggle => 'collapse',  :target => '.navbar-collapse'}}
+                %span.sr-only
+                  Toggle navigation
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
+              %a.navbar-brand{href: '/'}
+                %img{src: '../logo.png'}
+            .collapse.navbar-collapse
+              = render partial: 'menu'
+    .container
+      = render partial: 'messages'
+      .top25.clearfix
+      = yield
+      #sign_up_modal.modal.fade
+        .modal-dialog
+          .modal-content
+            = render partial: 'signup'
+          .modal-header
+          %button.close{type: 'button', aria: {:hidden => 'true'},  data: {:dismiss => 'modal'}}
+            %i.fa.fa-times-circle
+      #sign_in_modal.modal.fade
+        .modal-dialog
+          .modal-content
+            = render partial: 'signin'
+          .modal-header
+          %button.close{type: 'button', aria: {:hidden => 'true'},  data: {:dismiss => 'modal'}}
+            %i.fa.fa-times-circle
+      = render partial: 'leftpanel'
+    %footer.footer
+      = render partial: 'footer'

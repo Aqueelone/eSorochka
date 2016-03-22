@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails eSorochka: production" uuid="de1762eb-0a81-4177-a41e-fb42d3a0e21a">
+      <user-name>su</user-name>
+      <user-password>dfd9dfdf</user-password>
+      <ssh-properties>
+        <enabled>true</enabled>
+        <proxy-host>ec2-52-29-207-123.eu-central-1.compute.amazonaws.com</proxy-host>
+        <proxy-port>22</proxy-port>
+        <secret-storage>master_key</secret-storage>
+        <user>ec2-user</user>
+        <use-password>false</use-password>
+        <private-key-path>D:\Sergy\work\awsaquYahoo.ppk</private-key-path>
+      </ssh-properties>
+    </data-source>
+    <data-source name="Rails eSorochka: development" uuid="14100c78-2bb8-461b-8700-3fceb8738d16">
+      <user-name>su</user-name>
+      <user-password>dfd9dfdf</user-password>
+      <schema-pattern>eSorochkaDev.pg_catalog eSorochkaDev.public</schema-pattern>
+      <default-schemas>eSorochkaDev.public</default-schemas>
+      <ssh-properties>
+        <enabled>true</enabled>
+        <proxy-host>ec2-52-29-207-123.eu-central-1.compute.amazonaws.com</proxy-host>
+        <proxy-port>22</proxy-port>
+        <secret-storage>master_key</secret-storage>
+        <user>ec2-user</user>
+        <use-password>false</use-password>
+        <private-key-path>D:\Sergy\work\awsaquYahoo.ppk</private-key-path>
+      </ssh-properties>
+    </data-source>
+    <data-source name="Rails eSorochka: cucumber" uuid="a1b9970d-7f76-406e-9ce8-dc6ccb3aea96">
+      <user-name>su</user-name>
+      <user-password>dfd9dfdf</user-password>
+      <schema-pattern>eSorochkaTest.pg_catalog eSorochkaTest.public</schema-pattern>
+      <default-schemas>eSorochkaTest.public</default-schemas>
+      <ssh-properties>
+        <enabled>true</enabled>
+        <proxy-host>ec2-52-29-207-123.eu-central-1.compute.amazonaws.com</proxy-host>
+        <proxy-port>22</proxy-port>
+        <secret-storage>master_key</secret-storage>
+        <user>ec2-user</user>
+        <use-password>false</use-password>
+        <private-key-path>D:\Sergy\work\awsaquYahoo.ppk</private-key-path>
+      </ssh-properties>
+    </data-source>
+    <data-source name="Rails eSorochka: test" uuid="8a20deab-9866-49f4-9db2-38b77df5cb9c">
+      <user-name>su</user-name>
+      <user-password>dfd9dfdf</user-password>
+      <schema-pattern>eSorochkaTest.pg_catalog eSorochkaTest.public</schema-pattern>
+      <default-schemas>eSorochkaTest.public</default-schemas>
+      <ssh-properties>
+        <enabled>true</enabled>
+        <proxy-host>ec2-52-29-207-123.eu-central-1.compute.amazonaws.com</proxy-host>
+        <proxy-port>22</proxy-port>
+        <secret-storage>master_key</secret-storage>
+        <user>ec2-user</user>
+        <use-password>false</use-password>
+        <private-key-path>D:\Sergy\work\awsaquYahoo.ppk</private-key-path>
+      </ssh-properties>
+    </data-source>
+  </component>
+</project>
