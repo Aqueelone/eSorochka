@@ -1,5 +1,5 @@
 # eSorochka
 E-commerce simple internet shop
 
-<img src="/doc/models_complete.svg" />
-<img src="/doc/controllers_complete.svg" />
+![](images/table /doc/models_complete.svg?raw=true)
+![](images/table /doc/controllers_complete.svg?raw=true)
