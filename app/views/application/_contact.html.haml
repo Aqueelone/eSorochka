@@ -1,0 +1,41 @@
+.container
+  .row
+    .heading.text-center.col-sm-8.col-sm-offset-2.wow.fadeInUp.animated{ 'data-wow-duration' => "1500ms", 'data-wow-delay' => "500ms"}
+      %h2
+        Contact Us
+      %p
+        Зв'яжіться з нами і ми відповимо на усі ваші запитання!
+    .contact-form.wow.fadeIn.animated{ 'data-wow-duration' => "2000ms", 'data-wow-delay' => "1000ms"}
+      .col-sm-6
+        .contact-feedback
+          %h2
+            Write to Us:
+          .form-group
+            %input.form-control{ type: "text", name: "name", id: "name", placeholder: "Your Name...", required: "required"}
+            %input.form-control{ type: "text", name: "email", id: "email", placeholder: "Your Email...", required: "required"}
+          .form-group
+            %input.form-control{ type: "text", name: "sabject", id: "sabject", placeholder: "Sabject...", required: "required"}
+          .form-group.last
+            %text-area.form-control.wysihtml5.wow.fadeIn.animated{name: "message", id: "message", placeholder: "Enter your message", row: '12', cols: "45", required: "required"}
+          .row.wow.fadeInUp.animated{ 'data-wow-duration' => "2000ms", 'data-wow-delay' => "800ms"}
+            .col-sm-6
+              .form-group
+            .col-sm-6
+              .form-group
+                %a.btn.btn-start.btn-submit.topbutton.animated.scroll.fadeInUpBig{ href: '#contact'}
+                  send now
+      .col-sm-6
+        .contact-info.wow.fadeInUp.animated{ 'data-wow-duration' => "2000ms", 'data-wow-delay' => "800ms"}
+          %ul.address
+            %li
+              %i.glyphicon.glyphicon-earphone
+              %span
+                Phone:
+              +38-097-601-2988
+            %br
+            %li
+              %i.glyphicon.glyphicon-envelope
+              %span
+                Email:
+              %a{ href: 'mailto: info@sorochkaopt.com'}
+                info@sorochkaopt.com

@@ -1,58 +1,55 @@
-.dropdown-wrap.boxed-velvet.topmenu
-  %ul{class: ['dropdown', 'inner', 'clearfix', 'gradient']}
-    %li{class: ['menu-level-0', 'first']}
-      %a{href: '/', class: 'gradient'}
-        %span Home
+%ul{class: ['nav', 'navbar-nav', 'navbar-right']}
+  %li{class: ['scroll', 'active']}
+    %a{href: '#home'}
+      %i{class: [ 'menu-icon', 'menu-icon-1']}
+      Home
+  %li{class: 'scroll'}
+    %a{href: '#catalog'}
+      %i{class: [ 'menu-icon', 'menu-icon-3']}
+      Catalog
+  %li{class: 'scroll'}
+    %a{href: '#order', class: 'gradient'}
+      %i{class: [ 'menu-icon', 'menu-icon-2']}
+      Order
+  %li{class: 'scroll'}
+    %a{href: '#about', class: 'gradient'}
+      %i{class: [ 'menu-icon', 'menu-icon-6']}
+      About Us
+  - if current_user
     %li{class: ['menu-level-0', 'parent']}
-      = link_to 'About Us', :controller => '/static_pages', :action => 'about', class: 'gradient'
+      %a{href: '#', class: 'gradient'}
+        %sup{class: ['note', 'gradient']} 3
+        %i{class: [ 'menu-icon', 'menu-icon-9']}
+        Account
       %ul.submenu-1
         %li{class: ['menu-level-1', 'first']}
-          = link_to 'About Us', :controller => '/static_pages', :action => 'about', class: 'gradient'
-        %li{class: ['menu-level-1', 'last']}
-          = link_to 'Contacts', :controller => '/static_pages', :action => 'contacts', class: 'gradient'
-    - if current_user
-      %li{class: ['menu-level-0', 'parent']}
-        %a{href: '#', class: 'gradient'}
-          %sup{class: ['note', 'gradient']} 3
-          %span Account
-        %ul.submenu-1
-          %li{class: ['menu-level-1', 'first']}
-            = link_to 'Users', :controller => '/static_pages', :action => 'userslist', class: 'gradient'
-          %li{class: 'menu-level-1'}
-            %a{href: '/users/edit', class: 'gradient'}
-              %span My profile
-          %li{class: ['menu-level-1', 'parent', 'last']}
-            %a{href: '#', class: 'gradient'}
-              %sup{class: ['note', 'gradient']} 3 
-              %span Assign for me
-            %ul.submenu-2
-              %li{class: ['menu-level-2', 'first']}
-                %a{href: '#', class: 'gradient'}
-                  %sup{class: ['note', 'gradient']} 1 
-                  %span Waiting for Customer
-              %li{class: ['menu-level-2', 'last']}
-                %a{href: '#', class: 'gradient'}
-                  %sup{class: ['note', 'gradient']} 2
-                  %span On hold
-      %li{class: ['menu-level-0', 'parent']}
-        %a{href: '#', class: 'gradient'}
-          %sup{class: ['note', 'gradient']} 3
-          %span Tickets
-        %ul.submenu-1
-          %li{class: ['menu-level-1', 'first']}
-            %a{href: '#', class: 'gradient'} 
-              %span All tickets
-          %li{class: ['menu-level-1', 'last']}
-            %a{href: '#', class: 'gradient'}
-              %sup{class: ['note', 'gradient']} 3 
-              %span Wait for Staff Response
-      %li{class: ['menu-level-0', 'last']}
-        %a{href: '/users/sign_out', class: 'gradient'}
-          %span Log Out
-    - else
-      %li{class: 'menu-level-0'}
-        %a{href: '/users/sign_up', class: 'gradient'}
-          %span Sign Up
-      %li{class: ['menu-level-0', 'last']}
-        %a{href: '/users/sign_in', class: 'gradient'}
-          %span Log In
+          = link_to 'Users', :controller => '/static_pages', :action => 'userslist', class: 'gradient'
+        %li{class: 'menu-level-1'}
+          %a{href: '/users/edit', class: 'gradient'}
+            My profile
+        %li{class: ['menu-level-1', 'parent', 'last']}
+          %a{href: '#', class: 'gradient'}
+            %sup{class: ['note', 'gradient']} 3 
+            Assign for me
+          %ul.submenu-2
+            %li{class: ['menu-level-2', 'first']}
+              %a{href: '#', class: 'gradient'}
+                %sup{class: ['note', 'gradient']} 1 
+                Waiting for Customer
+            %li{class: ['menu-level-2', 'last']}
+              %a{href: '#', class: 'gradient'}
+                %sup{class: ['note', 'gradient']} 2
+                On hold
+    %li{class: ['menu-level-0', 'last']}
+      %a{href: '/users/sign_out', class: 'gradient'}
+        %i{class: [ 'menu-icon', 'menu-icon-4']}
+        Log Out
+  - else
+    %li{class: ['scroll', 'remote-modal']}
+      %a{href: '/users/sign_up', class: 'gradient'}
+        %i{class: [ 'menu-icon', 'menu-icon-9']}
+        Sign Up
+    %li{class: ['scroll', 'remote-modal']}
+      %a{href: '/users/sign_in', class: 'gradient'}
+        %i{class: [ 'menu-icon', 'menu-icon-4']}
+        Log In

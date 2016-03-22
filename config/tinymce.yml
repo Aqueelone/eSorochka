@@ -1,0 +1,35 @@
+default:
+  selector: textarea.tinymce
+  skin_url: '/assets/sampletickettinymce'
+  toolbar: 
+  - styleselect | bold italic | undo redo | table | image | link | insertdatetime | legacyoutput | media | preview | forecolor | backcolor | textpattern | emoticons | code
+  plugins:
+    - table
+    - image
+    - link
+    - insertdatetime
+    - legacyoutput
+    - media
+    - preview
+    - textcolor
+    - textpattern
+    - layer
+    - emoticons
+    - code
+  media_alt_source: true  
+  media_poster: true
+  media_dimensions: true
+  media_filter_html: true
+  textpattern_patterns: [
+         {start: '*', end: '*', format: 'italic'},
+         {start: '**', end: '**', format: 'bold'},
+         {start: '#', format: 'h1'},
+         {start: '##', format: 'h2'},
+         {start: '###', format: 'h3'},
+         {start: '####', format: 'h4'},
+         {start: '#####', format: 'h5'},
+         {start: '######', format: 'h6'},
+         {start: '1. ', cmd: 'InsertOrderedList'},
+         {start: '* ', cmd: 'InsertUnorderedList'},
+         {start: '- ', cmd: 'InsertUnorderedList'}
+    ]

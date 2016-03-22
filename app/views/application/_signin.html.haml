@@ -1,0 +1,34 @@
+.col-sm-8
+  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .widget-container.widget-profile.boxed.blue-line
+      .widget-title.abs
+        %h3 Log in
+      .avatar
+        %img{src: '../no-gravatar.jpg'}
+      .inner
+        = devise_error_messages!
+        .field.field_text.clearfix
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true
+        .field.field_text.clearfix
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true
+        .field.field_text.clearfix
+          = f.label :password
+          %br/
+          = f.password_field :password, autocomplete: "off"
+        - if devise_mapping.rememberable?
+          .field.field_text.clearfix
+            = f.label :remember_me
+            %br/
+            .rowCheckbox
+              .custom-checkbox
+                = f.check_box :remember_me, class: 'gradient', value: 'user_remember_me'
+                %label{for: 'user_remember_me', class: 'turnedable checked'}
+      .follow.clearfix
+        .left.widget-shared
+          = render "devise/shared/links"
+        %span.btn.btn-icon.btn-icon-right.btn-icon-signup.btn-green.right
+          = f.submit "Log in", class: 'submit'

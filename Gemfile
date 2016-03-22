@@ -1,10 +1,21 @@
 source 'https://rubygems.org'
+gem 'bundler', '>= 1.8.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
+# load enveronmets
+gem 'dotenv-rails', :groups => [:development, :test]
 # Use postgresql9.4 as the database for Active Record
 gem 'pg'
 # Authentication
 gem 'devise', '3.5.2'
+gem 'oauth2'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
+gem 'omniauth-instagram'
+gem 'omniauth-linkedin'
+gem 'omniauth-google-oauth2'
 gem 'devise_lastseenable', '0.0.6'
 gem 'devise-token_authenticatable', '~> 0.4.0'
 # Background processing
@@ -16,9 +27,13 @@ gem 'sidetiq', '0.6.3'
 gem 'bootstrap-sass', '3.3.5.1'
 gem 'compass-rails',  '2.0.5'
 gem 'sass-rails',     '5.0.4'
+gem 'less-rails'
+gem 'therubyracer'
+gem 'less-rails-bootstrap'
 gem 'autoprefixer-rails', '6.0.3'
 gem 'bootstrap-switch-rails', '3.3.3'
 gem 'bootstrap-generators'
+gem "font-awesome-rails"
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -28,14 +43,20 @@ gem 'uuid', '2.3.8'
 # Icons
 gem 'entypo-rails', '3.0.0.pre.rc2'
 # JavaScript
+gem "bower-rails", "~> 0.10.0"
 gem 'backbone-on-rails', '1.2.0.0'
 gem 'handlebars_assets', '0.21.0'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 gem 'js_image_paths',    '0.0.2'
 gem 'js-routes',         '1.1.2'
 source 'https://rails-assets.org' do
   gem 'rails-assets-jquery',                              '1.11.2'
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-angular'
+  gem 'rails-assets-leaflet'
   # Should be kept in sync with jquery-rails
   gem 'rails-assets-markdown-it',                         '5.0.2'
   gem 'rails-assets-markdown-it-hashtag',                 '0.4.0'
@@ -46,14 +67,29 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-highlightjs',                         '8.9.1'
   gem 'rails-assets-typeahead.js',                        '0.11.1'
   # jQuery plugins
-  gem 'rails-assets-jeresig--jquery.hotkeys',       '0.2.0'
-  gem 'rails-assets-jquery-placeholder',            '2.1.3'
-  gem 'rails-assets-jquery-textchange',             '0.2.3'
-  gem 'rails-assets-perfect-scrollbar',             '0.6.7'
-  gem 'rails-assets-jakobmattsson--jquery-elastic', '1.6.11'
-  gem 'rails-assets-autosize',                      '3.0.14'
-  gem 'rails-assets-blueimp-gallery',               '2.16.0'
+  gem 'rails-assets-jquery.documentsize'
+  gem 'rails-assets-jquery.isinview'
+  gem 'rails-assets-animate-css'
+  gem 'rails-assets-wow'
+  gem 'rails-assets-jquery-mousewheel'
+  gem 'rails-assets-jquery-placeholder'
+  gem 'rails-assets-jquery-textchange'
+  gem 'rails-assets-vanilla-masker'
+  gem 'rails-assets-perfect-scrollbar'
+  gem 'rails-assets-jquery-smooth-scroll'
+  gem 'rails-assets-Smooth-jQuery-Parallax'
+  gem 'rails-assets-jakobmattsson--jquery-elastic'
+  gem 'rails-assets-autosize'
+  gem 'rails-assets-blueimp-gallery'
+  gem 'rails-assets-blueimp-bootstrap-image-gallery'
+  gem 'rails-assets-blueimp-canvas-to-blob'
+  gem 'rails-assets-blueimp--JavaScript-Load-Image'
+  gem 'rails-assets-blueimp-tmpl'
+  gem 'rails-assets-blueimp-file-upload'
+  gem 'rails-assets-jquery.jscroll'
 end
+gem 'bootstrap-wysihtml5-rails'
+gem 'tinymce-rails'
 # Turbolinks makes following links in your web application faster.
 # Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -81,7 +117,9 @@ gem 'ruby-oembed',       '0.8.14'
 gem 'open_graph_reader', '0.6.1'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
-
+gem 'annotate', :groups => [:development]
+gem 'kramdown', :groups => [:development], :require => false
+gem 'railroady', :groups => [:development, :test]
 # Prevent occasions where minitest is not bundled in
 # packaged versions of ruby. See following issues/prs:
 # https://github.com/gitlabhq/gitlabhq/issues/3826

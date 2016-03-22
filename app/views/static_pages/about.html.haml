@@ -1,7 +1,33 @@
-.col-60perc-right
-  .col-ss650.left
-    %h1 About Sitesupport project
-    %p This project is a simple test project support system of a relatively small site or portal.
-    %p You could use it as is without any guarantees from the developers of the system on your own risk
-.col-ss450
-  %img{src: 'about.jpg'}
+.col-sm-4
+  .contact-form.styled.boxed.green-line
+    .comment-form
+      %form{action: '#', id: 'commentForm', method: 'post'}
+        .field_text
+          %label.label_title
+            Contact us:
+        .field_select
+          %label.label_title{for: 'contact-name'}
+          %select{:multiple => 'true' , id: 'contact-name', name: 'contact-name', :data => {:placeholder => 'Select name...'}}
+            %option
+            %option{value: 'ee@ee.com'}
+              optionaly
+            %option{value: 'ee@ee.com'}
+              optionaly2
+            %option{value: 'ee@ee.com'}
+              optionaly3
+            %option{value: 'ee@ee.com'}
+              optionaly4
+        .field_text
+          %label.label_title{for: 'subject'}
+          %input{type: 'text', name: 'subject', id: 'subject', placeholder: 'You can add a subject', hidefocus: 'true'}
+        .field_text.field_textarea
+          %label.label_title{for: 'nicedit-message'}
+          %textarea{name: 'nicedit-message', id: 'nicedit-message', hidefocus: 'true'}
+        .rowSubmit.clearfix
+          %a{ href: "#", class: "link-reset btn btn-icon btn-gray btn-discard", onclick: "document.getElementById('commentForm').reset(); return false", hidefocus: "true", style: "outline: none;"}
+            %span
+              Discard
+          %span{ class: "btn btn-icon btn-icon-send btn-submit"}
+            %input{ type: "submit", id: "send", value: "Send Message", hidefocus: "true", style: "outline: none;"}
+
+
