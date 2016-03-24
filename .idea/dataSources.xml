@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1259000806">
+  <component name="DataSourceManagerImpl" format="xml" hash="1828616966">
     <data-source source="LOCAL" name="Rails eSorochka: production" uuid="de1762eb-0a81-4177-a41e-fb42d3a0e21a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>

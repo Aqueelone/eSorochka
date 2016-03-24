@@ -1,0 +1,10 @@
+.controlls
+  %fieldset
+    %legend Controlls:
+    .controll-group-user
+      = bootstrap_icon_link_to 'User List', users_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New User', new_user_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-category
+      = bootstrap_icon_link_to 'Category List', categories_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New Category', new_category_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"

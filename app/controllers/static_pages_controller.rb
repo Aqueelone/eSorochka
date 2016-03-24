@@ -3,7 +3,7 @@
 #   This file is licensed under the Common Domain General Public License..
 
 class StaticPagesController < ApplicationController
-  before_action :authenticate_user!, only: [:userslist]
+  before_action :authenticate_user!, only: [:userslist, :adminpanel, :modpanel]
   def home
   end
 
@@ -15,5 +15,17 @@ class StaticPagesController < ApplicationController
 
   def userslist
     @users = User.all
+  end
+
+  def privatpolicy
+
+  end
+
+  def adminpanel
+
+  end
+
+  def modpanel
+
   end
 end

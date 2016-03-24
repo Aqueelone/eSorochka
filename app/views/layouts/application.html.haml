@@ -6,6 +6,7 @@
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     %meta{:content => content_for?(:description) ? yield(:description) : "Сорочка ОПТ", :name => "description"}
     %meta{content: "Sergy Nazarevich", name: "author"}
+    %meta{:content => "http://sorochkaopt.com", :property => "og:url"}
     %title= content_for?(:title) ? "Сорочка ОПТ | " + yield(:title) : "Сорочка ОПТ"
 
     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -28,27 +29,13 @@
                 %span.icon-bar
                 %span.icon-bar
               %a.navbar-brand{href: '/'}
-                %img{src: '../logo.png'}
+                %img{src: '/logo.png'}
             .collapse.navbar-collapse
               = render partial: 'menu'
     .container
       = render partial: 'messages'
       .top25.clearfix
       = yield
-      #sign_up_modal.modal.fade
-        .modal-dialog
-          .modal-content
-            = render partial: 'signup'
-          .modal-header
-          %button.close{type: 'button', aria: {:hidden => 'true'},  data: {:dismiss => 'modal'}}
-            %i.fa.fa-times-circle
-      #sign_in_modal.modal.fade
-        .modal-dialog
-          .modal-content
-            = render partial: 'signin'
-          .modal-header
-          %button.close{type: 'button', aria: {:hidden => 'true'},  data: {:dismiss => 'modal'}}
-            %i.fa.fa-times-circle
       = render partial: 'leftpanel'
     %footer.footer
       = render partial: 'footer'
