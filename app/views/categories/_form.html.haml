@@ -1,0 +1,25 @@
+= form_for(@category) do |f|
+  - if @category.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@category.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @category.errors.full_messages.each do |msg|
+          %li= msg
+  %table.table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :name_ua
+      %td= f.text_field :name_ua, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :name_ru
+      %td= f.text_field :name_ru, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :name_en
+      %td= f.text_field :name_en, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :parent
+      %td= f.select :parent_id, Category.order("parent_id ASC").map { |c| [c.name_ua, c.id] }, :include_blank => true
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', categories_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"

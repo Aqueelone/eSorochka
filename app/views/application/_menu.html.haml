@@ -16,40 +16,27 @@
       %i{class: [ 'menu-icon', 'menu-icon-6']}
       About Us
   - if current_user
-    %li{class: ['menu-level-0', 'parent']}
-      %a{href: '#', class: 'gradient'}
-        %sup{class: ['note', 'gradient']} 3
-        %i{class: [ 'menu-icon', 'menu-icon-9']}
-        Account
-      %ul.submenu-1
-        %li{class: ['menu-level-1', 'first']}
-          = link_to 'Users', :controller => '/static_pages', :action => 'userslist', class: 'gradient'
-        %li{class: 'menu-level-1'}
-          %a{href: '/users/edit', class: 'gradient'}
-            My profile
-        %li{class: ['menu-level-1', 'parent', 'last']}
-          %a{href: '#', class: 'gradient'}
-            %sup{class: ['note', 'gradient']} 3 
-            Assign for me
-          %ul.submenu-2
-            %li{class: ['menu-level-2', 'first']}
-              %a{href: '#', class: 'gradient'}
-                %sup{class: ['note', 'gradient']} 1 
-                Waiting for Customer
-            %li{class: ['menu-level-2', 'last']}
-              %a{href: '#', class: 'gradient'}
-                %sup{class: ['note', 'gradient']} 2
-                On hold
-    %li{class: ['menu-level-0', 'last']}
+    - if current_user.is_admin
+      %li{class: ['remote-modal']}
+        %a{href: '/adminpanel', class: 'gradient'}
+          %i{class: [ 'menu-icon', 'menu-icon-4']}
+          Admin panel
+    - else
+      %li{class: ['scroll']}
+        %a{href: '/users/edit', class: 'gradient'}
+          %i{class: [ 'menu-icon', 'menu-icon-9']}
+          Account
+    %li{class: ['remote-modal']}
       %a{href: '/users/sign_out', class: 'gradient'}
         %i{class: [ 'menu-icon', 'menu-icon-4']}
         Log Out
+
   - else
-    %li{class: ['scroll', 'remote-modal']}
-      %a{href: '/users/sign_up', class: 'gradient'}
+    %li{class: ['remote-modal']}
+      = link_to remote_sign_up_path, :remote => true do
         %i{class: [ 'menu-icon', 'menu-icon-9']}
         Sign Up
-    %li{class: ['scroll', 'remote-modal']}
-      %a{href: '/users/sign_in', class: 'gradient'}
+    %li{class: ['remote-modal']}
+      = link_to remote_sign_in_path, :remote => true do
         %i{class: [ 'menu-icon', 'menu-icon-4']}
         Log In
