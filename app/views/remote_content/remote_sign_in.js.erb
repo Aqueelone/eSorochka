@@ -1,0 +1,14 @@
+if($('.modal').length == 0) {
+  $("body").prepend("<%= escape_javascript(render "remote_sign_in", :formats => [:html]) %>");
+}
+
+$("#sign_in_modal").modal();
+
+//Gravatar
+$('#sign_in_modal input.email').change( function() {
+  email = $(this).val();
+  if(isValidEmailAddress(email)){
+    avatar = Gravtastic(email, { size: 300});
+    $('.avatar img').attr('src', avatar);
+  }
+});

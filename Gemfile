@@ -6,6 +6,10 @@ gem 'rails', '4.1.8'
 gem 'dotenv-rails', :groups => [:development, :test]
 # Use postgresql9.4 as the database for Active Record
 gem 'pg'
+gem 'foreigner'
+gem 'immigrant'
+# fix for attr_accessible and attr_protected
+gem 'protected_attributes'
 # Authentication
 gem 'devise', '3.5.2'
 gem 'oauth2'
@@ -105,6 +109,7 @@ gem 'typhoeus',           '0.8.0'
 gem 'haml', '4.0.7'
 gem 'haml-rails'
 gem 'haml-contrib'
+gem 'simple_form'
 # Mail
 gem 'markerb',             '1.1.0'
 gem 'messagebus_ruby_api', '1.0.3'
@@ -115,6 +120,7 @@ gem 'twitter-text',      '1.13.0'
 gem 'roxml',             '3.1.6'
 gem 'ruby-oembed',       '0.8.14'
 gem 'open_graph_reader', '0.6.1'
+gem 'gravtastic'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'annotate', :groups => [:development]

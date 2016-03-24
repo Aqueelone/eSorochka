@@ -1,0 +1,26 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of #{@category.name_ua}:
+      %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Name UA
+          %td= @categories.name_ua
+        %tr
+          %td{:scope => "row"} Name RU
+          %td= @categories.name_ru
+        %tr
+          %td{:scope => "row"} Name EN
+          %td= @categories.name_en
+        %tr
+          %td{:scope => "row"} Parent
+          %td= Category.find(@categories.parent_id).name_ua
+        %tr
+          %td{:scope => "row"}
+          %td
+            = bootstrap_icon_link_to 'Edit', edit_category_path(@category), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', @category, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
