@@ -1,0 +1,42 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of #{@user.name}:
+      %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Name
+          %td
+            = @user.name
+            - if @user.is_admin
+              %span.label.label-info Admin
+            - if @user.is_moderator
+              %span.label.label-info Moderator
+        %tr
+          %td{:scope => "row"} Email
+          %td= @user.email
+        %tr
+          %td{:scope => "row"} Current SignIn at
+          %td= @user.current_sign_in_at
+        %tr
+          %td{:scope => "row"} Last SignIn at
+          %td= @user.last_sign_in_at
+        %tr
+          %td{:scope => "row"} Current SignIn IP
+          %td= @user.current_sign_in_ip
+        %tr
+          %td{:scope => "row"} Last SignIn IP
+          %td= @user.last_sign_in_ip
+        %tr
+          %td{:scope => "row"} SignInCount
+          %td= @user.sign_in_count
+        %tr
+          %td{:scope => "row"}
+            = image_tag @user.gravatar_url
+          %td
+            - if current_user && (@user.id == current_user.id || current_user.is_admin || current_user.is_moderator)
+              = bootstrap_icon_link_to 'Edit', edit_user_path(@user), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+              - if current_user.is_admin
+                = bootstrap_icon_link_to 'Delete', @user, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

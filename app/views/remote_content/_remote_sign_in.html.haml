@@ -1,0 +1,25 @@
+#sign_in_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times-circle
+        %h4#SignInModal.modal-title Log in
+        %p Sign in to Your account
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name, :format => :js), :remote => true,  :html => {:class => "form-signin"}) do |f|
+        .modal-body
+          .avatar
+            %img{src: '../no-gravatar.jpg'}
+          = f.input :email, :autofocus => true, :label => false, :input_html => {:class => 'form-control'}, :placeholder => "Your email..."
+          = f.input :password, :label => false, :input_html => {:class => 'form-control'}, :placeholder => "Your password..."
+          - if devise_mapping.rememberable?
+            = f.label :remember_me, class:'remember-label'
+            = f.check_box :remember_me, class: 'remember', value: 'user_remember_me'
+          .modal-footer
+            .form-actions
+              .modal-social-icons
+                %a{ href: '/users/auth/vkontakte', class: "btn btn-default vkontakte"}
+                  %i.fa.fa-vk.modal-icons
+                %a{ href: '/users/auth/facebook', class: "btn btn-default facebook"}
+                  %i.fa.fa-facebook.modal-icons
+              = f.button :submit, "Log in", :class => "topbutton animated"

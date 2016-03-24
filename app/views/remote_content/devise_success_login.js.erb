@@ -1,0 +1,6 @@
+$('#sign_in_modal .close').click();
+
+if($('#flash').length > 0) { $('#flash').remove(); }
+$('body').prepend("<%= escape_javascript raw(flash_normal) %>");
+
+location.reload();

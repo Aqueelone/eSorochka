@@ -235,14 +235,14 @@ textarea.form-control {
     color:rgba(255, 255, 255,0.8);
     border: 1px solid rgba(204,204,204,0.5);
 }
-#catalog .topbutton, #contact .topbutton{
+.topbutton{
     position: relative;
     font: normal normal normal 32px/1.2em 'okolaksregularitalic',sans-serif;
     border-radius: 10px;
     padding: 0px 10px 10px 10px;
     opacity: 0.8;
 }
-#catalog .topbutton:hover, #contact .topbutton:hover{
+.topbutton:hover{
     border-color: #028fcc;
     background-color: #028fcc;
     opacity: 1;
@@ -292,6 +292,92 @@ textarea.form-control {
     text-shadow: 1px 1px 1px #000;
     width: 130px;
 }
+
+@media screen and (min-width: 768px) {
+    body.modal-open .modal-dialog {
+        width: 330px;
+        padding-top: 10px;
+        padding-bottom: 0px;
+    }
+    body.modal-open .modal-header{
+        padding: 12px 12px 0px 15px;
+        border-bottom: 2px solid #ACB7C9;
+    }
+    body.modal-open .modal-body{
+        padding: 0;
+    }
+    body.modal-open .avatar{
+         width: 300px;
+         padding: 0px;
+         margin: auto 4px;
+    }
+    body.modal-open .avatar img{
+        width: 300px;
+        max-width: 300px;
+    }
+    body.modal-open .form-group{
+        padding: 0px 10px 70px 10px;
+        margin: -55px 0px 0px 0px;
+    }
+    body.modal-open .form-control{
+        border-color: rgba(172,183,201,0.7);
+        position: relative;
+    }
+    body.modal-open .modal-footer{
+        border-top: 2px solid #ACB7C9;
+        margin-top: -50px;
+        padding: 3px;
+    }
+    body.modal-open .modal-footer a.btn-sm img{
+        width: 30px;
+    }
+    body.modal-open .modal-footer .modal-social-icons{
+        position: absolute;
+        margin-left: 20px;
+    }
+    body.modal-open .modal-footer .modal-social-icons .vkontakte{
+        color: #5279A4;
+        font-size: 21px;
+        padding: 5px 10px 0px 10px;
+    }
+    body.modal-open .modal-footer .modal-social-icons .facebook{
+        color: #5279A4;
+        font-size: 25px;
+        padding: 5px 10px 0px 10px;
+    }
+
+    body.modal-open .form-group input::-webkit-input-placeholder {color: rgba(20,21,59,0.6);
+        font-weight: normal; text-shadow: 1px 1px 10px #7F8C9F, 2px 2px 15px #BDC6D6, -10px -5px 50px #fff;}
+    body.modal-open .form-group input::-moz-placeholder          {color: rgba(20,21,59,0.6);
+        font-weight: normal; text-shadow: 1px 1px 10px #7F8C9F, 2px 2px 15px #BDC6D6, -10px -5px 50px #fff;}
+    body.modal-open .form-group input:-moz-placeholder           {color: rgba(20,21,59,0.6);
+        font-weight: normal; text-shadow: 1px 1px 10px #7F8C9F, 2px 2px 15px #BDC6D6, -10px -5px 50px #fff;}
+    body.modal-open .form-group input:-ms-input-placeholder      {color: rgba(20,21,59,0.6);
+        font-weight: normal; text-shadow: 1px 1px 10px #7F8C9F, 2px 2px 15px #BDC6D6, -10px -5px 50px #fff;}
+    body.modal-open .form-group input{
+        color: #04205D;
+        text-shadow: 0px 0px 3px #fff;
+        padding: 5px;
+        font-weight: bold;
+        background-color: rgba(255,255,255,0.3);
+        border-radius: 5px;
+    }
+    body.modal-open .alert{
+        width: 300px;
+        left: 4px;
+    }
+    body.modal-open .remember-label{
+        position: relative;
+        top: -53px;
+        left: 160px;
+    }
+    body.modal-open .remember{
+        position: relative;
+        top: -50px;
+        right: -40px;
+    }
+}
+
 .contact-btn {
     position: fixed;
     top: 48%;
@@ -312,9 +398,37 @@ textarea.form-control {
 .btn-contact{
     font-weight: bold;
 }
+#add-email-back, #adminpanel, #modpanel{
+    position: fixed;
+    background-image: url('admin_back.jpg');
+    background-position: center;
+    background-origin: content-box;
+    min-width: 100%;
+    min-height: 650px;
+}
+#add-email{
+    width: 500px;
+    margin: 80px auto;
+    height: 300px;
+    border: #428BCA 1px solid;
+    padding: 20px;
+    box-shadow: 1px 1px 3px #428BCA;
+    z-index: 100;
+    position: relative;
+    background: rgba(255,255,255,0.81);
+}
+#add-email h1{
+    color: #042062;
+}
 .fb-btn{
     position: fixed;
     top: 70%;
+    z-index: 9999;
+    margin-left: -10px;
+}
+.vk-btn{
+    position: fixed;
+    top: 76%;
     z-index: 9999;
     margin-left: -10px;
 }
@@ -327,6 +441,7 @@ footer {
     margin: auto;
     width: 90%;
     text-align: center;
+    z-index: 100;
 }
 footer section {
     padding: 10px 10px 0px 0px;
@@ -412,6 +527,10 @@ footer .menu > li > ul{
 .text-left{
     text-align: left;
 }
+#privatpolicy {
+    margin: 100px 0px 0px 50px;
+}
+
 .ps-theme-sorochka {
 @include ps-container(map-merge($ps-theme-default, (
 border-radius: 5px,
@@ -428,3 +547,51 @@ scrollbar-y-width: 20px
 .container {
         width: 100% !important;
     }
+
+.controlls{
+    margin: 70px auto 0px auto;
+    padding: 10px;
+    width: 90%;
+}
+fieldset{
+    padding: 10px;
+    border: rgba(255,255,255,0.4) 1px solid;
+    box-shadow: 1px 1px 3px rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.4);
+}
+legend{
+    width: 30%;
+    color: #000;
+    text-shadow: 1px 0px 2px #fff;
+    padding: 0px 0px 2px 5px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 5px;
+}
+.tab-content{
+    width: 93%;
+    margin: 0px auto;
+}
+#adminpanel .button{
+    box-shadow: 1px 0px 5px rgba(255,255,255,0.7), 2px 2px 3px rgba(255,255,255,0.5);
+    text-shadow: 1px 1px 1px #777;
+    margin:5px;
+}
+#adminpanel .table-striped > tbody > tr:nth-child(odd) > td, #adminpanel .table-striped > tbody > tr:nth-child(odd) > th {
+    background-color: rgba(249,249,249,0.5);
+}
+#adminpanel .table-user-profile{
+    width:400px;
+}
+#adminpanel .controll-group-user{
+    width: 100px;
+    display: inline-block;
+}
+#adminpanel .controll-group-category{
+    width: 100px;
+    display: inline-block;
+    margin-left: 20px;
+}
+#adminpanel .name_field{
+    width: 500px;
+    font-size: 14px;
+}

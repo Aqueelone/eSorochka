@@ -228,7 +228,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :get
@@ -260,4 +260,20 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+
+  config.omniauth :facebook, ENV['FB_key'], ENV['FB_secret'],
+                  scope: 'email, public_profile, user_friends, user_birthday, user_hometown, user_likes'
+  config.omniauth :vkontakte, ENV['VK_key'], ENV['VK_secret']
+  #config.omniauth :twitter, ENV['TW_key'], ENV['TW_secret'],
+  #                { authorize_params: { force_login: 'true', use_authorize: 'true' } }
+  #config.omniauth :linkedin, ENV['LI_key'], ENV['LI_secret']
+  #config.omniauth :google_oauth2, ENV['GP_key'], ENV['GP_secret'],
+  #                {
+  #                    name: 'google',
+  #                    scope: 'plus.login, userinfo.email, userinfo.profile,
+  #                        plus.media.upload, plus.me, plus.circles.read,
+  #                        plus.circles.write, plus.profiles.read,
+  #                        plus.stream.read, plus.stream.write',
+  #                    prompt: "select_account"
+  #                }
 end

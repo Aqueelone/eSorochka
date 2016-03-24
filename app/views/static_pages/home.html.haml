@@ -1,4 +1,4 @@
-#home-slider.carousel.slide.carousel-fade.parallax{data: {:image => 'banner1.jpg'}}
+#home-slider.inview-observer.carousel.slide.carousel-fade.parallax{data: {:image => 'banner1.jpg'}}
   .wow.lightSpeedIn.title1{'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
     %span
       Стильна  гуртовня
@@ -9,15 +9,15 @@
     %i.icon-catalog
     %span
       online
-%section#catalog.topwhite.parallax
+%section#catalog.inview-observer.topwhite.parallax
   %a.btn.btn-start.animated.scroll.topbutton.fadeInUpBig{href: '#catalog'}
     каталог
 %section#navpanel.topwhite
 %section#product.parallax
 %section#navpanel2.topwhite
-%section#contact.parallax
+%section#contact.inview-observer.parallax
   = render partial: 'contact'
-%section#order.topwhite.parallax
-%section#about.parallax
+%section#order.inview-observer.topwhite.parallax
+%section#about.inview-observer.parallax
   = render partial: 'about'
 %section#navpanel3.topwhite

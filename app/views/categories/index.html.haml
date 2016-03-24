@@ -1,0 +1,28 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend List of users
+      %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
+        %thead
+          %tr
+            %th{:scope => "column"} Name
+            %th{:scope => "column"} Name
+            %th{:scope => "column"} Name
+            %th{:scope => "column"} Parent
+            %th{:scope => "column"}
+        %tbody
+          - @categories.each do |c|
+            %tr
+              %td= c.name_ua
+              %td= c.name_ru
+              %td= c.name_en
+              - if(c.parent_id)
+                %td= Category.find(c.parent_id).name_ua
+              - else
+                %td
+              %td
+                = bootstrap_icon_link_to 'Show',c, "glyphicon glyphicon-user icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to "Edit", edit_category_path(c), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to 'Delete', c, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

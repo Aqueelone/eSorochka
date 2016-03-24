@@ -1,0 +1,35 @@
+= form_for(@user) do |f|
+  - if @user.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@user.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  %table.table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :name
+      %td= f.text_field :name
+    %tr
+      %td{:scope => "row"}= f.label :email
+      %td= f.text_field :email
+    - if current_user.is_admin?
+      %tr
+        %td{:scope => "row"}= f.label "Aproved rights:"
+        %td
+          .left
+            = f.label :is_admin
+            = f.check_box :is_admin
+          .right
+            = f.label :is_moderator
+            = f.check_box :is_moderator
+    %tr
+      %td{:scope => "row"}= f.label :password
+      %td= f.password_field :password
+    %tr
+      %td{:scope => "row"}= f.label :password_confirmation
+      %td= f.password_field :password_confirmation
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', users_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"

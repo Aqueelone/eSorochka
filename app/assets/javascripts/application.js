@@ -33,6 +33,7 @@
 //= require tmpl.min
 //= require blueimp-file-upload
 //= require jquery.jscroll
+//= require gravtastic
 //= require bootstrap-wysihtml5
 //= require bootstrap-wysihtml5/wysihtml5x-toolbar.js
 //= require bootstrap-wysihtml5/handlebars.runtime.min.js
@@ -141,7 +142,21 @@ jQuery(document).ready(function(callback) {
         }, 0)
     });
 
+// topnavbar activity
+    $('.main-nav .navbar-nav a.scroll').click( function() {
+        setActive($(this));
+    });
 
+// inveiw activity
+    $('.inview-observer').bind('inview', function(event, isInView) {
+        name = $(event.target).id();
+        if (isInView) {
+            alert('name');
+            // element is now visible in the viewport
+        } else {
+            // element has gone out of viewport
+        }
+    });
 
 // prettyPhoto lightbox, check if <a> has atrr data-rel and hide for Mobiles
     if($('a').is('[data-rel]') && screenRes > 600) {
@@ -174,6 +189,8 @@ jQuery(document).ready(function(callback) {
     // binds ready event and turbolink page:load event
     $(window).on('load', callback);
     $(document).on('page:load',callback);
+
+
 });
 
 function startEditor(){
@@ -202,4 +219,19 @@ function startEditor(){
             });
           }
       });
+}
+
+function setActive(obj) {
+    $('.main-nav li.active').removeClass('active');
+    $(obj).parent('li').addClass('active');
+}
+
+function isValidEmailAddress(emailAddress) {
+    var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+    return pattern.test(emailAddress);
+};
+
+function isValidCell(tel) {
+    var pattern = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+    return pattern.test(tel);
 }
