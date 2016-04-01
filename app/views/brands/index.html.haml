@@ -1,0 +1,23 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend List of brands
+      %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
+        %thead
+          %tr
+            %th{:scope => "column"} Name
+            %th{:scope => "column"} Description
+            %th{:scope => "column"} Image
+            %th{:scope => "column"}
+        %tbody
+          - @brands.each do |b|
+            %tr
+              %td= b.name
+              %td= b.description
+              %td= attachment_image_tag(b, :image, :fill, 300, 100, fallback: "default300x100.png")
+              %td
+                = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to "Edit", edit_brand_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

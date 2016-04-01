@@ -94,6 +94,10 @@ source 'https://rails-assets.org' do
 end
 gem 'bootstrap-wysihtml5-rails'
 gem 'tinymce-rails'
+# file uploads + S3
+gem "refile", require: "refile/rails"
+gem "refile-mini_magick"
+gem "refile-s3"
 # Turbolinks makes following links in your web application faster.
 # Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -110,6 +114,7 @@ gem 'haml', '4.0.7'
 gem 'haml-rails'
 gem 'haml-contrib'
 gem 'simple_form'
+gem 'jquery-minicolors-rails'
 # Mail
 gem 'markerb',             '1.1.0'
 gem 'messagebus_ruby_api', '1.0.3'

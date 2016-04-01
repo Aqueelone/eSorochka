@@ -1,0 +1,62 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of #{@product.name}:
+      %table.table-striped.table-bordered.table-condensed.table-product-picture{:role => "grid"}
+        %tr
+          %td= attachment_image_tag((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+      %table.table-striped.table-bordered.table-condensed.table-product-form{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Name
+          %td.name_field= @product.name
+        %tr
+          %td{:scope => "row"} Brand
+          %td.name_field
+            - if(@product.brand_id)
+              - b = Brand.find(@product.brand_id)
+              = attachment_image_tag(b, :image, :fill, 300, 100, fallback: "default300x100.png")
+        %tr
+          %td{:scope => "row"} Category
+          %td.name_field= @product.category_id && Category.find(@product.category_id).name_ua
+        %tr
+          %td{:scope => "row"} Description
+          %td.name_field= @product.description
+        %tr
+          %td{:scope => "row"} Price
+          %td.name_field= (@product.price_min && @product.price_max) && (@product.price_min.to_s + '$ - ' + @product.price_max.to_s + '$')
+        %tr
+          %td{:scope => "row"} Amount
+          %td.name_field= (@product.amount_min && @product.amount_max) && (@product.amount_min.to_s + ' - ' + @product.amount_max.to_s)
+        %tr
+          %td{:scope => "row"} Sizes
+          %td.name_field
+            %table.table-striped.table-bordered.table-condensed.table-size-show{:role => "grid"}
+              %tr
+                - @product.sizes.each do |s|
+                  %td
+                    = s.sign
+        %tr
+          %td{:scope => "row"}
+          %td.name_field
+            = bootstrap_icon_link_to 'Edit', edit_product_path(@product), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', @product, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+      %table.table-striped.table-bordered.table-condensed.table-product-char-form{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Cut type
+          %td.name_field= @product.cut_type
+        %tr
+          %td{:scope => "row"} Collar type
+          %td.name_field= @product.collar_type
+        %tr
+          %td{:scope => "row"} Sleeve_type
+          %td.name_field= @product.sleeve_type
+        %tr
+          %td{:scope => "row"} Cuff_type
+          %td.name_field= @product.cuff_type
+        %tr
+          %td{:scope => "row"} Style_type
+          %td.name_field= @product.style_type

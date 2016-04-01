@@ -98,6 +98,10 @@ class User < ActiveRecord::Base
     email && email !~ TEMP_EMAIL_REGEX
   end
 
+  def is_admin?
+    self.is_admin
+  end
+
   class << self
     def serialize_from_session(key,salt)
       record = to_adapter.get(key[0].to_param)

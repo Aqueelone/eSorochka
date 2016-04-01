@@ -1,5 +1,5 @@
 .container
-  .col-sm-9
+  .col-sm-8
     .heading.text-left.col-sm-8.col-sm-offset-2.wow.fadeInUp.animated{ 'data-wow-duration' => "1500ms", 'data-wow-delay' => "500ms"}
       %h2
         About Us
@@ -13,3 +13,7 @@
       %h2
         Ласкаво просимо до стильної гуртовні модного одягу
         СОРОЧКА ОПТ!
+  .col-sm-3.wow.lightSpeedIn{'data-wow-duration' => '1200ms', 'data-wow-delay' => '1500ms'}
+    - Brand.all().order('brands.id ASC').each do |b|
+      .brand_image
+        = attachment_image_tag(b, :image, :fill, 300, 100, fallback: "default300x100.png", class: 'image_uploaded', title: b.description)
