@@ -13,9 +13,7 @@ class ApplicationController < ActionController::Base
     session[:token].present?
   end
 
-  def after_sign_in_path_for(resource)
-    redirect_to 'static_pages#adminpanel' && resource.is_admin?
-    redirect_to 'static_pages#modpanel' && resource.is_moderator?
-    redirect_to 'static_pages#home'
+  def require_admin
+    (!current_user || !current_user.is_admin) && (redirect_to root_path, :error => 'You are not admin!')
   end
 end

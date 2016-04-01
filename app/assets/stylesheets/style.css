@@ -210,6 +210,16 @@ textarea.form-control {
     min-height: 650px;
     margin-top: -60px;
 }
+#about .col-sm-3{
+    margin: 30px 0px 10px 10px;
+    background: rgba(84,42,24,0.2);
+}
+#about .brand_image{
+    padding: 0px 10px 20px 0px;
+}
+#about .brand_image img{
+    margin: 20px 0px 0px 40px;
+}
 .icon-catalog{
     width: 92px;
     height: 92px;
@@ -399,12 +409,13 @@ textarea.form-control {
     font-weight: bold;
 }
 #add-email-back, #adminpanel, #modpanel{
-    position: fixed;
     background-image: url('admin_back.jpg');
     background-position: center;
     background-origin: content-box;
+    background-attachment: fixed;
     min-width: 100%;
     min-height: 650px;
+    margin-top: -70px;
 }
 #add-email{
     width: 500px;
@@ -517,9 +528,10 @@ footer .menu > li > ul{
 }
 .alert{
     position: absolute;
-    right: 630px;
-    top: 50px;
+    right: 650px;
+    top: 40px;
     font-size: 14px;
+    z-index: 100000;
 }
 .top25{
     min-height: 25px;
@@ -550,7 +562,7 @@ scrollbar-y-width: 20px
 
 .controlls{
     margin: 70px auto 0px auto;
-    padding: 10px;
+    padding: 80px 20px 10px 0px;
     width: 90%;
 }
 fieldset{
@@ -570,6 +582,9 @@ legend{
 .tab-content{
     width: 93%;
     margin: 0px auto;
+}
+.tab-content img{
+    padding: 10px;
 }
 #adminpanel .button{
     box-shadow: 1px 0px 5px rgba(255,255,255,0.7), 2px 2px 3px rgba(255,255,255,0.5);
@@ -594,4 +609,88 @@ legend{
 #adminpanel .name_field{
     width: 500px;
     font-size: 14px;
+}
+#adminpanel .controll-group-brand{
+    width: 100px;
+    display: inline-block;
+    margin-left: 50px;
+}
+#adminpanel .controll-group-fabric{
+    width: 100px;
+    display: inline-block;
+    margin-left: 30px;
+}
+#adminpanel .controll-group-image{
+    width: 100px;
+    display: inline-block;
+    margin-left: 30px;
+}
+#adminpanel .controll-group-gallery{
+    width: 100px;
+    display: inline-block;
+    margin-left: 30px;
+}
+#adminpanel .controll-group-product{
+    width: 100px;
+    display: inline-block;
+    margin-left: 30px;
+}
+#adminpanel .controll-group-order{
+    width: 100px;
+    display: inline-block;
+    margin-left: 60px;
+}
+.table-user-form{
+    width: 500px;
+}
+.table-color-form{
+    width: 500px;
+}
+.table-image-profile{
+    display: inline-block;
+}
+.table-image-profile > td, .table-image-profile img{
+    padding: 0px;
+    width: 300px;
+}
+.color_square{
+    min-height: 20px;
+    min-width: 20px;
+}
+.table-product-form{
+    width:430px;
+    display: inline-block;
+}
+#adminpanel .table-product-form .name_field{
+    width: 307px;
+}
+.table-product-char-form{
+    width: 405px;
+    display: inline-block;
+}
+#adminpanel .table-product-char-form .name_field{
+    width: 302px;
+}
+.table-product-picture{
+    width: 334px;
+    height: 447px;
+    display: inline-block;
+}
+.table-product-picture-set{
+    width: 334px;
+    height: 487px;
+    display: inline-block;
+}
+.number-field{
+    width: 80px;
+}
+.table-size-show td{
+    font-size: 14px;
+    font-weight: bolder;
+}
+.table-product-gallery-form{
+    display: inline-block;
+}
+.table-product-gallery-form .select_gallery{
+    min-width:400px
 }

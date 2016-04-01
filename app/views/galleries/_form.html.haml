@@ -1,0 +1,42 @@
+= form_for(@gallery) do |f|
+  - if @gallery.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@gallery.errors.count, "error")
+        prohibited this gallery from being saved:
+      %ul
+        - @gallery.errors.full_messages.each do |msg|
+          %li= msg
+  - @gallery.images.each do |b|
+    %table.table-striped.table-bordered.table-condensed.table-image-profile{:role => "grid"}
+      %tr
+        %td= attachment_image_tag(b, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+      %tr
+        %td= b.description
+      %tr
+        %td= link_to 'edit image', edit_image_path(b)
+  %table.table-striped.table-bordered.table-condensed.table-product-char-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label 'add fabric:'
+      %td= f.collection_select :fabric_id, Fabric.all, :id, :name, {:selected => @gallery.fabric_id}
+    %tr
+      %td{:scope => "row"} Fabric
+      %td{class: 'fabric_insert'}
+        = @gallery.fabric_id && attachment_image_tag(Fabric.find(@gallery.fabric_id), :image, :fill, 300, 300, fallback: "default300x300.png")
+  %table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :name
+      %td= f.text_field :name, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :description
+      %td= f.text_area :description, class: "name_field"
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', galleries_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td
+        = f.submit :class => "button btn btn-success"
+        %td= bootstrap_icon_link_to 'New color', new_color_path, 'glyphicon glyphicon-choose icon-white', :class => "button btn btn-primary"
+    %tr.color_choose
+      %td{:scope => "row"}
+        = f.label 'add color:'
+        .color_square
+      %td= f.collection_select :color_id, Color.all, :id, :name, {:selected => @gallery.color_id}

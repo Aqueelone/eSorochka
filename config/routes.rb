@@ -9,6 +9,62 @@
 #                          PATCH     /categories/:id(.:format)              categories#update
 #                          PUT       /categories/:id(.:format)              categories#update
 #                          DELETE    /categories/:id(.:format)              categories#destroy
+#                   brands GET       /brands(.:format)                      brands#index
+#                          POST      /brands(.:format)                      brands#create
+#                new_brand GET       /brands/new(.:format)                  brands#new
+#               edit_brand GET       /brands/:id/edit(.:format)             brands#edit
+#                    brand GET       /brands/:id(.:format)                  brands#show
+#                          PATCH     /brands/:id(.:format)                  brands#update
+#                          PUT       /brands/:id(.:format)                  brands#update
+#                          DELETE    /brands/:id(.:format)                  brands#destroy
+#                  fabrics GET       /fabrics(.:format)                     fabrics#index
+#                          POST      /fabrics(.:format)                     fabrics#create
+#               new_fabric GET       /fabrics/new(.:format)                 fabrics#new
+#              edit_fabric GET       /fabrics/:id/edit(.:format)            fabrics#edit
+#                   fabric GET       /fabrics/:id(.:format)                 fabrics#show
+#                          PATCH     /fabrics/:id(.:format)                 fabrics#update
+#                          PUT       /fabrics/:id(.:format)                 fabrics#update
+#                          DELETE    /fabrics/:id(.:format)                 fabrics#destroy
+#                    sizes GET       /sizes(.:format)                       sizes#index
+#                          POST      /sizes(.:format)                       sizes#create
+#                 new_size GET       /sizes/new(.:format)                   sizes#new
+#                edit_size GET       /sizes/:id/edit(.:format)              sizes#edit
+#                     size GET       /sizes/:id(.:format)                   sizes#show
+#                          PATCH     /sizes/:id(.:format)                   sizes#update
+#                          PUT       /sizes/:id(.:format)                   sizes#update
+#                          DELETE    /sizes/:id(.:format)                   sizes#destroy
+#                   colors GET       /colors(.:format)                      colors#index
+#                          POST      /colors(.:format)                      colors#create
+#                new_color GET       /colors/new(.:format)                  colors#new
+#               edit_color GET       /colors/:id/edit(.:format)             colors#edit
+#                    color GET       /colors/:id(.:format)                  colors#show
+#                          PATCH     /colors/:id(.:format)                  colors#update
+#                          PUT       /colors/:id(.:format)                  colors#update
+#                          DELETE    /colors/:id(.:format)                  colors#destroy
+#                   images GET       /images(.:format)                      images#index
+#                          POST      /images(.:format)                      images#create
+#                new_image GET       /images/new(.:format)                  images#new
+#               edit_image GET       /images/:id/edit(.:format)             images#edit
+#                    image GET       /images/:id(.:format)                  images#show
+#                          PATCH     /images/:id(.:format)                  images#update
+#                          PUT       /images/:id(.:format)                  images#update
+#                          DELETE    /images/:id(.:format)                  images#destroy
+#                galleries GET       /galleries(.:format)                   galleries#index
+#                          POST      /galleries(.:format)                   galleries#create
+#              new_gallery GET       /galleries/new(.:format)               galleries#new
+#             edit_gallery GET       /galleries/:id/edit(.:format)          galleries#edit
+#                  gallery GET       /galleries/:id(.:format)               galleries#show
+#                          PATCH     /galleries/:id(.:format)               galleries#update
+#                          PUT       /galleries/:id(.:format)               galleries#update
+#                          DELETE    /galleries/:id(.:format)               galleries#destroy
+#                 products GET       /products(.:format)                    products#index
+#                          POST      /products(.:format)                    products#create
+#              new_product GET       /products/new(.:format)                products#new
+#             edit_product GET       /products/:id/edit(.:format)           products#edit
+#                  product GET       /products/:id(.:format)                products#show
+#                          PATCH     /products/:id(.:format)                products#update
+#                          PUT       /products/:id(.:format)                products#update
+#                          DELETE    /products/:id(.:format)                products#destroy
 #         new_user_session GET       /users/sign_in(.:format)               sessions#new
 #             user_session POST      /users/sign_in(.:format)               sessions#create
 #     destroy_user_session GET       /users/sign_out(.:format)              sessions#destroy
@@ -34,6 +90,7 @@
 #               adminpanel GET       /adminpanel(.:format)                  static_pages#adminpanel
 #           remote_sign_up GET       /remote_sign_up(.:format)              remote_content#remote_sign_up
 #           remote_sign_in GET       /remote_sign_in(.:format)              remote_content#remote_sign_in
+#         remote_image_add POST      /remote_image_add(.:format)            image#create_from_gallery
 #            finish_signup GET|PATCH /users/:id/finish_signup(.:format)     users#finish_signup
 #                 sign_out GET       /sign_out(.:format)                    devise/sessions#destroy
 #                          DELETE    /sign_out(.:format)                    devise/sessions#destroy
@@ -45,7 +102,45 @@
 #                          PATCH     /users/:id(.:format)                   users#update
 #                          PUT       /users/:id(.:format)                   users#update
 #                          DELETE    /users/:id(.:format)                   users#destroy
+#                gid_color GET       /colors/:id/gid(.:format)              colors#gid
+#                          GET       /colors(.:format)                      colors#index
+#                          POST      /colors(.:format)                      colors#create
+#                          GET       /colors/new(.:format)                  colors#new
+#                          GET       /colors/:id/edit(.:format)             colors#edit
+#                          GET       /colors/:id(.:format)                  colors#show
+#                          PATCH     /colors/:id(.:format)                  colors#update
+#                          PUT       /colors/:id(.:format)                  colors#update
+#                          DELETE    /colors/:id(.:format)                  colors#destroy
+#             image_fabric GET       /fabrics/:id/image(.:format)           fabrics#image
+#                          GET       /fabrics(.:format)                     fabrics#index
+#                          POST      /fabrics(.:format)                     fabrics#create
+#                          GET       /fabrics/new(.:format)                 fabrics#new
+#                          GET       /fabrics/:id/edit(.:format)            fabrics#edit
+#                          GET       /fabrics/:id(.:format)                 fabrics#show
+#                          PATCH     /fabrics/:id(.:format)                 fabrics#update
+#                          PUT       /fabrics/:id(.:format)                 fabrics#update
+#                          DELETE    /fabrics/:id(.:format)                 fabrics#destroy
+#          gallery_gallery GET       /galleries/:id/gallery(.:format)       galleries#gallery
+#          product_gallery POST      /galleries/:id/product(.:format)       galleries#product
+#                          GET       /galleries(.:format)                   galleries#index
+#                          POST      /galleries(.:format)                   galleries#create
+#                          GET       /galleries/new(.:format)               galleries#new
+#                          GET       /galleries/:id/edit(.:format)          galleries#edit
+#                          GET       /galleries/:id(.:format)               galleries#show
+#                          PATCH     /galleries/:id(.:format)               galleries#update
+#                          PUT       /galleries/:id(.:format)               galleries#update
+#                          DELETE    /galleries/:id(.:format)               galleries#destroy
+#          picture_product POST      /products/:id/picture(.:format)        products#picture
+#                          GET       /products(.:format)                    products#index
+#                          POST      /products(.:format)                    products#create
+#                          GET       /products/new(.:format)                products#new
+#                          GET       /products/:id/edit(.:format)           products#edit
+#                          GET       /products/:id(.:format)                products#show
+#                          PATCH     /products/:id(.:format)                products#update
+#                          PUT       /products/:id(.:format)                products#update
+#                          DELETE    /products/:id(.:format)                products#destroy
 #                     root GET       /                                      static_pages#home
+#               refile_app           /attachments                           #<Refile::App app_file="/home/ec2-user/.rvm/gems/ruby-2.1.5/gems/refile-0.6.2/lib/refile/app.rb">
 #           entypo_charmap GET       /entypo/charmap(.:format)              entypo/charmap#index
 #
 
@@ -53,6 +148,13 @@
 
 Rails.application.routes.draw do
   resources :categories
+  resources :brands
+  resources :fabrics
+  resources :sizes
+  resources :colors
+  resources :images
+  resources :galleries
+  resources :products
 
   devise_for :users, :controllers => { registrations: 'registrations',
                                        omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions' }
@@ -65,6 +167,7 @@ Rails.application.routes.draw do
 
   match 'remote_sign_up', to: 'remote_content#remote_sign_up', via: [:get]
   match 'remote_sign_in', to: 'remote_content#remote_sign_in', via: [:get]
+  match 'remote_image_add', to: 'image#create_from_gallery', via: [:post]
   match '/users/:id/finish_signup' => 'users#finish_signup',
         via: [:get, :patch], as: :finish_signup
   devise_scope :users do
@@ -74,6 +177,30 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :colors do
+    member do
+      get :gid
+    end
+  end
+
+  resources :fabrics do
+    member do
+      get :image
+    end
+  end
+
+  resources :galleries do
+    member do
+      get  :gallery
+      post :product
+    end
+  end
+
+  resources :products do
+    member do
+      post :picture
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -2,9 +2,33 @@
   %fieldset
     %legend Controlls:
     .controll-group-user
-      = bootstrap_icon_link_to 'User List', users_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'User List', users_path, "glyphicon glyphicon-user icon-white", :class => "button btn btn-info"
       = bootstrap_icon_link_to 'New User', new_user_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-category
       = bootstrap_icon_link_to 'Category List', categories_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
       = bootstrap_icon_link_to 'New Category', new_category_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-brand
+      = bootstrap_icon_link_to 'Brand List', brands_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New Brand', new_brand_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-fabric
+      = bootstrap_icon_link_to 'Fabric List', fabrics_path, "glyphicon glyphicon-th icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New Fabric', new_fabric_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-image
+      = bootstrap_icon_link_to 'Image List', images_path, "glyphicon glyphicon-picture icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New Image', new_image_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-gallery
+      = bootstrap_icon_link_to 'Gallery List', galleries_path, "glyphicon glyphicon-cloud icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New Gallery', new_gallery_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-product
+      = bootstrap_icon_link_to 'Product List', products_path, "glyphicon glyphicon-chevron-right icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New Product', new_product_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-order
+      = bootstrap_icon_link_to 'Order Form List', galleries_path, "glyphicon glyphicon-check icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New Order Form', new_gallery_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"

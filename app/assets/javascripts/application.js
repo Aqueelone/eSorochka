@@ -40,8 +40,12 @@
 //= require bootstrap-wysihtml5/locales/tr-TR
 //= require bootstrap-wysihtml5/locales/ru-RU
 //= require bootstrap-wysihtml5/locales/ua-UA
-//= require tinymce-jquery
+//= require jquery.minicolors
+//= require jquery.minicolors.simple_form
+//= require refile
 //= require turbolinks
+//= require_tree
+
 
 jQuery(document).ready(function(callback) {
  	var $ = jQuery;
@@ -51,14 +55,22 @@ jQuery(document).ready(function(callback) {
 // wow
     new WOW().init();
 
+    if($('#adminpanel').length > 0) {
+        $('#adminpanel').perfectScrollbar({
+            wheelSpeed: 2,
+            wheelPropagation: false,
+            suppressScrollX: true,
+            minScrollbarLength: 20,
+            theme: 'sorochka'
+        }).perfectScrollbar('update');
+    } else {
     $('html').perfectScrollbar({
         wheelSpeed: 0.5,
         wheelPropagation: true,
         suppressScrollX: true,
         minScrollbarLength: 20,
         theme: 'sorochka'
-    }).perfectScrollbar('update');
-
+    }).perfectScrollbar('update'); }
     $('.scroll a').on('click', function() {
         obj = $(this);
         target = $(obj).attr('href');
@@ -157,7 +169,8 @@ jQuery(document).ready(function(callback) {
             // element has gone out of viewport
         }
     });
-
+//colorchooser
+    $('#color_color_gid').minicolors( {theme: 'bootstrap' })
 // prettyPhoto lightbox, check if <a> has atrr data-rel and hide for Mobiles
     if($('a').is('[data-rel]') && screenRes > 600) {
         $('a[data-rel]').each(function() {
@@ -165,7 +178,55 @@ jQuery(document).ready(function(callback) {
         });
         $("a[rel^='prettyPhoto']").prettyPhoto({social_tools:false});
     };
-
+//gallery
+    $('#gallery_color_id').on('change', function() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: '/colors/' + $(this).val() + '/gid',
+            success: function(data) {
+                $('.color_choose .color_square').css('background-color', data.gid);
+            }
+        });
+    });
+    $('#gallery_fabric_id').on('change', function() {
+        $.ajax({
+            type: 'GET',
+            url: '/fabrics/' + $(this).val() + '/image',
+            success: function(data) {
+            $('.fabric_insert').html(data);
+        }
+    });
+    });
+    $('.select_gallery select').on('change', function() {
+        $.ajax({
+            type: 'GET',
+            url: '/galleries/' + $(this).val() + '/gallery',
+            success: function(data) {
+                $('.gallery_insert_box').html(data);
+            }
+        });
+    });
+    $('.table-product-gallery-form .button').on('click', function() {
+        if($('.select_gallery select').val() > 0) {
+        $.ajax({
+            type: 'POST',
+            url: '/galleries/' + $('.select_gallery select').val() + '/product',
+            data: "gallery[product_id]=" + $('#product_id').val() + "&gallery[id]=" + $('.select_gallery select').val()
+        }); }
+    });
+    $('.btn-gallery-remove').on('click', function() {
+            $.ajax({
+                type: 'POST',
+                url: '/galleries/' + $(this).parent().children('#gallery_id').val() + '/product',
+                data: "gallery[product_id]=0&gallery[id]=" + $('.select_gallery select').val()
+            });
+    });
+    $('.btn-picture-set').on('click', function() {
+        number = $(this).parent().children('#image_id').val();
+        $('input[name="product[picture_id]"]').attr('value', number);
+        $('form').submit();
+    });
 // Rating Stars
     var star = $(".rating span.star");
 
@@ -186,6 +247,19 @@ jQuery(document).ready(function(callback) {
     });
 
     startEditor();
+
+    //file uploads
+    $(document).on("upload:complete", "form", function(e) {
+        if(!$(this).find("input.uploading").length) {
+    //        im = jQuery.parseJSON($('input[name="brand[image]"]').val());
+    //        image_link = 'https://s3.eu-central-1.amazonaws.com/esorochka/cache/' + im.id;
+    //        alert(image_link);
+    //        $('input#brand_description').val(image_link);
+    //        $('image_uploaded').attr('src', image_link);
+        }
+    });
+    //
+    //https://s3.eu-central-1.amazonaws.com/esorochka/cache/
     // binds ready event and turbolink page:load event
     $(window).on('load', callback);
     $(document).on('page:load',callback);
@@ -234,4 +308,24 @@ function isValidEmailAddress(emailAddress) {
 function isValidCell(tel) {
     var pattern = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
     return pattern.test(tel);
+}
+
+function showImagePreview(fileInput, obj) {
+    var files = $(fileInput).files;
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var imageType = /image.*/;
+        if (!file.type.match(imageType)) {
+            continue;
+        }
+        var img=document.getElementById($(obj).id());
+        img.file = file;
+        var reader = new FileReader();
+        reader.onload = (function(aImg) {
+            return function(e) {
+                aImg.src = e.target.result;
+            };
+        })(img);
+        reader.readAsDataURL(file);
+    }
 }

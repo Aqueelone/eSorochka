@@ -8,16 +8,16 @@
       %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
         %tr
           %td{:scope => "row"} Name UA
-          %td= @categories.name_ua
+          %td= @category.name_ua
         %tr
           %td{:scope => "row"} Name RU
-          %td= @categories.name_ru
+          %td= @category.name_ru
         %tr
           %td{:scope => "row"} Name EN
-          %td= @categories.name_en
+          %td= @category.name_en
         %tr
           %td{:scope => "row"} Parent
-          %td= Category.find(@categories.parent_id).name_ua
+          %td= Category.find(@category.parent_id).name_ua
         %tr
           %td{:scope => "row"}
           %td
