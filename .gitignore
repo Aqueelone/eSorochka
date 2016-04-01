@@ -14,6 +14,7 @@
 
 #Ignore Gemfile cache
 Gemfile.lock
+/.idea/inspectionProfiles
 /.idea/*
 /.idea/workspace.xml
 /.idea/dataSources.ids
