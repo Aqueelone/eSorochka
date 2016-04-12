@@ -31,4 +31,18 @@ module ApplicationHelper
       "<i class=\"#{icon}\"></i> #{text}".html_safe
     end
   end
+
+  def sort_link_to (text, query, url, html_options = {})
+    if defined? descA[query]
+      desc_q = true
+      icon = '.glyphicon-arrow-down'
+    else
+      desc_q = false
+      icon = '.glyphicon-arrow-up'
+    end
+    url = url + "/?sort='#{query}'&desc='#{desc_q}'"
+    link_to url, html_options do
+      "#{text} <i class='.glyphicon #{icon}></i>".html_safe
+    end
+  end
 end

@@ -1,0 +1,17 @@
+- if !@gallery.blank?
+  %table.table-striped.table-bordered.table-condensed.table-product-char-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}
+        %input{type: 'hidden', id: 'color_id', name: 'color_id', value: "#{@color.id}"}
+        = @color.name
+        .color_square{style: "background-color: #{@color.color_gid}"}
+  - @gallery.images.each do |b|
+    %table.table-striped.table-bordered.table-condensed.table-image-profile{:role => "grid"}
+      %tr
+        %td= attachment_image_tag(b, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+      %tr
+        %td= b.description
+      %tr
+        %td
+          %input{type: 'hidden', id: 'image_id', name: 'image_id', value: "#{b.id}"}
+          = bootstrap_icon_link_to 'Set as primary', '#', "glyphicon glyphicon-check icon-white", :class => "button btn btn-small btn-primary btn-image-set"

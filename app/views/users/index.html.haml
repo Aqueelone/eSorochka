@@ -9,8 +9,10 @@
           %tr
             %th{:scope => "column"} Name
             %th{:scope => "column"} Email
+            %th{:scope => "column"} Cell
             %th{:scope => "column"} Networks
             %th{:scope => "column"} SignInCount
+            %th{:scope => "column"} Temporary
             %th{:scope => "column"}
         %tbody
           - @users.each do |user|
@@ -22,11 +24,13 @@
                 - if user.is_moderator
                   %span.label.label-info Moderator
               %td= user.email
+              %td= user.cell
               %td
                 - result = ''
                 - user.identities.each { |ident| result += ident.provider.to_s + ' ' }
                 = result
               %td= user.sign_in_count
+              %td= user.temporary
               %td
                 = bootstrap_icon_link_to 'Profile', user, "glyphicon glyphicon-user icon-white", method: :get, :class => "button btn btn-small btn-primary"
                 = bootstrap_icon_link_to "Edit", edit_user_path(user), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
