@@ -1,6 +1,8 @@
 .controlls
   %fieldset
-    %legend Controlls:
+    %legend
+      Controlls:
+      = session['temporary']
     .controll-group-user
       = bootstrap_icon_link_to 'User List', users_path, "glyphicon glyphicon-user icon-white", :class => "button btn btn-info"
       = bootstrap_icon_link_to 'New User', new_user_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
@@ -30,5 +32,5 @@
       = bootstrap_icon_link_to 'New Product', new_product_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-order
-      = bootstrap_icon_link_to 'Order Form List', galleries_path, "glyphicon glyphicon-check icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New Order Form', new_gallery_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to 'Order List', orders_path, "glyphicon glyphicon-check icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'Order Items', order_items_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-warning"

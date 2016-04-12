@@ -1,0 +1,71 @@
+.nav0-tabs.nav.nav-tabs.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+  %ul.nav0-tabs
+    %li.active
+      %a{href: "#your_order"}
+        Your New Order
+    %li
+      %a{href: "#history"}
+        Orders History
+.tab-content
+  #your_order.tab-pane.fade.in.active
+    = form_for @order, :url => add_attr_order_path, :remote => true, :method => :patch  do |f|
+      %table.table-striped.table-condensed.table-order-form-box{:role => "grid"}
+        %tr
+          %td{:scope => "row"}
+            %label Your name:
+          %td
+            = f.text_field :name, class: "order_field", placeholder: "write Your name..."
+          %td.ok_insert
+        %tr
+          %td{:scope => "row"}
+            %label Your email:
+          %td
+            = f.text_field :email, class: "order_field email", placeholder: "write Your email..."
+          %td.ok_insert
+        %tr
+          %td{:scope => "row"}
+            %label
+              Your cell number:
+          %td
+            = f.text_field :cell, class: "order_field cell", placeholder: "write Your cell number..."
+          %td.ok_insert
+        %tr
+          %td{:scope => "row"}
+            %label
+              Comment:
+          %td
+            = f.text_area :comment, class: "order_field", placeholder: "write comment..."
+          %td.ok_insert
+        %tr
+          %td{:scope => "row"}
+            %label
+              Total cost:
+          %td
+            - total = 0
+            - OrderItem.where(order_id: @order.id).each do |b|
+              - amount = b.amount || 0
+              - p = Product.find(ProductCode.find(b.product_code_id).product_id)
+              - sizes_count = p.sizes.count()
+              - total += amount * p.price_max * sizes_count
+            %span.price
+              = '$' + total.to_s
+          %td
+        %tr
+          %td{:scope => "row"}
+            %label
+              Payment type:
+          %td
+            = f.hidden_field :order_type_id, value: 1
+            = f.select :payment_type_id, PaymentType.order("name ASC").map { |c| [c.name, c.id] }, {}, {:class => "order_field"}
+          %td.ok_insert
+    = render partial: 'items'
+    .clear
+    .approve_box
+      - if @order.email.blank? && @order.cell.blank?
+        %input{type: 'submit', class: 'btn btn-primary btn-order-approve', :disabled => "#{@order.email.blank? || @order.cell.blank?}"}
+      - else
+        %input{type: 'submit', class: 'btn btn-primary btn-order-approve'}
+
+
+  #history.tab-pane.fade
+    No history yet...

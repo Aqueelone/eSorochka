@@ -26,10 +26,10 @@
           %td.name_field= @product.description
         %tr
           %td{:scope => "row"} Price
-          %td.name_field= (@product.price_min && @product.price_max) && (@product.price_min.to_s + '$ - ' + @product.price_max.to_s + '$')
+          %td.name_field= @product.price_max && (@product.price_max.to_s + '$')
         %tr
-          %td{:scope => "row"} Amount
-          %td.name_field= (@product.amount_min && @product.amount_max) && (@product.amount_min.to_s + ' - ' + @product.amount_max.to_s)
+          %td{:scope => "row"} Amount min
+          %td.name_field= @product.amount_max && (@product.amount_max.to_s)
         %tr
           %td{:scope => "row"} Sizes
           %td.name_field

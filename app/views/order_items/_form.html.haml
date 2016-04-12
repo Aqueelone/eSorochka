@@ -1,0 +1,37 @@
+= form_for(@order_item) do |f|
+  - if @order_item.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@order_item.errors.count, "error")
+        prohibited this order_item from being saved:
+      %ul
+        - @order_item.errors.full_messages.each do |msg|
+          %li= msg
+  %table.table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :amount
+      %td= f.number_field :amount, class: "number_field"
+    %tr
+      %td{:scope => "row"}= f.label :product_code
+      %td= f.collection_select :product_code_id, ProductCode.all, :id, :name, {selected: @order_item.product_code_id},
+            {:prompt => "Please, select product code...", :include_blank => true}
+    %tr
+      %td{:scope => "row"}= f.label :order_id
+      %td= f.text_field :order_id, class: "order_field"
+    %tr
+      %td{:scope => "row"}= f.label :temporary
+      - if(@order_item.temporary.blank?)
+        %td.new_temporary
+          = f.label session['temporary']
+          = f.hidden_field :temporary, value: session['temporary']
+      - else
+        %td
+          = f.label @order_item.temporary
+          - if current_user.is_admin
+            %br
+            = f.text_field :temporary, value: @order_item.temporary, class: "order_field"
+          - else
+            = f.hidden_field :temporary, value: @order_item.temporary
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', order_items_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"

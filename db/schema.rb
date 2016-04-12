@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160330122905) do
+ActiveRecord::Schema.define(version: 20160412050445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,55 @@ ActiveRecord::Schema.define(version: 20160330122905) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_items", force: true do |t|
+    t.integer  "amount",          default: 1
+    t.integer  "product_code_id"
+    t.integer  "order_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.uuid     "temporary"
+    t.integer  "last_order_id"
+  end
+
+  create_table "order_statuses", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "cell"
+    t.string   "comment"
+    t.integer  "user_id"
+    t.integer  "stuff_id"
+    t.uuid     "temporary"
+    t.boolean  "closed",          default: false
+    t.integer  "total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "payment_type_id"
+    t.integer  "order_status_id"
+  end
+
+  create_table "payment_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_codes", force: true do |t|
+    t.string   "name"
+    t.integer  "product_id"
+    t.integer  "category_id"
+    t.integer  "color_id"
+    t.integer  "picture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "products", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -174,6 +223,8 @@ ActiveRecord::Schema.define(version: 20160330122905) do
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.uuid     "temporary"
+    t.string   "cell"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

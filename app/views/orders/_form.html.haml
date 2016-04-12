@@ -1,0 +1,85 @@
+= form_for(@order) do |f|
+  - if @order.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@order.errors.count, "error")
+        prohibited this order from being saved:
+      %ul
+        - @order.errors.full_messages.each do |msg|
+          %li= msg
+  %table.table.table-striped.table-bordered.table-condensed.table-order-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :closed
+      %td
+        = f.select :closed, [['Closed', true], ['Open', false]], default: false
+    %tr
+      %td{:scope => "row"}= f.label :name
+      %td= f.text_field :name, class: "order_field"
+    %tr
+      %td{:scope => "row"}= f.label :email
+      %td= f.text_field :email, class: "order_field"
+    %tr
+      %td{:scope => "row"}= f.label :cell
+      %td= f.text_field :cell, class: "order_field"
+    %tr
+      %td{:scope => "row"}= f.label :comment
+      %td= f.text_area :comment, class: "order_field"
+    %tr
+      %td{:scope => "row"}= f.label :payment_type_id
+      %td= f.select :payment_type_id, PaymentType.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => true
+    %tr
+      %td{:scope => "row"}= f.label :order_status_id
+      %td= f.select :order_status_id, OrderStatus.order("name ASC").map { |c| [c.name, c.id] }
+    %tr
+      %td{:scope => "row"}= f.label :temporary
+      - if(@order.temporary.blank?)
+        %td.new_temporary
+          = f.label session['temporary']
+          = f.hidden_field :temporary, value: session['temporary']
+      - else
+        %td
+          = f.label @order.temporary
+          - if current_user.is_admin
+            %br
+            = f.text_field :temporary, value: @order.temporary, class: "order_field"
+          - else
+            = f.hidden_field :temporary, value: @order.temporary
+    %tr
+      %td{:scope => "row"}= f.label :user
+      %td
+        - if !@order.user_id.blank?
+          = User.find(@order.user_id).name
+        - else
+          %label
+            =' new user'
+        %br
+        - if current_user.is_admin || current_user.is_moderator
+          = f.select :user_id, User.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => true
+        - else
+          - if !@order.user_id.blank?
+            = f.hidden_field :user_id, :class => "span5 hidden"
+    %tr
+      %td{:scope => "row"}= f.label :stuff
+      %td
+        - if !@order.stuff_id.blank?
+          = User.find(@order.stuff_id).name
+        - else
+          %label
+            =' new responsible person'
+        %br
+        - if current_user.is_admin || current_user.is_moderator
+          = f.select :stuff_id, User.order("name ASC").map { |c| [c.name, c.id] }, :include_blank => true
+        - else
+          - if !@order.user_id.blank?
+            = f.hidden_field :stuff_id, :class => "span5 hidden"
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', orders_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"
+    %tr.total_label
+      %td
+      %td
+        - total = 0
+        - @order.id && OrderItem.where(order_id: @order.id).each do |i|
+          - product = Product.find(ProductCode.find(i.product_code_id).product_id)
+          - total += product.price_max * product.sizes.count() * i.amount
+        = '$' + total.to_s

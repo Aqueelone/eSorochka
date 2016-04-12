@@ -1,0 +1,59 @@
+= form_for(@product_code) do |f|
+  - if @product_code.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@product_code.errors.count, "error")
+        prohibited this product_code from being saved:
+      %ul
+        - @product_code.errors.full_messages.each do |msg|
+          %li= msg
+  %table.table-striped.table-bordered.table-condensed.table-product-picture{:role => "grid"}
+    %tr
+      %td= attachment_image_tag((@product_code.picture_id && Image.find(@product_code.picture_id)) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+  %table.table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :name
+      %td
+        = f.text_field :name, class: "name_field"
+        = f.hidden_field :id
+        = f.hidden_field :picture_id
+    %tr
+      %td{:scope => "row"}= f.label :category
+      - if(@product_code.product_id)
+        %td
+          - c = Category.find(Product.find(@product_code.product_id))
+          = f.label c.name_ua
+          %input{id: "product_code_category_id", name: "product_code[category_id]", type: "hidden", value: "#{c.id}"}
+      - else
+        %td.category_insert
+    %tr
+      %td{:scope => "row"}= f.label :product
+      - if(!@product_code.product_id.blank?)
+        %td= f.collection_select :product_id, Product.all, :id, :name, {selected: @product_code.product_id},
+            {:prompt => "Please, select product...", :include_blank => true}
+      - else
+        %td= f.collection_select :product_id, @product_without_pc, :id, :name,
+            {:prompt => "Please, select product...", :include_blank => true}
+    %tr
+      %td{:scope => "row"}= f.label :color
+      - if(!@product_code.color_id.blank?)
+        - c = Color.find(@product_code.color_id)
+        %td
+          = c.name
+          .color_square{style: "background-color: #{c.color_gid}"}
+          %input{id: "product_code_color_id", name: "product_code[color_id]", type: "hidden", value: "#{c.id}"}
+      - else
+        - if(!@product_code.picture_id.blank?)
+          - i = Image.find(@product_code.picture_id)
+          - g = Gallery.find(i.gallery_id)
+          - c = Color.find(g.color_id)
+          %td
+            = c.name
+            .color_square{style: "background-color: #{c.color_gid}"}
+            %input{id: "product_code_color_id", name: "product_code[color_id]", type: "hidden", value: "#{c.id}"}
+        - else
+          %td.gallery_insert
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', product_codes_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"
+  .gallery

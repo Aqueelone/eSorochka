@@ -1,0 +1,27 @@
+- @products.each do |p|
+  .prod_cel{class: "prod_cel#{p.id}", style:"left: #{@hash[p.id]['point']}px; top: #{@hash[p.id]['top']}px; z-index: #{@hash[p.id]['zindex'];}",
+            'data-id' => "prod_cel#{p.id}", 'data-aspect' => "#{@hash[p.id]['aspect']}"}
+    %table.table-condensed.table-catalog-face{:role => "grid"}
+      %tr
+        %td
+          %a{href: "#", class: "cat-image-action"}
+            = attachment_image_tag((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 225, 300, fallback: "default225x300.png", class: 'image_uploaded')
+            .cat-image-action-zone
+            .cat-image-action-zoom{style: "background-image: url(#{attachment_url((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 900, 1200, fallback: "default300x400.png")});"}
+      %tr
+        %td
+          %table.table-condensed.table-catalog-face-label{:role => "grid"}
+            %tr
+              %td.cat-price
+                %span.cat-price
+                  = '$'+p.price_max.to_s
+                %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
+                  %tr
+                    - p.sizes.each do |s|
+                      %td
+                        = s.sign
+            %tr
+              %td
+                %a.btn.btn-start.btn-more.animated.scroll.topbutton.fadeInUpBig{ href: "#product", id:"#prod#{p.id}", class: "btn-product btn-more-#{p.id}"}
+                  докладніше...
+

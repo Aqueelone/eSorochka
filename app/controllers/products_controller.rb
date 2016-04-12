@@ -33,6 +33,25 @@ class ProductsController < ApplicationController
     !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
   end
 
+  def show_product
+    @product = Product.find(params[:id])
+    @orders = Order.uncached do
+      Order.where(:temporary => session['temporary'], :closed => false)
+    end
+    @orders.blank? && (redirect_to root_path)
+    !@orders.blank? && (@order = @orders.last)
+    @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
+    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    @amounts = []
+    @product_codes_ids = ProductCode.where(product_id: @product.id).map {|p| p.id}
+    @temper = session['temporary']
+    OrderItem.all.where(temporary: @temper, :product_code_id => @product_codes_ids).each do |oi|
+      @amounts[oi.product_code_id] = oi.amount
+    end
+
+    render :partial => 'prod'
+  end
+
   def new
     @product = Product.new
   end
@@ -70,6 +89,44 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     !@product.permit(:picture_id).update(params[:picture_id]) && (redirect_to edit_product_path)
     redirect_to edit_product_path( session['product_id'])
+  end
+
+  def get_catalog
+    @products = Product.all.order('products.id ASC')
+    @width = params[:width].to_i
+    @pointX = @width/2 -122
+    @point = @pointY = @pointX
+    @top = 230
+    @step = 270
+    @topstep = 12
+    @zindex = 100000
+    @aspect = 0
+    @pleft = 0
+    @pright = 0
+    @k = 1
+    @hash = []
+    @pos = 'start'
+    @products.each do |p|
+      if(@pos != 'start')
+        if(@pos == 'left')
+          @pos = 'right'
+          @point = @pointX -= @step
+          @aspect = -@pright +=1
+          @top -= @topstep
+          @zindex -= 1
+        else
+          @pos = 'left'
+          @point = @pointY += @step
+          @aspect = @pleft += 1
+          @step -= @step/(2*@k)
+          @k++
+          @topstep += 10 + (@topstep /2)
+        end
+      else @pos = 'left'
+      end
+      @hash[p.id] = {'point' => @point, 'top' => @top, 'zindex' => @zindex, 'aspect' => @aspect}
+    end
+    render :partial => 'cat1'
   end
 
   def destroy

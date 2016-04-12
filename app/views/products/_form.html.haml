@@ -16,28 +16,22 @@
         = f.label :name
         = f.hidden_field :id
         = f.hidden_field :picture_id
-      %td= f.text_field :name, class: "name_field"
+      %td.order_field= f.text_field :name, class: 'text_input'
     %tr.brand_image_insert
       %td{:scope => "row"}= f.label :brand
       %td= f.collection_select :brand_id, Brand.all, :id, :name, {:selected => @product.brand_id}
     %tr
       %td{:scope => "row"}= f.label :category
       %td= f.collection_select :category_id, Category.all.where('categories.parent_id IS NOT NULL'), :id, :name_ua, {:selected => @product.category_id}
-    %tr
+    %tr.product_description
       %td{:scope => "row"}= f.label :description
-      %td= f.text_area :description, class: "name_field"
+      %td= f.text_area :description, class: 'text_input'
     %tr
-      %td{:scope => "row"}= f.label :price_min
-      %td= f.number_field :price_min, class: "number_field"
+      %td{:scope => "row"}= f.label 'Price'
+      %td.number_field= f.number_field :price_max
     %tr
-      %td{:scope => "row"}= f.label :price_max
-      %td= f.number_field :price_max, class: "number_field"
-    %tr
-      %td{:scope => "row"}= f.label :amount_min
-      %td= f.number_field :amount_min, class: "number_field"
-    %tr
-      %td{:scope => "row"}= f.label :amount_max
-      %td= f.number_field :amount_max, class: "number_field"
+      %td{:scope => "row"}= f.label 'Amount'
+      %td.number_fiel= f.number_field :amount_max
     %tr
       %td{:scope => "row"}= f.label :sizes
       %td= f.collection_check_boxes(:size_ids, Size.all, :id, :sign)
@@ -59,24 +53,24 @@
     - !@colors.blank? && @colors.each do |c|
       %tr
         %td{:scope => "row"}= f.label 'Colors'
-        %td
+        %td.order_field
           = c.name
           .color_square{style: "background-color: #{c.color_gid}"}
     %tr
       %td{:scope => "row"}= f.label :cut_type
-      %td= f.text_field :cut_type, class: "name_field"
+      %td.order_field= f.text_field :cut_type, class: "text_input"
     %tr
       %td{:scope => "row"}= f.label :collar_type
-      %td= f.text_field :collar_type, class: "name_field"
+      %td.order_field= f.text_field :collar_type, class: "text_input"
     %tr
       %td{:scope => "row"}= f.label :sleeve_type
-      %td= f.text_field :sleeve_type, class: "name_field"
+      %td.order_field= f.text_field :sleeve_type, class: "text_input"
     %tr
       %td{:scope => "row"}= f.label :cuff_type
-      %td= f.text_field :cuff_type, class: "name_field"
+      %td.order_field= f.text_field :cuff_type, class: "text_input"
     %tr
       %td{:scope => "row"}= f.label :style_type
-      %td= f.text_field :style_type, class: "name_field"
+      %td.order_field= f.text_field :style_type, class: "text_input"
   - !@galleries.blank? && @galleries.each do |b|
     - b.images.each do |i|
       %table.table-striped.table-bordered.table-condensed.table-product-picture-set{:role => "grid"}

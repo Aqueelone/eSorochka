@@ -21,6 +21,8 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  temporary              :uuid
+#  cell                   :string(255)
 #
 # Indexes
 #
@@ -51,6 +53,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.confirmed_at = Time.now
+    @user.temporary = session['temporary']
     @user.skip_confirmation!
     !@user.save && (redirect_to new_user_session_path, error: 'Creating of user is fail!')
     redirect_to @user
