@@ -9,15 +9,24 @@
     %i.icon-catalog
     %span
       online
-%section#catalog.inview-observer.topwhite.parallax
+%section#navpanel0.topwhite
   %a.btn.btn-start.animated.scroll.topbutton.fadeInUpBig{href: '#catalog'}
     каталог
+  = render partial: 'nav0'
+  .nav-catalog
+    .nav-cat
+      %a.btn.btn-cat-nav-left
+        %i.glyphicon.glyphicon-hand-left.icon-white
+      .nav-cat-div.topwhite
+      %a.btn.btn-cat-nav-right
+        %i.glyphicon.glyphicon-hand-right.icon-white
+%section#catalog
 %section#navpanel.topwhite
-%section#product.parallax
-%section#navpanel2.topwhite
+%section#product
+%section#order.topwhite
 %section#contact.inview-observer.parallax
   = render partial: 'contact'
-%section#order.inview-observer.topwhite.parallax
+%section#navpanel2.topwhite
 %section#about.inview-observer.parallax
   = render partial: 'about'
 %section#navpanel3.topwhite

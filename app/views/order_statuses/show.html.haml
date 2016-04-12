@@ -1,0 +1,17 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of #{@order_status.name}:
+      %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Name
+          %td= @order_status.name
+        %tr
+          %td{:scope => "row"}
+          %td
+            = bootstrap_icon_link_to 'Edit', edit_order_status_path(@order_status), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', @order_status, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

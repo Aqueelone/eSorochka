@@ -1,0 +1,16 @@
+= form_for(@order_status) do |f|
+  - if @order_status.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@order_status.errors.count, "error")
+        prohibited this order_status from being saved:
+      %ul
+        - @order_status.errors.full_messages.each do |msg|
+          %li= msg
+  %table.table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :name
+      %td= f.text_field :name, class: "name_field"
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', order_statuses_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"

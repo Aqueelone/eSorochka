@@ -9,6 +9,7 @@
           %tr
             %th{:scope => "column"} Name
             %th{:scope => "column"} Description
+            %th{:scope => "column"} preview
             %th{:scope => "column"} product
             %th{:scope => "column"} images:
             %th{:scope => "column"}
@@ -17,7 +18,10 @@
             %tr
               %td= b.name
               %td= b.description
-              %td= b.product_id && (bootstrap_icon_link_to 'Show', Product.find(b.product_id), "glyphicon glyphicon-search icon-white", method: :get, :class => "button btn btn-small btn-primary")
+              %td
+                -if(!(im = Image.where("images.gallery_id = #{b.id}").first).blank?)
+                  = attachment_image_tag(Image.find(im) || Image.new, :file, :fill, 90, 120, fallback: "default300x100.png", class: 'image_uploaded')
+              %td= b.product_id && Product.find_by_id(b.product_id) && (bootstrap_icon_link_to 'Show', Product.find(b.product_id), "glyphicon glyphicon-search icon-white", method: :get, :class => "button btn btn-small btn-primary")
               %td= b.images.count
               %td
                 = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"

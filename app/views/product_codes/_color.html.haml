@@ -1,0 +1,7 @@
+= collection_select :product_code, 'gallery_id', @galleries, :id, :name,
+            {:prompt => "Please, select gallery...", :include_blank => true}
+%tr
+  %td{:scope => "row"}
+    %label{for: "product_code", class: "category_name"}
+      = Category.find(@product.category_id).name_ua
+      %input{type: 'hidden', id: 'category_id', name: 'category_id', value: "#{@product.category_id}"}

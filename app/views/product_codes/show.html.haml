@@ -1,0 +1,31 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of #{@product_code.name}:
+      %table.table-striped.table-bordered.table-condensed.table-product-picture{:role => "grid"}
+        %tr
+          %td= attachment_image_tag((@product_code.picture_id && Image.find(@product_code.picture_id)) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+      %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Name
+          %td= @product_code.name
+        %tr
+          %td{:scope => "row"} Product
+          %td= @product.name
+        %tr
+          %td{:scope => "row"} Color
+          %td
+            = @color.name
+            .color_square{style: "background-color: #{@color.color_gid}"}
+        %tr
+          %td{:scope => "row"} Category
+          %td= @category.name_ua
+        %tr
+          %td{:scope => "row"}
+          %td
+            = bootstrap_icon_link_to 'Edit', edit_product_code_path(@product_code), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', @product_code, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

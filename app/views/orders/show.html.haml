@@ -1,0 +1,50 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of order# #{@order.id}:
+      %table.table.table-striped.table-bordered.table-condensed.table-order-form{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Name
+          %td.order_field= @order.name
+        %tr
+          %td{:scope => "row"} Email
+          %td.order_field= @order.email
+        %tr
+          %td{:scope => "row"} Cell
+          %td.order_field= @order.cell
+        %tr
+          %td{:scope => "row"} Comment
+          %td.order_field= @order.comment
+        %tr
+          %td{:scope => "row"} Payment type
+          %td.order_field= @order.payment_type_id && PaymentType.find(@order.payment_type_id).name
+        %tr
+          %td{:scope => "row"} Order status
+          %td.order_field= @order.order_status_id && OrderStatus.find(@order.order_status_id).name
+        %tr
+          %td{:scope => "row"} Temporary
+          %td.order_field= @order.temporary
+        %tr
+          %td{:scope => "row"} User
+          %td.order_field= @order.user.name
+        %tr
+          %td{:scope => "row"} Stuff
+          %td.order_field= @order.stuff.name
+        %tr
+          %td{:scope => "row"}
+          %td
+            = bootstrap_icon_link_to 'Edit', edit_order_path(@order), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', @order, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+        %tr.total_label
+          %td
+          %td
+            - total = 0
+            - OrderItem.where(order_id: @order.id).each do |i|
+              - product = Product.find(ProductCode.find(i.product_code_id).product_id)
+              - total += product.price_max * product.sizes.count() * i.amount
+            = '$' + total.to_s
+      = render 'order_items'
