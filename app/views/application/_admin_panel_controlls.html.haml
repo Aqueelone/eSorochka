@@ -3,6 +3,8 @@
     %legend
       Controlls:
       = session['temporary']
+    .controll-group-session
+      = collection_select(:category, :category_id, Category.all, :id, :name_ua, {:selected => session["category"]})
     .controll-group-user
       = bootstrap_icon_link_to 'User List', users_path, "glyphicon glyphicon-user icon-white", :class => "button btn btn-info"
       = bootstrap_icon_link_to 'New User', new_user_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
@@ -30,6 +32,10 @@
     .controll-group-product
       = bootstrap_icon_link_to 'Product List', products_path, "glyphicon glyphicon-chevron-right icon-white", :class => "button btn btn-info"
       = bootstrap_icon_link_to 'New Product', new_product_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+
+    .controll-group-product
+      = bootstrap_icon_link_to 'ProductCode List', product_codes_path, "glyphicon glyphicon-chevron-right icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to 'New ProductCode', new_product_code_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-order
       = bootstrap_icon_link_to 'Order List', orders_path, "glyphicon glyphicon-check icon-white", :class => "button btn btn-info"

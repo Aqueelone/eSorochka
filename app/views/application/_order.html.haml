@@ -1,46 +1,53 @@
-.nav0-tabs.nav.nav-tabs.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+.nav0-tabs.nav.nav-tabs
+  .flash.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
   %ul.nav0-tabs
-    %li.active
+    %li{class: "#{session['history'] || ' active'}"}
       %a{href: "#your_order"}
-        Your New Order
-    %li
+        =t('orders.new.header')
+    %li{class: "#{session['history'] && ' active'}"}
       %a{href: "#history"}
-        Orders History
+        =t('orders.history.header')
 .tab-content
-  #your_order.tab-pane.fade.in.active
+  #your_order.tab-pane.fade{class: "#{session['history'] || 'in active'}"}
     = form_for @order, :url => add_attr_order_path, :remote => true, :method => :patch  do |f|
       %table.table-striped.table-condensed.table-order-form-box{:role => "grid"}
         %tr
           %td{:scope => "row"}
-            %label Your name:
-          %td
-            = f.text_field :name, class: "order_field", placeholder: "write Your name..."
-          %td.ok_insert
-        %tr
-          %td{:scope => "row"}
-            %label Your email:
-          %td
-            = f.text_field :email, class: "order_field email", placeholder: "write Your email..."
+            %label
+              =t('orders.new.name')
+          %td.input_field
+            - if current_user
+              = f.hidden_field :user_id, value: current_user.id
+            - else
+              = f.hidden_field :user_id
+            = f.text_field :name, class: "order_field", placeholder: "#{t('orders.new.pname')}"
           %td.ok_insert
         %tr
           %td{:scope => "row"}
             %label
-              Your cell number:
-          %td
-            = f.text_field :cell, class: "order_field cell", placeholder: "write Your cell number..."
+              =t('orders.new.email')
+          %td.input_field
+            = f.text_field :email, class: "order_field email", placeholder: "#{t('orders.new.pemail')}"
           %td.ok_insert
         %tr
           %td{:scope => "row"}
             %label
-              Comment:
+              =t('orders.new.cell')
+          %td.input_field
+            = f.text_field :cell, class: "order_field cell", placeholder: "#{t('orders.new.pcell')}"
+          %td.ok_insert
+        %tr.input_field
+          %td{:scope => "row"}
+            %label
+              =t('orders.new.comment')
           %td
-            = f.text_area :comment, class: "order_field", placeholder: "write comment..."
+            = f.text_area :comment, class: "order_field", placeholder: "#{t('orders.new.pcomment')}"
           %td.ok_insert
         %tr
           %td{:scope => "row"}
             %label
-              Total cost:
-          %td
+              =t('orders.new.cost')
+          %td.input_field
             - total = 0
             - OrderItem.where(order_id: @order.id).each do |b|
               - amount = b.amount || 0
@@ -53,19 +60,17 @@
         %tr
           %td{:scope => "row"}
             %label
-              Payment type:
-          %td
+              =t('orders.new.payment')
+          %td.input_field
             = f.hidden_field :order_type_id, value: 1
             = f.select :payment_type_id, PaymentType.order("name ASC").map { |c| [c.name, c.id] }, {}, {:class => "order_field"}
           %td.ok_insert
     = render partial: 'items'
     .clear
     .approve_box
-      - if @order.email.blank? && @order.cell.blank?
-        %input{type: 'submit', class: 'btn btn-primary btn-order-approve', :disabled => "#{@order.email.blank? || @order.cell.blank?}"}
-      - else
-        %input{type: 'submit', class: 'btn btn-primary btn-order-approve'}
-
-
-  #history.tab-pane.fade
-    No history yet...
+      - if !@order.email.blank? || !@order.cell.blank?
+        =form_for @order, :url => approve_order_path( :format => :js), remote: true  do |fa|
+          = fa.submit t('orders.new.place'), class: 'btn btn-primary btn-order-approve'
+        - ##%input{type: 'submit', class: 'btn btn-primary btn-order-approve'}
+  #history.tab-pane.fade{class: "#{session['history'] && 'in active'}"}
+    = render partial: "history"

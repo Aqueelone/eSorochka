@@ -16,6 +16,9 @@
       %td{:scope => "row"}= f.label :description
       %td= f.text_area :description, class: "name_field"
     %tr
+      %td{:scope => "row"}= f.label :category
+      %td= f.collection_select :category_id, Category.all, :id, :name_ua, {:selected => session["category"]}
+    %tr
       %td{:scope => "row"}= f.label :composition
       %td= f.text_field :composition, class: "name_field"
     %tr

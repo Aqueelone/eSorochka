@@ -1,0 +1,34 @@
+- c = session['deffered'].compact
+- c.each do |d|
+  - p = Product.find(d)
+  - if !p.blank?
+    .prod_cel_deffered.wow.lightSpeedIn{class: "prod_cel#{d}", 'data-id' => "prod_cel#{d}", 'data-wow-duration' => '100ms', 'data-wow-delay' => '100ms'}
+      %table.table-condensed.table-catalog-face{:role => "grid"}
+        %tr
+          %td
+            %a{href: "/products/#{d.to_s + "?locale=" + I18n.locale.to_s}", class: "btn-product cat-image-action", 'data-id' => "prod_cel#{d}"}
+              = attachment_image_tag((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 120, 160, fallback: "default120x160.png", class: 'image_uploaded')
+        %tr
+          %td
+            %table.table-condensed.table-catalog-face-label{:role => "grid"}
+              %tr
+                %td.cat-price
+                  %span.cat-price
+                    = '$'+p.price_max.to_s
+                %td.close
+                  %a{href: '#close', 'data-id' => "#{d}"}
+                    %i.glyphicon.glyphicon-remove.icon-red
+              %tr
+                %td
+                  %a.btn.btn-start.btn-more.btn-product.animated.scroll.topbutton.fadeInUpBig{ href: "/products/#{d.to_s + "?locale=" + I18n.locale.to_s}", id:"#prod#{d}", 'data-id' => "prod_cel#{d}", class: "btn-more-#{d}"}
+                    =t(:_furthermore)
+.nav-deff
+  .deff-spacer.wow.lightSpeedIn{'data-wow-duration' => '100ms', 'data-wow-delay' => '100ms'}
+  %a.btn.animated.scroll.btn-nav-deff.btn-nav-deff-left.lightSpeedIn{ href: "#"}
+    %i.glyphicon.glyphicon-chevron-left
+    %i.glyphicon.glyphicon-chevron-left
+    %i.glyphicon.glyphicon-chevron-left
+  %a.btn.animated.scroll.btn-nav-deff.btn-nav-deff-right.lightSpeedIn{ href: "#"}
+    %i.glyphicon.glyphicon-chevron-right
+    %i.glyphicon.glyphicon-chevron-right
+    %i.glyphicon.glyphicon-chevron-right

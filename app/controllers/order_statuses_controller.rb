@@ -9,6 +9,7 @@
 #
 
 class OrderStatusesController < ApplicationController
+  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   def index
     @order_statuses = OrderStatus.all.order('order_statuses.id ASC')
   end

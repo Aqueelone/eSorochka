@@ -10,6 +10,7 @@
 #  color_id    :integer
 #  fabric_id   :integer
 #  product_id  :integer
+#  category_id :integer
 #
 # Indexes
 #
@@ -21,7 +22,7 @@
 class GalleriesController < ApplicationController
   before_action :require_admin
   def index
-    @galleries = Gallery.includes(:images).order('galleries.created_at ASC')
+    @galleries = Gallery.includes(:images).where("galleries.category_id IS NULL OR galleries.category_id = '#{session['category']}'").order('galleries.created_at ASC')
   end
 
   def show
@@ -69,6 +70,6 @@ class GalleriesController < ApplicationController
   private
 
   def gallery_params
-    params.require(:gallery).permit(:id, :name, :description, :color_id, :fabric_id, :product_id, :return_to, images_attributes:[:description, :file])
+    params.require(:gallery).permit(:id, :name, :description, :color_id, :fabric_id, :product_id, :category_id, :return_to, images_attributes:[:description, :file])
   end
 end

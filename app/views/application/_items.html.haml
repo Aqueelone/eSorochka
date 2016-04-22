@@ -1,21 +1,21 @@
 %table.table-striped.table-condensed.table-order-form-item{:role => "grid"}
   %thead
     %caption
-      Included order items:
+      =t('orders.items.caption')
     %tr
       %th{:class => "column-sort"}
       %th{:class => "column-sort"}
-        Amount
+        =t('orders.items.amount')
       %th{:class => "column-sort"}
-        Total
+        =t('orders.items.total')
+      %th{:class => "column-sort sizes_field"}
+        =t('orders.items.sizes')
       %th{:class => "column-sort"}
-        Sizes in pack
+        =t('orders.items.preview')
       %th{:class => "column-sort"}
-        Preview
+        =t('orders.items.pcode')
       %th{:class => "column-sort"}
-        Product Code
-      %th{:class => "column-sort"}
-        Color
+        =t('orders.items.color')
       %th{:class => "column-sort"}
   %tbody
     - @order_items.each do |b|
@@ -31,14 +31,16 @@
             = fo.hidden_field :temporary
             = fo.number_field :amount, class: "number_field order-item-amount"
             = fo.hidden_field :order_id, value: @order.id
-        %td= '$' + (amount * p.price_max * sizes_count).to_s
+        %td
+          %span.price
+            = '$' + (amount * p.price_max * sizes_count).to_s
         %td
           %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
             %tr
               - p.sizes.each do |s|
                 %td
                   = s.sign
-        %td.image_preview= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 45, 60, fallback: "default300x400.png", class: 'image_uploaded')
+        %td.image_preview= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 90, 120, fallback: "default300x400.png", class: 'image_uploaded')
         %td= pc.name
         %td
           .color_square{style: "background-color: #{Color.find(pc.color_id).color_gid}"}

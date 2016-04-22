@@ -9,6 +9,7 @@
 #
 
 class PaymentTypesController < ApplicationController
+  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   def index
     @payment_types = PaymentType.all.order('payment_types.id ASC')
   end

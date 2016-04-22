@@ -1,0 +1,32 @@
+#approve_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times-circle
+        %h4#ApproveResult.modal-title Спасибо! Ваш ЗАКАЗ проведен успешно!
+        .modal-body
+          %h3  Наши менеджеры свяжутся с Вами по контактам, которые Вы нам предоставили.
+          %table.table-striped.table-condensed.table-hisory-form-item{:role => "grid"}
+            %caption
+              На этой странице Вы можете узнать состояние Вашего Заказа, где:
+            %tr
+              %td.first
+                очікує
+              %td
+                показывает, что наши менеджеры именно сейчас будут связываться с Вами по этому заказу
+            %tr
+              %td.first
+                виконується
+              %td показывает, что в данный момент Ваш Заказ на пути к Вам
+            %tr
+              %td.first
+                закрито
+              %td
+                показывает, что Ваш заказ уже доставлен
+            %tr
+              %td.first
+                проблема
+              %td
+                показывает, что возникла определенная проблема с доставкой Вашего Заказа и что наши менеджеры, возможно,
+                в ближайшее время попробуют с Вами связаться для решения проблемы

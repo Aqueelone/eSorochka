@@ -127,6 +127,7 @@
 #                         about GET       /about(.:format)                              static_pages#about
 #                     userslist GET       /userslist(.:format)                          static_pages#userslist
 #                  privatpolicy GET       /privatpolicy(.:format)                       static_pages#privatpolicy
+#                       catalog GET       /catalog(.:format)                            categories#catalog
 #                    adminpanel GET       /adminpanel(.:format)                         static_pages#adminpanel
 #                remote_sign_up GET       /remote_sign_up(.:format)                     remote_content#remote_sign_up
 #                remote_sign_in GET       /remote_sign_in(.:format)                     remote_content#remote_sign_in
@@ -142,6 +143,15 @@
 #                               PATCH     /users/:id(.:format)                          users#update
 #                               PUT       /users/:id(.:format)                          users#update
 #                               DELETE    /users/:id(.:format)                          users#destroy
+#       session_update_category GET       /categories/:id/session_update(.:format)      categories#session_update
+#                               GET       /categories(.:format)                         categories#index
+#                               POST      /categories(.:format)                         categories#create
+#                               GET       /categories/new(.:format)                     categories#new
+#                               GET       /categories/:id/edit(.:format)                categories#edit
+#                               GET       /categories/:id(.:format)                     categories#show
+#                               PATCH     /categories/:id(.:format)                     categories#update
+#                               PUT       /categories/:id(.:format)                     categories#update
+#                               DELETE    /categories/:id(.:format)                     categories#destroy
 #                     gid_color GET       /colors/:id/gid(.:format)                     colors#gid
 #                               GET       /colors(.:format)                             colors#index
 #                               POST      /colors(.:format)                             colors#create
@@ -173,6 +183,7 @@
 #               picture_product POST      /products/:id/picture(.:format)               products#picture
 #           get_catalog_product GET       /products/:id/get_catalog(.:format)           products#get_catalog
 #          show_product_product GET       /products/:id/show_product(.:format)          products#show_product
+#             show_mode_product GET       /products/:id/show_mode(.:format)             products#show_mode
 #                               GET       /products(.:format)                           products#index
 #                               POST      /products(.:format)                           products#create
 #                               GET       /products/new(.:format)                       products#new
@@ -203,8 +214,10 @@
 #                               PUT       /order_items/:id(.:format)                    order_items#update
 #                               DELETE    /order_items/:id(.:format)                    order_items#destroy
 #                  newbox_order GET       /orders/:id/newbox(.:format)                  orders#newbox
+#                    last_order GET       /orders/:id/last(.:format)                    orders#last
+#                 history_order GET       /orders/:id/history(.:format)                 orders#history
 #                add_attr_order PATCH     /orders/:id/add_attr(.:format)                orders#add_attr
-#                 approve_order PATCH     /orders/:id/approve(.:format)                 orders#approve
+#                 approve_order GET       /orders/:id/approve(.:format)                 orders#approve
 #                               GET       /orders(.:format)                             orders#index
 #                               POST      /orders(.:format)                             orders#create
 #                               GET       /orders/new(.:format)                         orders#new
@@ -217,6 +230,7 @@
 #                    refile_app           /attachments                                  #<Refile::App app_file="/home/ec2-user/.rvm/gems/ruby-2.1.5/gems/refile-0.6.2/lib/refile/app.rb">
 #                entypo_charmap GET       /entypo/charmap(.:format)                     entypo/charmap#index
 #
+
 
 
 
@@ -242,8 +256,10 @@ Rails.application.routes.draw do
   get 'home' => 'static_pages#home', :as => 'home'
   get 'contacts' => 'static_pages#contacts', :as => 'contacts'
   get 'about' => 'static_pages#about', :as => 'about'
+  get 'order' => 'static_pages#order', :as => '_order'
   get 'userslist' => 'static_pages#userslist', :as => 'userslist'
   get 'privatpolicy' => 'static_pages#privatpolicy', :as => 'privatpolicy'
+  get 'catalog' => 'categories#catalog', :as => 'catalog'
   get 'adminpanel' => 'static_pages#adminpanel', :as => 'adminpanel'
 
   match 'remote_sign_up', to: 'remote_content#remote_sign_up', via: [:get]
@@ -257,6 +273,12 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
+  resources :categories do
+    member do
+      get :session_update
+    end
+  end
 
   resources :colors do
     member do
@@ -282,6 +304,9 @@ Rails.application.routes.draw do
       post :picture
       get :get_catalog
       get :show_product
+      get :show_mode
+      get :get_deffered
+      get :remove_deffered
     end
   end
 
@@ -303,8 +328,10 @@ Rails.application.routes.draw do
   resources :orders do
     member do
       get :newbox
+      get :last
+      get :history
       patch :add_attr
-      patch :approve
+      get :approve
     end
   end
 

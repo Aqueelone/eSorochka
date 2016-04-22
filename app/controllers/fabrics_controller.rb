@@ -10,12 +10,13 @@
 #  image_id    :string(255)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  category_id :integer
 #
 
 class FabricsController < ApplicationController
   before_action :require_admin
   def index
-    @fabrics = Fabric.all
+    @fabrics = Fabric.where("fabrics.category_id IS NULL OR fabrics.category_id = '#{session['category']}'").order("fabrics.created_at DESC")
   end
 
   def show
@@ -56,6 +57,6 @@ class FabricsController < ApplicationController
   private
 
   def fabric_params
-    params.require(:fabric).permit(:name, :description, :composition, :image)
+    params.require(:fabric).permit(:name, :description, :composition, :image, :category_id)
   end
 end

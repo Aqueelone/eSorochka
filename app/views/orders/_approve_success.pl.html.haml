@@ -1,0 +1,33 @@
+#approve_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times-circle
+        %h4#ApproveResult.modal-title Dziękuję! Twoje zamówienie zostanie przeprowadzona pomyślnie!
+        .modal-body
+          %h3  Nasi menedżerowie skontaktuje się na kontaktach, które zostały przewidziane do nas.
+          %table.table-striped.table-condensed.table-hisory-form-item{:role => "grid"}
+            %caption
+              Na tej stronie można dowiedzieć się o status zamówienia, przy czym:
+            %tr
+              %td.first
+                очікує
+              %td
+                To pokazuje, że nasi menedżerowie teraz skontaktuje się po tym zamówienii
+            %tr
+              %td.first
+                виконується
+              %td To pokazuje, że w momencie zamówienia na drodze do ciebie
+            %tr
+              %td.first
+                закрито
+              %td
+                To oznacza, że zamówienie już otrzymane
+            %tr
+              %td.first
+                проблема
+              %td
+                To pokazuje, że istnieje jakieś problemy z dostarczeniem zamówienia i że
+                nasi menedżerowie mogą próbować skontaktować się z Tobą w najbliższej przyszłości,
+                aby skontaktować się rozwiązać problem

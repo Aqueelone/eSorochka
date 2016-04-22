@@ -1,0 +1,33 @@
+#approve_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times-circle
+        %h4#ApproveResult.modal-title Teşekkür ederim! Sizin SİPARİŞ başarıyla yapılır!
+        .modal-body
+          %h3  Bizim yöneticiler bize sağladığınız kontaklar sizinle irtibata geçecektir.
+          %table.table-striped.table-condensed.table-hisory-form-item{:role => "grid"}
+            %caption
+              Bu sayfada Sizin SİPARİŞ, durumunu öğrenebilirsiniz:
+            %tr
+              %td.first
+                очікує
+              %td
+                Bizim yöneticiler şu anda bu sipariş üzerine sizinle irtibata geçecektir gösterir
+            %tr
+              %td.first
+                виконується
+              %td
+                Bu gösteriyor ki şimdiki zaman size yolda senin SİPARİŞ de
+            %tr
+              %td.first
+                закрито
+              %td
+                Bu sipariş teslim edildiğini gösterir
+            %tr
+              %td.first
+                проблема
+              %td
+                Bu senin SİPARİŞ teslim bazı sıkıntılar olduğunu gösterir ve mümkün olan yöneticiler,
+                gerekli olması, bu sorunları çözmek eğer, yakında sizinle temasa için çalışacağız

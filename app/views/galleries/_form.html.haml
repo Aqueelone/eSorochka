@@ -18,7 +18,7 @@
   %table.table-striped.table-bordered.table-condensed.table-product-char-form{:role => "grid"}
     %tr
       %td{:scope => "row"}= f.label 'add fabric:'
-      %td= f.collection_select :fabric_id, Fabric.all, :id, :name, {:selected => @gallery.fabric_id}
+      %td= f.collection_select :fabric_id, Fabric.where("fabrics.category_id = #{session['category']}"), :id, :name, {:selected => @gallery.fabric_id}
     %tr
       %td{:scope => "row"} Fabric
       %td{class: 'fabric_insert'}
@@ -30,6 +30,9 @@
     %tr
       %td{:scope => "row"}= f.label :description
       %td= f.text_area :description, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :category
+      %td= f.collection_select :category_id, Category.all, :id, :name_ua, {:selected => session["category"]}
     %tr
       %td= bootstrap_icon_link_to 'Cancel', galleries_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td

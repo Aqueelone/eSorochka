@@ -1,1 +1,10 @@
-.nav0-tabs.nav.nav-tabs.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+.nav0-tabs.nav.nav-tabs
+  .flash.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+  %ul.nav0-tabs
+    - Category.where("categories.visible = 't'").each do |c|
+      %li{class: "#{(c.id.to_s == session['category']) ? 'active' : ''}"}
+        %a{href: "#catalog", title: "#{c.name_ua}", id: "catalog-#{c.id}", class: "catalog-toggle"}
+          - if c.id == 2
+            = t('category.two')
+          - if c.id == 3
+            = t('category.three')

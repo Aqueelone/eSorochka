@@ -9,6 +9,7 @@
           %tr
             %th{:scope => "column"} Name
             %th{:scope => "column"} Description
+            %th{:scope => "column"} Created at
             %th{:scope => "column"} Composition
             %th{:scope => "column"} Image
             %th{:scope => "column"}
@@ -17,9 +18,15 @@
             %tr
               %td= f.name
               %td= f.description
+              %td= f.created_at
               %td= f.composition
               %td= attachment_image_tag(f, :image, :fill, 300, 300, fallback: "default300x300.png")
               %td
                 = bootstrap_icon_link_to 'Show', f, "glyphicon glyphicon-th icon-white", method: :get, :class => "button btn btn-small btn-primary"
                 = bootstrap_icon_link_to "Edit", edit_fabric_path(f), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
                 = bootstrap_icon_link_to 'Delete', f, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+                %br
+                %span
+                  in:
+                %br
+                = f.category_id && Category.find(f.category_id).name_ua

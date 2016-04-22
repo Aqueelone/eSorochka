@@ -23,33 +23,75 @@
 #
 
 class ProductsController < ApplicationController
+  before_action :require_admin, only: [:index, :new, :create, :edit, :update, :destroy]
   def index
-    @products = Product.all.order('products.id ASC')
+    @products = Product.where("products.category_id IS NULL OR products.category_id = '#{session['category']}'").order('products.created_at ASC')
   end
 
   def show
     @product = Product.find(params[:id])
     @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
     !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    if((current_user)&&(current_user.is_admin?))
+      render :template => 'products/show'
+    else
+      @orders = Order.uncached do
+        Order.where(:temporary => session['temporary'], :closed => false)
+      end
+      @orders.blank? && (redirect_to root_path)
+      !@orders.blank? && (@order = @orders.last)
+      @amounts = []
+      @product_codes_ids = ProductCode.where(product_id: @product.id).map {|p| p.id}
+      @temper = session['temporary']
+      OrderItem.all.where(temporary: @temper, :product_code_id => @product_codes_ids).each do |oi|
+        @amounts[oi.product_code_id] = oi.amount
+      end
+      session['deffered'].delete_if {|d| d == @product.id}
+      session['deffered'] << @product.id
+      session['deffered'].uniq.compact
+      render :template => 'products/view'
+    end
+  end
+
+  def show_mode
+    session['view'] = params[:product][:view]
+    respond_to do |format|
+      format.js
+    end
   end
 
   def show_product
     @product = Product.find(params[:id])
+    @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
+    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
     @orders = Order.uncached do
       Order.where(:temporary => session['temporary'], :closed => false)
     end
     @orders.blank? && (redirect_to root_path)
     !@orders.blank? && (@order = @orders.last)
-    @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
-    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
     @amounts = []
     @product_codes_ids = ProductCode.where(product_id: @product.id).map {|p| p.id}
     @temper = session['temporary']
     OrderItem.all.where(temporary: @temper, :product_code_id => @product_codes_ids).each do |oi|
       @amounts[oi.product_code_id] = oi.amount
     end
-
+    @locale = (!params[:locale].blank? && ('?locale=' + params[:locale]))||''
+    session['deffered'].delete_if {|d| d == @product.id}
+    session['deffered'] << @product.id
+    session['deffered'].uniq.compact
     render :partial => 'prod'
+  end
+
+  def get_deffered
+    if( defined? params[:product][:shift])
+      params[:product][:shift] == 'left' && @shift = session['deffered'].last
+      params[:product][:shift] == 'right' && @shift = session['deffered'].first
+      session['deffered'].delete_if {|d| d == @shift}
+      params[:product][:shift] == 'left' && session['deffered'].unshift(@shift)
+      params[:product][:shift] == 'right' && session['deffered'] << @shift
+      session['deffered'].uniq.compact
+    end
+    render :partial => 'deffered'
   end
 
   def new
@@ -70,8 +112,7 @@ class ProductsController < ApplicationController
     !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
     @color_ids = @galleries.map { |g| g.color_id}
     !@color_ids.blank? && (@colors = Color.where("colors.id IN (#{@color_ids.join(',')})"))
-    @galleries_for_add = Gallery.all
-    !@fabric.blank? && (@galleries_for_add = Gallery.where("galleries.fabric_id = #{@fabric.id}"))
+    @galleries_for_add = Gallery.where("galleries.category_id = '#{session['category']}'")
     !@galleries.blank? && (@galleries_for_add -= @galleries)
     session['product_id'] = @product.id
   end
@@ -92,7 +133,7 @@ class ProductsController < ApplicationController
   end
 
   def get_catalog
-    @products = Product.all.order('products.id ASC')
+    @products = Product.where("products.category_id = '#{session['category']}'").order('products.id ASC')
     @width = params[:width].to_i
     @pointX = @width/2 -122
     @point = @pointY = @pointX
@@ -111,12 +152,15 @@ class ProductsController < ApplicationController
         if(@pos == 'left')
           @pos = 'right'
           @point = @pointX -= @step
+          @point < 30 && @point = 30
           @aspect = -@pright +=1
           @top -= @topstep
+          @top < 120 && @top = 120
           @zindex -= 1
         else
           @pos = 'left'
           @point = @pointY += @step
+          @point > @width * 0.78 && @point = @width * 0.78
           @aspect = @pleft += 1
           @step -= @step/(2*@k)
           @k++
@@ -126,7 +170,16 @@ class ProductsController < ApplicationController
       end
       @hash[p.id] = {'point' => @point, 'top' => @top, 'zindex' => @zindex, 'aspect' => @aspect}
     end
-    render :partial => 'cat1'
+    @locale = (!params[:locale].blank? && ('?locale=' + params[:locale]))||''
+    session['view'] == 'grid' &&(render :partial => 'cat2')
+    session['view'] == 'showcase' && (render :partial => 'cat1')
+    (session['view'] != 'showcase' && session['view'] != 'grid') && (redirect_to root_path)
+  end
+
+  def remove_deffered
+    session['deffered'] = session['deffered'].delete_if {|d| d == params[:product][:deffered].to_i}
+    session['deffered'] = session['deffered'].compact
+    render :partial => 'deffered'
   end
 
   def destroy
@@ -140,6 +193,7 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :brand_id, :category_id, :description, :picture_id,
                                     :price_min, :price_max, :amount_min, :amount_max, {size_ids:[]},
-                                    :cut_type, :collar_type, :sleeve_type, :cuff_type, :style_type)
+                                    :cut_type, :collar_type, :sleeve_type, :cuff_type, :style_type,
+                                    :deffered, :shift, :view)
   end
 end

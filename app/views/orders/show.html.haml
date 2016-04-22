@@ -29,10 +29,10 @@
           %td.order_field= @order.temporary
         %tr
           %td{:scope => "row"} User
-          %td.order_field= @order.user.name
+          %td.order_field= @order.user && @order.user.name
         %tr
           %td{:scope => "row"} Stuff
-          %td.order_field= @order.stuff.name
+          %td.order_field= @order.stuff && @order.stuff.name
         %tr
           %td{:scope => "row"}
           %td

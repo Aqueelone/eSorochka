@@ -111,10 +111,16 @@ section {
     color: black;
   }
   .container .navbar-right {
-    .scroll a, .remote-modal a{
-      color: black;
+    .scroll a, .remote-modal a, .direct a{
+      color: #042062;
+      font: normal normal normal 17px/1em 'okolaksregular',sans-serif;
+      font-weight: bold;
+      text-shadow: 0px 0px 2px #ffffff, 0px 0px 5px #ffffff, 0px 0px 10px #ffffff,
+      0px 0px 20px #ffffff, 0px 0px 50px #ffffff;
+      text-transform: none;
+      padding: 30px 10px 10px 10px;
     }
-    .scroll a:hover, .remote-modal a:hover{
+    .scroll a:hover, .remote-modal a:hover, .direct a:hover{
       background-color: lightblue;
       -webkit-transition: background-color .3s linear;
       -moz-transition: background-color .3s linear;
@@ -122,7 +128,11 @@ section {
       transition: background-color .3s linear;
     }
     .active {
-      background-color: lightblue;
+      background-color: rgba(173,216,230,0.7);
+      -webkit-transition: background-color .3s linear;
+      -moz-transition: background-color .3s linear;
+      -o-transition: background-color .3s linear;
+      transition: background-color .3s linear;
     }
   }
 }

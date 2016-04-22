@@ -7,7 +7,7 @@
     %meta{:content => content_for?(:description) ? yield(:description) : "Сорочка ОПТ", :name => "description"}
     %meta{content: "Sergy Nazarevich", name: "author"}
     %meta{:content => "http://sorochkaopt.com", :property => "og:url"}
-    %title= content_for?(:title) ? "Сорочка ОПТ | " + yield(:title) : "Сорочка ОПТ"
+    %title= content_for?(:title) ? "#{t(:title)} | " + yield(:title) : "#{t(:title)}"
 
     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
     /[if lt IE 9]
@@ -17,6 +17,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    %input{type: 'hidden', id: 'locale', value: "#{I18n.locale}"}
+    %input{type: 'hidden', id: 'catalog-test', value: "#{session['category']}"}
     %header#home
       %nav.navbar.navbar-transparent.navbar-fixed-top
         .main-nav
@@ -30,13 +32,12 @@
                 %span.icon-bar
               %a.navbar-brand{href: '/'}
                 %img{src: '/logo.png'}
+              = render partial: 'lang'
             .collapse.navbar-collapse
               = render partial: 'menu'
     .container
       = render partial: 'messages'
       .top25.clearfix
       = yield
-      = render partial: 'leftpanel'
-      = render partial: 'rightpanel'
     %footer.footer
       = render partial: 'footer'
