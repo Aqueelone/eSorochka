@@ -10,6 +10,7 @@
             %th{:scope => "column"} Name
             %th{:scope => "column"} Name
             %th{:scope => "column"} Name
+            %th{:scope => "column"} Visible
             %th{:scope => "column"} Parent
             %th{:scope => "column"}
         %tbody
@@ -18,6 +19,7 @@
               %td= c.name_ua
               %td= c.name_ru
               %td= c.name_en
+              %td= c.visible
               - if(c.parent_id)
                 %td= Category.find(c.parent_id).name_ua
               - else

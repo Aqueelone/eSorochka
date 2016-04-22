@@ -21,6 +21,9 @@
           %td{:scope => "row"} Description
           %td= @gallery.description
         %tr
+          %td{:scope => "row"} Category
+          %td= @gallery.category_id && Category.find(@gallery.category_id).name_ua
+        %tr
           %td{:scope => "row"} Color
           %td
             .color_square{style: "background-color: #{Color.find(@gallery.color_id).color_gid};"}

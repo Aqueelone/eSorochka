@@ -1,0 +1,18 @@
+.top_box.clearfix
+%section#navpanel.topwhite
+  .nav0-tabs.nav.nav-tabs
+    .flash.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+  .deffered-nav
+    = render partial: 'deffered'
+%section#product
+  = render partial: 'prod'
+:javascript
+  $('.main-nav li').removeClass('active');
+  $('.main-nav li.btn-nav-catalog').addClass('active');
+  get_gallery();
+  zoom_action($('#product-image'));
+  add_action($('.product-add'));
+  renew_hash();
+  remove_deffered();
+  deffered_view();
+  deffered_shift();

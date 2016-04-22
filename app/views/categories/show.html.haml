@@ -16,6 +16,9 @@
           %td{:scope => "row"} Name EN
           %td= @category.name_en
         %tr
+          %td{:scope => "row"} Visible
+          %td= @category.visible
+        %tr
           %td{:scope => "row"} Parent
           %td= Category.find(@category.parent_id).name_ua
         %tr

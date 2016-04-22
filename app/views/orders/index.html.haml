@@ -19,6 +19,9 @@
             %th{:class => "column-sort"}= bootstrap_icon_link_to 'Order status', orders_path(:sort => 'order_status',
                 :desc => !@desc['order_status'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['order_status']).blank? ? 'down':'up'} icon-white",
                 method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Payment type', orders_path(:sort => 'payment_type',
+                :desc => !@desc['order_status'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['payment_type']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
             %th{:class => "column-sort"}= bootstrap_icon_link_to 'Temporary', orders_path(:sort => 'temporary',
                 :desc => !@desc['temporary'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['temporary']).blank? ? 'down':'up'} icon-white",
                 method: :get, :class => "button btn btn-small btn-primary btn-sort"
@@ -37,11 +40,12 @@
             %th{:class => "column-sort"}
         %tbody
           - @orders.each do |b|
-            %tr
+            %tr{class: "#{b.order_status_id == 2 ? "red_row" : ""}"}
               %td= b.name
               %td= b.email
               %td= b.cell
-              %td= b.order_status_id && PaymentType.find(b.order_status_id).name
+              %td= b.order_status_id && OrderStatus.find(b.order_status_id).name
+              %td= b.payment_type_id && PaymentType.find(b.payment_type_id).name
               %td= b.temporary
               %td= b.user_id && User.find(b.user_id).name
               %td= b.stuff_id && User.find(b.stuff_id).name

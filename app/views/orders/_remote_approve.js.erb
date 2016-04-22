@@ -1,0 +1,5 @@
+if($('.modal').length == 0) {
+  $("body").prepend("<%= escape_javascript(render "approve_success", :formats => [:html]) %>");
+}
+
+$("#approve").modal();

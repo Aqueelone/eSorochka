@@ -9,6 +9,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  gallery_id  :integer
+#  category_id :integer
 #
 # Indexes
 #
@@ -19,4 +20,5 @@ class Image < ActiveRecord::Base
   attachment :file, content_type: ["image/jpeg", "image/png", "image/gif"]
   belongs_to :gallery
   accepts_nested_attributes_for :gallery
+  belongs_to :category
 end

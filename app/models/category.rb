@@ -9,6 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  parent_id  :integer
+#  visible    :boolean          default(FALSE)
 #
 # Indexes
 #

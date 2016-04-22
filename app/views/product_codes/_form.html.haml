@@ -19,17 +19,12 @@
         = f.hidden_field :picture_id
     %tr
       %td{:scope => "row"}= f.label :category
-      - if(@product_code.product_id)
-        %td
-          - c = Category.find(Product.find(@product_code.product_id))
-          = f.label c.name_ua
-          %input{id: "product_code_category_id", name: "product_code[category_id]", type: "hidden", value: "#{c.id}"}
-      - else
-        %td.category_insert
+      %td.category_insert
+        = f.collection_select :category_id, Category.all, :id, :name_ua, {:selected => session["category"]}
     %tr
       %td{:scope => "row"}= f.label :product
       - if(!@product_code.product_id.blank?)
-        %td= f.collection_select :product_id, Product.all, :id, :name, {selected: @product_code.product_id},
+        %td= f.collection_select :product_id, Product.where("products.category_id = '#{session['category']}'"), :id, :name, {selected: @product_code.product_id},
             {:prompt => "Please, select product...", :include_blank => true}
       - else
         %td= f.collection_select :product_id, @product_without_pc, :id, :name,
@@ -42,10 +37,15 @@
           = c.name
           .color_square{style: "background-color: #{c.color_gid}"}
           %input{id: "product_code_color_id", name: "product_code[color_id]", type: "hidden", value: "#{c.id}"}
+          %input{id: "product_code_picture_id", name: "product_code[picture_id]", type: "hidden", value: "#{@product_code.picture_id}"}
+          -if(@product_code.picture_id.blank? && !@product_code.product_id.blank?)
+            - p = Product.find(@product_code.product_id)
+            - g = Gallery.where("galleries.product_id = '#{p.id}' AND galleries.color_id = '#{c.id}'").last()
+            - i = Image.where("images.gallery_id = '#{g.id}'").first()
+            %input{id: "product_code_picture_id", name: "product_code[picture_id]", type: "hidden", value: "#{i.id}"}
       - else
         - if(!@product_code.picture_id.blank?)
           - i = Image.find(@product_code.picture_id)
-          - g = Gallery.find(i.gallery_id)
           - c = Color.find(g.color_id)
           %td
             = c.name

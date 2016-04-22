@@ -1,20 +1,20 @@
 %ul{class: ['nav', 'navbar-nav', 'navbar-right']}
-  %li{class: ['scroll', 'active']}
-    %a{href: '#home'}
+  %li{class: ['direct', 'active']}
+    %a{href: "#{root_path}"}
       %i{class: [ 'menu-icon', 'menu-icon-1']}
-      Home
-  %li{class: 'scroll'}
-    %a{href: '#catalog'}
+      =t(:_home)
+  %li{class: ['direct', 'btn-nav-catalog']}
+    %a{href: "#{catalog_path}"}
       %i{class: [ 'menu-icon', 'menu-icon-3']}
-      Catalog
-  %li{class: 'scroll'}
-    %a{href: '#order', class: 'gradient'}
+      =t(:_catalog)
+  %li{class: ['direct', 'btn-nav-order']}
+    %a{href: "#{_order_path}", class: 'gradient'}
       %i{class: [ 'menu-icon', 'menu-icon-2']}
-      Order
-  %li{class: 'scroll'}
-    %a{href: '#about', class: 'gradient'}
+      =t(:_order)
+  %li{class: ['direct', 'btn-nav-about']}
+    %a{href: "#{about_path}", class: 'gradient'}
       %i{class: [ 'menu-icon', 'menu-icon-6']}
-      About Us
+      =t(:_about)
   - if current_user
     - if current_user.is_admin
       %li{class: ['remote-modal']}
@@ -22,21 +22,20 @@
           %i{class: [ 'menu-icon', 'menu-icon-4']}
           Admin panel
     - else
-      %li{class: ['scroll']}
+      %li{class: ['direct', 'btn-nav-user']}
         %a{href: '/users/edit', class: 'gradient'}
           %i{class: [ 'menu-icon', 'menu-icon-9']}
-          Account
+          =t('account')
     %li{class: ['remote-modal']}
       %a{href: '/users/sign_out', class: 'gradient'}
         %i{class: [ 'menu-icon', 'menu-icon-4']}
-        Log Out
-
+        = t('layouts.header.logout')
   - else
     %li{class: ['remote-modal']}
       = link_to remote_sign_up_path, :remote => true do
         %i{class: [ 'menu-icon', 'menu-icon-9']}
-        Sign Up
+        = t('registrations.new.sign_up')
     %li{class: ['remote-modal']}
       = link_to remote_sign_in_path, :remote => true do
         %i{class: [ 'menu-icon', 'menu-icon-4']}
-        Log In
+        = t('layouts.header.login')

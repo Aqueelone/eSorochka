@@ -46,6 +46,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uuid', '2.3.8'
 # Icons
 gem 'entypo-rails', '3.0.0.pre.rc2'
+# Internationalization (aka i18n)
+gem 'rails-i18n'
+gem 'http_accept_language'
 # JavaScript
 gem "bower-rails", "~> 0.10.0"
 gem 'backbone-on-rails', '1.2.0.0'
