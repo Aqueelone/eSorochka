@@ -1,0 +1,16 @@
+.nav-view
+  %a.btn.btn-view.btn-showcase.first{class: "#{(session['view'] == 'showcase')? 'choosen':''}", 'data-view' => 'showcase'}
+    %i.glyphicon.glyphicon-eye-open
+    %span
+      = t(:_showcase)
+  %a.btn.btn-view.btn-grid.last{class: "#{(session['view'] == 'grid')? 'choosen':''}", 'data-view' => 'grid'}
+    %i.glyphicon.glyphicon-th-large
+    %span
+      = t(:_grid)
+.nav-cat
+  - if(session['view'] == 'showcase')
+    %a.btn.btn-cat-nav-left
+      %i.glyphicon.glyphicon-hand-left.icon-white
+    .nav-cat-div.topwhite
+    %a.btn.btn-cat-nav-right
+      %i.glyphicon.glyphicon-hand-right.icon-white

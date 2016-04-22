@@ -13,8 +13,9 @@
 #
 
 class ProductCodesController < ApplicationController
+  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   def index
-    @product_codes = ProductCode.all.order('product_codes.id ASC')
+    @product_codes = ProductCode.where("product_codes.category_id IS NULL OR product_codes.category_id = '#{session['category']}'").order('product_codes.created_at ASC')
   end
 
   def show
@@ -56,8 +57,8 @@ class ProductCodesController < ApplicationController
     @product_code = ProductCode.new(product_code_params)
     @product = Product.find(params[:product_code][:product_id])
     @product_code.product_id = params[:product_code][:product_id]
-    @category = Category.find(params[:category_id])
-    @product_code.category_id = params[:category_id]
+    @category = Category.find(params[:product_code][:category_id])
+    @product_code.category_id = params[:product_code][:category_id]
     @color = Color.find(params[:color_id])
     @product_code.color_id = params[:color_id]
     @product_id_pc = @product.id.to_s;

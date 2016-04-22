@@ -9,6 +9,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  parent_id  :integer
+#  visible    :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -16,9 +17,14 @@
 #
 
 class CategoriesController < ApplicationController
-  before_action :require_admin
+  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   def index
     @categories = Category.all.order('categories.parent_id ASC')
+  end
+
+  def catalog
+    @categories = Category.where("categories.visible = 't'")
+    render :template => 'categories/catalog'
   end
 
   def show
@@ -45,6 +51,12 @@ class CategoriesController < ApplicationController
     redirect_to @category
   end
 
+  def session_update
+    session['category'] = params[:id]
+    (session['category'] != params[:id] && @err = true) || @err = false
+    render :partial => 'box_add'
+  end
+
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
@@ -54,6 +66,6 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name_ua, :name_ru, :name_en, :parent_id)
+    params.require(:category).permit(:name_ua, :name_ru, :name_en, :parent_id, :visible)
   end
 end

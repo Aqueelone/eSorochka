@@ -4,10 +4,8 @@
     %table.table-condensed.table-catalog-face{:role => "grid"}
       %tr
         %td
-          %a{href: "#", class: "cat-image-action"}
+          %a{href: "/products/#{p.id.to_s + @locale}", class: "btn-product cat-image-action", 'data-id' => "prod_cel#{p.id}"}
             = attachment_image_tag((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 225, 300, fallback: "default225x300.png", class: 'image_uploaded')
-            .cat-image-action-zone
-            .cat-image-action-zoom{style: "background-image: url(#{attachment_url((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 900, 1200, fallback: "default300x400.png")});"}
       %tr
         %td
           %table.table-condensed.table-catalog-face-label{:role => "grid"}
@@ -22,6 +20,6 @@
                         = s.sign
             %tr
               %td
-                %a.btn.btn-start.btn-more.animated.scroll.topbutton.fadeInUpBig{ href: "#product", id:"#prod#{p.id}", class: "btn-product btn-more-#{p.id}"}
-                  докладніше...
+                %a.btn.btn-start.btn-more.btn-product.animated.scroll.topbutton.fadeInUpBig{ href: "/products/#{p.id.to_s + @locale}", id:"#prod#{p.id}", 'data-id' => "prod_cel#{p.id}", class: "btn-more-#{p.id}"}
+                  =t(:_furthermore)
 

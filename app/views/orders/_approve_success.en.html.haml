@@ -1,0 +1,34 @@
+#approve_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times-circle
+        %h4#ApproveResult.modal-title Thank you! Your ORDER is conducted successfully!
+        .modal-body
+          %h3  Our managers will contact you on the contacts that you have provided to us.
+          %table.table-striped.table-condensed.table-hisory-form-item{:role => "grid"}
+            %caption
+              On this page you can find out the status of Your ORDER, where:
+            %tr
+              %td.first
+                очікує
+              %td
+                It shows that our managers right now will contact you on this order
+            %tr
+              %td.first
+                виконується
+              %td
+                It shows that at the present time Your ORDER on the way to you
+            %tr
+              %td.first
+                закрито
+              %td
+                It indicates that your order has been delivered
+            %tr
+              %td.first
+                проблема
+              %td
+                It shows that there was some troubles with the delivery of Your ORDER and
+                that our managers, possible, will try to contact you in the soon,
+                if it will be necessary, for solve this troubles

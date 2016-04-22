@@ -10,6 +10,9 @@
           %td{:scope => "row"} Description
           %td= @image.description
         %tr
+          %td{:scope => "row"} Category
+          %td= @image.category_id && Category.find(@image.category_id).name_ua
+        %tr
           %td{:scope => "row"} Image
           %td= attachment_image_tag(@image, :file, :fill, 300, 400, fallback: "default300x400.png")
         %tr

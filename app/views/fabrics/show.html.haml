@@ -13,6 +13,9 @@
           %td{:scope => "row"} Description
           %td= @fabric.description
         %tr
+          %td{:scope => "row"} Category
+          %td= @fabric.category_id && Category.find(@fabric.category_id).name_ua
+        %tr
           %td{:scope => "row"} Composition
           %td= @fabric.composition
         %tr

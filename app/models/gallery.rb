@@ -10,6 +10,7 @@
 #  color_id    :integer
 #  fabric_id   :integer
 #  product_id  :integer
+#  category_id :integer
 #
 # Indexes
 #
@@ -24,4 +25,5 @@ class Gallery < ActiveRecord::Base
   accepts_attachments_for :images
   belongs_to :color
   belongs_to :fabric
+  belongs_to :category
 end

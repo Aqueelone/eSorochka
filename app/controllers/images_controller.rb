@@ -9,6 +9,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  gallery_id  :integer
+#  category_id :integer
 #
 # Indexes
 #
@@ -18,7 +19,7 @@
 class ImagesController < ApplicationController
   before_action :require_admin
   def index
-    @images = Image.includes(:gallery).order('images.created_at ASC')
+    @images = Image.includes(:gallery).where("images.category_id IS NULL OR images.category_id = '#{session['category']}'").order('images.created_at DESC')
   end
 
   def show
@@ -61,6 +62,6 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:description, :file, :gallery_id)
+    params.require(:image).permit(:description, :file, :gallery_id, :category_id)
   end
 end

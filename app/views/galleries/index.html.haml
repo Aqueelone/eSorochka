@@ -27,3 +27,8 @@
                 = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
                 = bootstrap_icon_link_to "Edit", edit_gallery_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
                 = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+                %br
+                %span
+                  in:
+                %br
+                = b.category_id && Category.find(b.category_id).name_ua

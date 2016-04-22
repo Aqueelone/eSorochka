@@ -18,6 +18,9 @@
       %td{:scope => "row"}= f.label :name_en
       %td= f.text_field :name_en, class: "name_field"
     %tr
+      %td{:scope => "row"}= f.label :visible
+      %td= f.check_box :visible, {}, 'true', 'false'
+    %tr
       %td{:scope => "row"}= f.label :parent
       %td= f.select :parent_id, Category.order("parent_id ASC").map { |c| [c.name_ua, c.id] }, :include_blank => true
     %tr

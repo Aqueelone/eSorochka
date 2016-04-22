@@ -14,6 +14,7 @@
 #
 
 class OrderItemsController < ApplicationController
+  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   def index
     @order_items = OrderItem.all.order('order_items.id ASC')
   end

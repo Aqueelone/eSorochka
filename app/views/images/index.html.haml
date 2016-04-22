@@ -23,4 +23,6 @@
                 %span
                   in:
                 %br
+                = b.category_id && Category.find(b.category_id).name_ua
+                %br
                 = b.gallery_id && (bootstrap_icon_link_to (g = Gallery.find(b.gallery_id)).name, g, "glyphicon glyphicon-list icon-white")
