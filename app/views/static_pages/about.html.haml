@@ -1,4 +1,8 @@
-.col-sm-4
+%section#about.inview-observer.parallax
+  = render partial: 'about'
+:javascript
+  $('.main-nav li').removeClass('active');
+  $('.main-nav li.btn-nav-about').addClass('active');
 
 
 

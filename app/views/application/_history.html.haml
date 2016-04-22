@@ -1,0 +1,91 @@
+- !@clear && @err && (render partial: 'order_fail')
+- !@clear && !@err && (render partial: 'order_success')
+- if @orders_history.blank?
+  =t('orders.history.blank')
+-else
+  %table.table.table-striped.table-condensed.table-order-history-box{:role => "grid"}
+    %thead
+      %tr
+        %th{:class => "column-sort"}= bootstrap_icon_link_to '', '#', "glyphicon", :class => "button btn btn-small btn-primary btn-toggle-all"
+        %th{:class => "column-sort"}= bootstrap_icon_link_to t('orders.history.table.order_status'), history_order_path(:sort => 'order_status',
+                :desc => !@desc['order_status'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['order_status']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+        %th{:class => "column-sort"}= bootstrap_icon_link_to t('orders.history.table.payment_type'), history_order_path(:sort => 'payment_type',
+                :desc => !@desc['order_status'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['order_status']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+        %th{:class => "column-sort"}= bootstrap_icon_link_to t('orders.history.table.updated_at'), history_order_path(:sort => 'updated_at',
+                :desc => !@desc['order_status'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['updated_at_status']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+        %th{:class => "column-sort"}= bootstrap_icon_link_to t('orders.history.table.your_manager'), history_order_path(:sort => 'stuff_id',
+                :desc => !@desc['stuff_id'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['stuff_id']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+        %th{:class => "column-sort"}= bootstrap_icon_link_to t('orders.history.table.items'), history_order_path(:sort => 'order_item',
+                :desc => !@desc['order_item'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['order_item']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+        %th{:class => "column-sort"}= bootstrap_icon_link_to t('orders.history.table.total'), history_order_path(:sort => 'total',
+                :desc => !@desc['total'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['total']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+    %tbody
+      - @orders_history.each do |b|
+        %tr
+          %td
+            = bootstrap_icon_link_to '', '#', "glyphicon-plus", :class => "btn-small btn-toggle btn-toggle-plus", id: "toggle-plus-#{b.id}"
+            = bootstrap_icon_link_to '', '#', "glyphicon-minus", :class => "btn-small btn-toggle btn-toggle-minus btn-hide", id: "toggle-minus-#{b.id}"
+          %td= b.order_status_id && OrderStatus.find(b.order_status_id).name
+          %td= b.payment_type_id && PaymentType.find(b.payment_type_id).name
+          %td= b.updated_at
+          %td= b.stuff_id && User.find(b.stuff_id).name
+          %td= c = OrderItem.where(order_id: b.id).count()
+          %td
+            - if(c == 0)
+              = c
+            - else
+              - total = 0
+              - OrderItem.where(order_id: b.id).each do |i|
+                - product = Product.find(ProductCode.find(i.product_code_id).product_id)
+                - total += product.price_max * product.sizes.count() * i.amount
+              %span.price
+                = "$" + total.to_s
+        %tr.foremore
+          %td{colspan: 2}
+          %td{colspan: 5}
+            %table.table.table-striped.table-order-history-item.table-hide{:role => "grid", class: "toggle-#{b.id}"}
+              %thead
+                %caption
+                  =t('orders.items.caption')
+                %tr
+                  %th{:class => "column-sort"}
+                    =t('orders.items.preview')
+                  %th{:class => "column-sort"}
+                    =t('orders.items.amount')
+                  %th{:class => "column-sort"}
+                    =t('orders.items.color')
+                  %th{:class => "column-sort sizes_field"}
+                    =t('orders.items.sizes')
+                  %th{:class => "column-sort"}
+                    =t('orders.items.pcode')
+                  %th{:class => "column-sort"}
+                    =t('orders.items.total')
+              %tbody
+                - OrderItem.where(order_id: b.id).each do |oi|
+                  %tr
+                    - pc = ProductCode.find(oi.product_code_id)
+                    - p = Product.find(pc.product_id)
+                    - sizes_count = p.sizes.count()
+                    - amount = oi.amount || 0
+                    %td.image_preview= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 90, 120, fallback: "default300x400.png", class: 'image_uploaded')
+                    %td
+                      %span.price
+                        = amount
+                    %td
+                      .color_square{style: "background-color: #{Color.find(pc.color_id).color_gid}"}
+                    %td
+                      %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
+                        %tr
+                          - p.sizes.each do |s|
+                            %td
+                              = s.sign
+                    %td= pc.name
+                    %td
+                      %span.price
+                        = '$' + (amount * p.price_max * sizes_count).to_s

@@ -1,23 +1,34 @@
 #home-slider.inview-observer.carousel.slide.carousel-fade.parallax{data: {:image => 'banner1.jpg'}}
-  .wow.lightSpeedIn.title1{'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
-    %span
-      Стильна  гуртовня
-  .wow.lightSpeedIn.title2{'data-wow-duration' => '1200ms', 'data-wow-delay' => '500ms'}
-    %span
-      модного одягу
+  .slider
+    .wow.lightSpeedIn.title1{'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+      %span
+        =t('home-slider.t1')
+    .wow.lightSpeedIn.title2{'data-wow-duration' => '1200ms', 'data-wow-delay' => '500ms'}
+      %span
+        =t('home-slider.t2')
   .wow.bounceInLeft.title3{'data-wow-duration' => '1200ms', 'data-wow-delay' => '1500ms'}
     %i.icon-catalog
     %span
       online
-%section#catalog.inview-observer.topwhite.parallax
+%section#navpanel0.topwhite
   %a.btn.btn-start.animated.scroll.topbutton.fadeInUpBig{href: '#catalog'}
-    каталог
+    =t(:_catalog)
+  = render partial: 'nav0'
+  .nav-catalog
+    = render partial: 'nav1'
+%section#catalog
 %section#navpanel.topwhite
-%section#product.parallax
-%section#navpanel2.topwhite
+  .nav0-tabs.nav.nav-tabs
+    .flash.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+  .deffered-nav.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+    = render partial: 'products/deffered'
+%section#product
+%section#order.topwhite
 %section#contact.inview-observer.parallax
   = render partial: 'contact'
-%section#order.inview-observer.topwhite.parallax
+%section#navpanel2.topwhite
 %section#about.inview-observer.parallax
   = render partial: 'about'
 %section#navpanel3.topwhite
+= render partial: 'leftpanel'
+= render partial: 'rightpanel'

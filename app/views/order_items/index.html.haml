@@ -1,0 +1,29 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend List of order_items
+      %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
+        %thead
+          %tr
+            %th{:scope => "column"} Product Code
+            %th{:scope => "column"} Amount
+            %th{:scope => "column"} Order
+            %th{:scope => "column"} created at
+            %th{:scope => "column"} updated at
+            %th{:scope => "column"}
+        %tbody
+          - @order_items.each do |b|
+            %tr
+              %td= (b.product_code_id != 0) && ProductCode.find(b.product_code_id).name
+              %td= b.amount
+              %td
+                - if(b.order_id)
+                  = b.order_id
+              %td= b.created_at
+              %td= b.updated_at
+              %td
+                = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to "Edit", edit_order_item_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

@@ -1,0 +1,103 @@
+= form_for(@product) do |f|
+  - if @product.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@product.errors.count, "error")
+        prohibited this product from being saved:
+      %ul
+        - @product.errors.full_messages.each do |msg|
+          %li= msg
+  %table.table-striped.table-bordered.table-condensed.table-product-picture{:role => "grid"}
+    %tr
+      %td= attachment_image_tag((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+  %table.table-striped.table-bordered.table-condensed.table-product-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}
+        = f.label :name
+        = f.hidden_field :id
+        = f.hidden_field :picture_id
+      %td.order_field= f.text_field :name, class: 'text_input'
+    %tr.brand_image_insert
+      %td{:scope => "row"}= f.label :brand
+      %td= f.collection_select :brand_id, Brand.all, :id, :name, {:selected => @product.brand_id}
+    %tr
+      %td{:scope => "row"}= f.label :category
+      %td= f.collection_select :category_id, Category.all.where('categories.parent_id IS NOT NULL'), :id, :name_ua, {:selected => @product.category_id}
+    %tr.product_description
+      %td{:scope => "row"}= f.label :description
+      %td= f.text_area :description, class: 'text_input'
+    %tr
+      %td{:scope => "row"}= f.label 'Price'
+      %td.number_field= f.number_field :price_max
+    %tr
+      %td{:scope => "row"}= f.label 'Amount'
+      %td.number_fiel= f.number_field :amount_max
+    %tr
+      %td{:scope => "row"}= f.label :sizes
+      %td= f.collection_check_boxes(:size_ids, Size.all, :id, :sign)
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', products_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"
+  %table.table-striped.table-bordered.table-condensed.table-product-picture{:role => "grid"}
+    %tr
+      %td= attachment_image_tag((@fabric || Fabric.new), :image, :fill, 300, 300, fallback: "default300x300.png", class: 'image_uploaded')
+    - if(@fabric)
+      %tr
+        %input{type: 'hidden', id: 'fabric_id', name: 'fabric_id', value: "#{@fabric.id}"}
+        %td=@fabric.name
+      %tr
+        %td=@fabric.description
+      %tr
+        %td=@fabric.composition
+  %table.table-striped.table-bordered.table-condensed.table-product-char-form{:role => "grid"}
+    - !@colors.blank? && @colors.each do |c|
+      %tr
+        %td{:scope => "row"}= f.label 'Colors'
+        %td.order_field
+          = c.name
+          .color_square{style: "background-color: #{c.color_gid}"}
+    %tr
+      %td{:scope => "row"}= f.label :cut_type
+      %td.order_field= f.text_field :cut_type, class: "text_input"
+    %tr
+      %td{:scope => "row"}= f.label :collar_type
+      %td.order_field= f.text_field :collar_type, class: "text_input"
+    %tr
+      %td{:scope => "row"}= f.label :sleeve_type
+      %td.order_field= f.text_field :sleeve_type, class: "text_input"
+    %tr
+      %td{:scope => "row"}= f.label :cuff_type
+      %td.order_field= f.text_field :cuff_type, class: "text_input"
+    %tr
+      %td{:scope => "row"}= f.label :style_type
+      %td.order_field= f.text_field :style_type, class: "text_input"
+  - !@galleries.blank? && @galleries.each do |b|
+    - b.images.each do |i|
+      %table.table-striped.table-bordered.table-condensed.table-product-picture-set{:role => "grid"}
+        %tr
+          %td= attachment_image_tag(i || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+        %tr
+          %td
+            %input{type: 'hidden', id: 'image_id', name: 'image_id', value: "#{i.id}"}
+            = bootstrap_icon_link_to 'Set as primary', '#', "glyphicon glyphicon-check icon-white", :class => "button btn btn-small btn-primary btn-picture-set"
+  %table.table-striped.table-bordered.table-condensed.table-product-gallery-form{:role => "grid"}
+    - !@galleries.blank? && @galleries.each do |b|
+      %tr
+        %td= b.name
+        %td= b.description
+        %td= b.images.count
+        %td
+          %input{type: 'hidden', id: 'gallery_id', name: 'gallery_id', value: "#{b.id}"}
+          = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+          = bootstrap_icon_link_to "Edit", edit_gallery_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+          = bootstrap_icon_link_to 'Remove from product',"#", "glyphicon glyphicon-trash icon-white", :class => "button btn btn-small btn-warning btn-gallery-remove"
+    %tr
+      %td
+        = bootstrap_icon_link_to 'Add gallery', '#', "glyphicon glyphicon-plus icon-white", method: :get, :class => "button btn btn-small btn-primary"
+      %td.select_gallery
+        - if(!@product.id.blank?)
+          = collection_select @product, 'gallery_id', @galleries_for_add, :id, :name, include_blank: 'select gallery...'
+  .gallery_insert_box
+
+
+

@@ -1,0 +1,24 @@
+- @products.each do |p|
+  .prod_cel_grid{class: "prod_cel#{p.id}", 'data-id' => "prod_cel#{p.id}", 'data-aspect' => "#{@hash[p.id]['aspect']}"}
+    %table.table-condensed.table-catalog-face{:role => "grid"}
+      %tr
+        %td
+          %a{href: "/products/#{p.id.to_s + @locale}", class: "btn-product cat-image-action", 'data-id' => "prod_cel#{p.id}"}
+            = attachment_image_tag((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 225, 300, fallback: "default225x300.png", class: 'image_uploaded')
+      %tr
+        %td
+          %table.table-condensed.table-catalog-face-label{:role => "grid"}
+            %tr
+              %td.cat-price
+                %span.cat-price
+                  = '$'+p.price_max.to_s
+                %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
+                  %tr
+                    - p.sizes.each do |s|
+                      %td
+                        = s.sign
+            %tr
+              %td
+                %a.btn.btn-start.btn-more.btn-product.animated.scroll.topbutton.fadeInUpBig{ href: "/products/#{p.id.to_s + @locale}", id:"#prod#{p.id}", 'data-id' => "prod_cel#{p.id}", class: "btn-more-#{p.id}"}
+                  =t(:_furthermore)
+

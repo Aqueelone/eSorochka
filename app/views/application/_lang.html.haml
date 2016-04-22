@@ -1,0 +1,17 @@
+.lang_panel
+  - langA = ['uk', 'ru', 'en', 'be', 'tr', 'pl' ]
+  - req = request.fullpath
+  - req.blank? && req = '/'
+  - langA.each do |l|
+    - req = req.sub("?locale=#{l}",'')
+    - req = req.sub("&locale=#{l}",'')
+  - path = (req.include? '?') ? "#{req}&" : "#{req}?"
+  - langA.each do |lang|
+    - lang == 'uk' && ((flag = 'ua') && (title = "українською"))
+    - lang == 'ru' && ((flag = 'ru') && (title = "по-русски"))
+    - lang == 'en' && ((flag = 'us') && (title = "for english"))
+    - lang == 'tr' && ((flag = 'tr') && (title = "türkçe"))
+    - lang == 'pl' && ((flag = 'pl') && (title = "w języku polskim"))
+    - lang == 'be' && ((flag = 'by') && (title = "па беларуску"))
+    %a{href: "#{path}locale=#{lang}", class: "flag-icon flag-#{lang}", title: "#{title}"}
+      %img{src: "/flags/#{flag}.png"}

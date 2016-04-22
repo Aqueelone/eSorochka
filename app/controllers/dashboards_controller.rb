@@ -1,4 +1,5 @@
 class DashboardsController < ApplicationController
+  before_action :require_admin
 
   def index
 

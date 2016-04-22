@@ -1,0 +1,21 @@
+.top_box.clearfix
+%section#navpanel0.topwhite
+  %a.btn.btn-start.animated.scroll.topbutton.fadeInUpBig{href: '#catalog'}
+    =t(:_catalog)
+  = render partial: 'nav0'
+  .nav-catalog
+    = render partial: 'nav1'
+%section#catalog
+%section#navpanel.topwhite
+  .nav0-tabs.nav.nav-tabs
+    .flash.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
+  .deffered-nav
+    = render partial: 'products/deffered'
+:javascript
+  $('.main-nav li').removeClass('active');
+  $('.main-nav li.btn-nav-catalog').addClass('active');
+  catalog_choose();
+  show_catalog();
+  remove_deffered();
+  deffered_view();
+  deffered_shift();

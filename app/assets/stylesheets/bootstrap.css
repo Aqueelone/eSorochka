@@ -779,13 +779,6 @@ pre code {
   overflow-y: scroll;
 }
 
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .container:before,
 .container:after {
   display: table;
@@ -1104,9 +1097,7 @@ pre code {
 }
 
 @media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
+
   .col-sm-1,
   .col-sm-2,
   .col-sm-3,
@@ -1276,9 +1267,7 @@ pre code {
 }
 
 @media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
+
   .col-md-1,
   .col-md-2,
   .col-md-3,

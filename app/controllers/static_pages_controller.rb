@@ -3,14 +3,21 @@
 #   This file is licensed under the Common Domain General Public License..
 
 class StaticPagesController < ApplicationController
-  before_action :authenticate_user!, only: [:userslist, :adminpanel, :modpanel]
+  before_action :require_admin, only: [:userslist, :adminpanel, :modpanel]
   def home
+
   end
 
   def contacts
+
   end
 
   def about
+
+  end
+
+  def order
+
   end
 
   def userslist

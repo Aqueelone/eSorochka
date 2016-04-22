@@ -1,0 +1,20 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of #{@size.name}:
+      %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Name
+          %td= @size.name
+        %tr
+          %td{:scope => "row"} Sign
+          %td= @size.sign
+        %tr
+          %td{:scope => "row"}
+          %td
+            = bootstrap_icon_link_to 'Edit', edit_size_path(@size), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', @size, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

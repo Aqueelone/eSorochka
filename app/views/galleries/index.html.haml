@@ -1,0 +1,34 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend List of galleries
+      %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
+        %thead
+          %tr
+            %th{:scope => "column"} Name
+            %th{:scope => "column"} Description
+            %th{:scope => "column"} preview
+            %th{:scope => "column"} product
+            %th{:scope => "column"} images:
+            %th{:scope => "column"}
+        %tbody
+          - @galleries.each do |b|
+            %tr
+              %td= b.name
+              %td= b.description
+              %td
+                -if(!(im = Image.where("images.gallery_id = #{b.id}").first).blank?)
+                  = attachment_image_tag(Image.find(im) || Image.new, :file, :fill, 90, 120, fallback: "default300x100.png", class: 'image_uploaded')
+              %td= b.product_id && Product.find_by_id(b.product_id) && (bootstrap_icon_link_to 'Show', Product.find(b.product_id), "glyphicon glyphicon-search icon-white", method: :get, :class => "button btn btn-small btn-primary")
+              %td= b.images.count
+              %td
+                = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to "Edit", edit_gallery_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+                %br
+                %span
+                  in:
+                %br
+                = b.category_id && Category.find(b.category_id).name_ua

@@ -1,0 +1,10 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Edit order
+      = render 'form'
+      = render 'order_items'
+      = render 'order_items_posible'

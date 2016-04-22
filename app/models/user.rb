@@ -21,6 +21,8 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  temporary              :uuid
+#  cell                   :string(255)
 #
 # Indexes
 #
@@ -96,6 +98,10 @@ class User < ActiveRecord::Base
 
   def email_verified?
     email && email !~ TEMP_EMAIL_REGEX
+  end
+
+  def is_admin?
+    self.is_admin
   end
 
   class << self

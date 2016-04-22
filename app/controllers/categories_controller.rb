@@ -1,6 +1,30 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id         :integer          not null, primary key
+#  name_ua    :string(255)
+#  name_ru    :string(255)
+#  name_en    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  parent_id  :integer
+#  visible    :boolean          default(FALSE)
+#
+# Indexes
+#
+#  index_categories_on_parent_id  (parent_id)
+#
+
 class CategoriesController < ApplicationController
+  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   def index
     @categories = Category.all.order('categories.parent_id ASC')
+  end
+
+  def catalog
+    @categories = Category.where("categories.visible = 't'")
+    render :template => 'categories/catalog'
   end
 
   def show
@@ -23,30 +47,25 @@ class CategoriesController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
+    !@category.update_attributes(category_params) && (redirect_to edit_category_path)
+    redirect_to @category
+  end
 
-    respond_to do |format|
-      if @category.update_attributes(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
-      end
-    end
+  def session_update
+    session['category'] = params[:id]
+    (session['category'] != params[:id] && @err = true) || @err = false
+    render :partial => 'box_add'
   end
 
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_path }
-      format.json { head :no_content }
-    end
+    redirect_to categories_path
   end
 
   private
 
   def category_params
-    params.require(:category).permit(:name_ua, :name_ru, :name_en, :parent_id)
+    params.require(:category).permit(:name_ua, :name_ru, :name_en, :parent_id, :visible)
   end
 end

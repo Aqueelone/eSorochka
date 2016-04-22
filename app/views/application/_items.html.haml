@@ -1,0 +1,51 @@
+%table.table-striped.table-condensed.table-order-form-item{:role => "grid"}
+  %thead
+    %caption
+      =t('orders.items.caption')
+    %tr
+      %th{:class => "column-sort"}
+      %th{:class => "column-sort"}
+        =t('orders.items.amount')
+      %th{:class => "column-sort"}
+        =t('orders.items.total')
+      %th{:class => "column-sort sizes_field"}
+        =t('orders.items.sizes')
+      %th{:class => "column-sort"}
+        =t('orders.items.preview')
+      %th{:class => "column-sort"}
+        =t('orders.items.pcode')
+      %th{:class => "column-sort"}
+        =t('orders.items.color')
+      %th{:class => "column-sort"}
+  %tbody
+    - @order_items.each do |b|
+      %tr
+        - pc = ProductCode.find(b.product_code_id)
+        - p = Product.find(pc.product_id)
+        - sizes_count = p.sizes.count()
+        - amount = b.amount || 0
+        %td= bootstrap_icon_link_to '', '#', "glyphicon glyphicon-plus icon-white", confirm: 'Are you sure?', :class => "button btn btn-small btn-primary btn-add-item"
+        %td
+          = form_for b, :url => add_order_box_order_item_path, remote: true  do |fo|
+            = fo.hidden_field :product_code_id
+            = fo.hidden_field :temporary
+            = fo.number_field :amount, class: "number_field order-item-amount"
+            = fo.hidden_field :order_id, value: @order.id
+        %td
+          %span.price
+            = '$' + (amount * p.price_max * sizes_count).to_s
+        %td
+          %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
+            %tr
+              - p.sizes.each do |s|
+                %td
+                  = s.sign
+        %td.image_preview= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 90, 120, fallback: "default300x400.png", class: 'image_uploaded')
+        %td= pc.name
+        %td
+          .color_square{style: "background-color: #{Color.find(pc.color_id).color_gid}"}
+        %td
+          = form_for b, :url => url_for(:id => b.id, :controller => 'order_items', :action => 'destroy'), method: :delete, remote: true  do |fo|
+            = fo.hidden_field :product_code_id
+            = fo.hidden_field :temporary
+            = bootstrap_icon_link_to '', b, "glyphicon glyphicon-trash icon-white", method: :delete, remote: true, confirm: 'Are you sure?', :class => "button btn btn-small btn-danger btn-item-remove"

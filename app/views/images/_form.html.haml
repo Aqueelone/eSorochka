@@ -1,0 +1,26 @@
+= form_for(@image) do |f|
+  - if @image.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@image.errors.count, "error")
+        prohibited this image from being saved:
+      %ul
+        - @image.errors.full_messages.each do |msg|
+          %li= msg
+  = attachment_image_tag(@image, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+  %table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :description
+      %td= f.text_area :description, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :category
+      %td= f.collection_select :category_id, Category.all, :id, :name_ua, {:selected => session["category"]}
+    %tr
+      %td{:scope => "row"}= f.label :gallery_id, class: "gallery-#{:gallery_id}"
+      %td= f.collection_select :gallery_id, Gallery.where("galleries.category_id = #{session["category"]}"), :id, :name, {:selected => @image.gallery_id}
+    %tr
+      %td{:scope => "row"}= f.label :file
+      %td= f.attachment_field :file, direct: true, presigned: true, class: 'file_uploader'
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', images_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"

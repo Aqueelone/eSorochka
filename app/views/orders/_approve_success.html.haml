@@ -1,0 +1,31 @@
+#approve_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"}
+          %i.fa.fa-times-circle
+        %h4#ApproveResult.modal-title Дякуємо! Ваше ЗАМОВЛЕННЯ записано успішно!
+        .modal-body
+          %h3  Наші менеджери зв'яжуться з Вами по контактам, які Ви нам надали.
+          %table.table-striped.table-condensed.table-hisory-form-item{:role => "grid"}
+            %caption
+              На цій сторінці Ви маєте змогу визначити стан Ваших Замовлень де:
+            %tr
+              %td.first
+                очікує
+              %td
+                показує , що наші менеджери саме зараз зв'язуються з Вами
+            %tr
+              %td.first
+                виконується
+              %td показує, що саме зараз Ваше Замовлення доставляєтсья до Вас
+            %tr
+              %td.first
+                закрито
+              %td
+                показує , що Ваше замовлення вже виконано
+            %tr
+              %td.first
+                проблема
+              %td
+                показує , що є певна проблема і для вирішення її наши менеджери ймовірно незабаром звяжуться з Вами

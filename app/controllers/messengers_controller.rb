@@ -8,6 +8,7 @@
 #
 
 class MessengersController < ApplicationController
+  before_action :require_admin
   # сохраняем объект EventMachine::WebSocket::Connection
   # в инстанс-переменной, чтобы отправлять данные на фронт-энд
   def initialize(ws)

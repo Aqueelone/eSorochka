@@ -1,0 +1,65 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend List of orders
+      %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
+        %thead
+          %tr
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Name', orders_path(:sort => 'name',
+                :desc => !@desc['name'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['name']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Email', orders_path(:sort => 'email',
+                :desc => !@desc['email'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['email']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Cell', orders_path(:sort => 'cell',
+                :desc => !@desc['cell'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['cell']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Order status', orders_path(:sort => 'order_status',
+                :desc => !@desc['order_status'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['order_status']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Payment type', orders_path(:sort => 'payment_type',
+                :desc => !@desc['order_status'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['payment_type']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Temporary', orders_path(:sort => 'temporary',
+                :desc => !@desc['temporary'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['temporary']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'User', orders_path(:sort => 'user_id',
+                :desc => !@desc['user_id'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['user_id']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Stuff', orders_path(:sort => 'stuff_id',
+                :desc => !@desc['stuff_id'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['stuff_id']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Order Items', orders_path(:sort => 'order_item',
+                :desc => !@desc['order_item'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['order_item']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}= bootstrap_icon_link_to 'Total, $', orders_path(:sort => 'total',
+                :desc => !@desc['total'].blank?), "glyphicon glyphicon-arrow-#{(!@desc['total']).blank? ? 'down':'up'} icon-white",
+                method: :get, :class => "button btn btn-small btn-primary btn-sort"
+            %th{:class => "column-sort"}
+        %tbody
+          - @orders.each do |b|
+            %tr{class: "#{b.order_status_id == 2 ? "red_row" : ""}"}
+              %td= b.name
+              %td= b.email
+              %td= b.cell
+              %td= b.order_status_id && OrderStatus.find(b.order_status_id).name
+              %td= b.payment_type_id && PaymentType.find(b.payment_type_id).name
+              %td= b.temporary
+              %td= b.user_id && User.find(b.user_id).name
+              %td= b.stuff_id && User.find(b.stuff_id).name
+              %td= c = OrderItem.where(order_id: b.id).count()
+              %td
+                - if(c == 0)
+                  = c
+                - else
+                  - total = 0
+                  - OrderItem.where(order_id: b.id).each do |i|
+                    - product = Product.find(ProductCode.find(i.product_code_id).product_id)
+                    - total += product.price_max * product.sizes.count() * i.amount
+                  = total
+              %td
+                = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to "Edit", edit_order_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

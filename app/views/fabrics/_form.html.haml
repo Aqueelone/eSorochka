@@ -1,0 +1,29 @@
+= form_for(@fabric) do |f|
+  - if @fabric.errors.any?
+    .alert.alert-error
+      %b
+        = pluralize(@fabric.errors.count, "error")
+        prohibited this user from being saved:
+      %ul
+        - @fabric.errors.full_messages.each do |msg|
+          %li= msg
+  = attachment_image_tag(@fabric, :image, :fill, 300, 300, fallback: "default300x300.png", class: 'image_uploaded')
+  %table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
+    %tr
+      %td{:scope => "row"}= f.label :name
+      %td= f.text_field :name, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :description
+      %td= f.text_area :description, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :category
+      %td= f.collection_select :category_id, Category.all, :id, :name_ua, {:selected => session["category"]}
+    %tr
+      %td{:scope => "row"}= f.label :composition
+      %td= f.text_field :composition, class: "name_field"
+    %tr
+      %td{:scope => "row"}= f.label :image
+      %td= f.attachment_field :image, direct: true, presigned: true, class: 'file_uploader'
+    %tr
+      %td= bootstrap_icon_link_to 'Cancel', fabrics_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= f.submit :class => "button btn btn-success"

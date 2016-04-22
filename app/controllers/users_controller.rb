@@ -21,6 +21,8 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  temporary              :uuid
+#  cell                   :string(255)
 #
 # Indexes
 #
@@ -30,6 +32,7 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, only: [:index, :show, :delete]
 
   # GET /users GET /users.json
   def index
@@ -50,13 +53,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     @user.confirmed_at = Time.now
+    @user.temporary = session['temporary']
     @user.skip_confirmation!
-    !@user.save && (redirect_to new_user_session_path)
+    !@user.save && (redirect_to new_user_session_path, error: 'Creating of user is fail!')
+    redirect_to @user
   end
 
   # GET /users/:id/edit
   def edit
     # authorize! :update, @user
+    @user = User.find(params[:id])
   end
 
   # PATCH/PUT /users/:id.:format
@@ -68,17 +74,11 @@ class UsersController < ApplicationController
       @param.delete(:password)
       @param.delete(:password_confirmation)
     end
+
     # authorize! :update, @user
-    respond_to do |format|
-      if @user.update_attributes(@param)
-        !current_user && sign_in(@user, :bypass => true)
-        format.html { redirect_to @user, notice: 'Your profile was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    !@user.update_attributes(@param) && ( redirect_to edit_users_path )
+    !current_user && sign_in(@user, :bypass => true)
+    redirect_to @user, notice: 'Your profile was successfully updated.'
   end
 
   # GET/PATCH /users/:id/finish_signup
@@ -113,10 +113,7 @@ class UsersController < ApplicationController
   def destroy
     # authorize! :delete, @user
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to root_url }
-      format.json { head :no_content }
-    end
+    redirect_to users_path, notice: 'User was deleted successful.'
   end
 
   private

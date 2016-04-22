@@ -1,0 +1,28 @@
+#adminpanel
+  = render 'admin_panel_controlls'
+  = show_flash
+  .tab-content
+    %fieldset
+      %legend
+        Profile of #{@product_code.name + ": " + @order_item.amount.to_s + "шт"}:
+      %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
+        %tr
+          %td{:scope => "row"} Amount
+          %td= @order_item.amount
+        %tr
+          %td{:scope => "row"} Product Code
+          %td= @product_code.name
+        %tr
+          %td{:scope => "row"} Order
+          %td
+            -if(@order_item.order_id)
+              = @order_item.order_id
+        %tr
+          %td{:scope => "row"} Temporary
+          %td= @order_item.temporary
+        %tr
+          %td{:scope => "row"}
+          %td
+            = bootstrap_icon_link_to 'Edit', edit_order_item_path(@order_item), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', @order_item, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

@@ -1,0 +1,47 @@
+%table.table.table-striped.table-bordered.table-condensed.table-order-posible-item-form{:role => "grid"}
+  %thead
+    %caption
+      Possible order items:
+    %tr
+      %th{:class => "column-sort"}
+        Amount
+      %th{:class => "column-sort"}
+        Product Code
+      %th{:class => "column-sort"}
+        Sizes
+      %th{:class => "column-sort"}
+        Total
+      %th{:class => "column-sort"}
+        Color
+      %th{:class => "column-sort"}
+        Preview
+      %th{:class => "column-sort"}
+  %tbody
+    - @order_items_posible.each do |b|
+      = form_for b, :url => url_for(:id => b.id, :controller => 'order_items', :action => 'add_order')  do |fo|
+        - pc = ProductCode.find(b.product_code_id)
+        - p = Product.find(pc.product_id)
+        - sizes_count = p.sizes.count()
+        - amount = b.amount || 0
+        %tr
+          %td
+            = fo.hidden_field :product_code
+            = fo.hidden_field :temporary
+            = fo.number_field :amount, class: "number_field"
+            = fo.hidden_field :order_id, value: @order.id
+          %td= pc.name
+          %td
+            %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
+              %tr
+                - p.sizes.each do |s|
+                  %td
+                    = s.sign
+          %td= amount * p.price_max * sizes_count
+          %td
+            .color_square{style: "background-color: #{Color.find(pc.color_id).color_gid}"}
+          %td.image_preview= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 45, 60, fallback: "default300x400.png", class: 'image_uploaded')
+          %td
+            = fo.submit "Add", :class => "button btn btn-success"
+            = bootstrap_icon_link_to 'Edit', edit_order_item_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            - if current_user.is_admin
+              = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
