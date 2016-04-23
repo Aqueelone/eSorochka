@@ -304,6 +304,8 @@ Rails.application.routes.draw do
       post :picture
       get :get_catalog
       get :show_product
+      get :view
+      get :show_full
       get :show_mode
       get :get_deffered
       get :remove_deffered

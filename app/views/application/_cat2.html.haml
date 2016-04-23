@@ -3,7 +3,7 @@
     %table.table-condensed.table-catalog-face{:role => "grid"}
       %tr
         %td
-          %a{href: "/products/#{p.id.to_s + @locale}", class: "btn-product cat-image-action", 'data-id' => "prod_cel#{p.id}"}
+          %a{href: "#{view_product_path(p)}", class: "btn-product cat-image-action", 'data-id' => "prod_cel#{p.id}"}
             = attachment_image_tag((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 225, 300, fallback: "default225x300.png", class: 'image_uploaded')
       %tr
         %td
@@ -19,6 +19,6 @@
                         = s.sign
             %tr
               %td
-                %a.btn.btn-start.btn-more.btn-product.animated.scroll.topbutton.fadeInUpBig{ href: "/products/#{p.id.to_s + @locale}", id:"#prod#{p.id}", 'data-id' => "prod_cel#{p.id}", class: "btn-more-#{p.id}"}
+                %a.btn.btn-start.btn-more.btn-product.animated.scroll.topbutton.fadeInUpBig{ href: "#{view_product_path(p)}", id:"#prod#{p.id}", 'data-id' => "prod_cel#{p.id}", class: "btn-more-#{p.id}"}
                   =t(:_furthermore)
 

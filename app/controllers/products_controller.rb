@@ -23,7 +23,7 @@
 #
 
 class ProductsController < ApplicationController
-  before_action :require_admin, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :require_admin, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   def index
     @products = Product.where("products.category_id IS NULL OR products.category_id = '#{session['category']}'").order('products.created_at ASC')
   end
@@ -32,25 +32,26 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
     !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
-    if((current_user)&&(current_user.is_admin?))
-      render :template => 'products/show'
-    else
-      @orders = Order.uncached do
-        Order.where(:temporary => session['temporary'], :closed => false)
-      end
-      @orders.blank? && (redirect_to root_path)
-      !@orders.blank? && (@order = @orders.last)
-      @amounts = []
-      @product_codes_ids = ProductCode.where(product_id: @product.id).map {|p| p.id}
-      @temper = session['temporary']
-      OrderItem.all.where(temporary: @temper, :product_code_id => @product_codes_ids).each do |oi|
-        @amounts[oi.product_code_id] = oi.amount
-      end
-      session['deffered'].delete_if {|d| d == @product.id}
-      session['deffered'] << @product.id
-      session['deffered'].uniq.compact
-      render :template => 'products/view'
+  end
+
+  def view
+    @product = Product.find(params[:id])
+    @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
+    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    @orders = Order.uncached do
+      Order.where(:temporary => session['temporary'], :closed => false)
     end
+    @orders.blank? && (redirect_to root_path)
+    !@orders.blank? && (@order = @orders.last)
+    @amounts = []
+    @product_codes_ids = ProductCode.where(product_id: @product.id).map {|p| p.id}
+    @temper = session['temporary']
+    OrderItem.all.where(temporary: @temper, :product_code_id => @product_codes_ids).each do |oi|
+      @amounts[oi.product_code_id] = oi.amount
+    end
+    session['deffered'].delete_if {|d| d == @product.id}
+    session['deffered'] << @product.id
+    session['deffered'].uniq.compact
   end
 
   def show_mode
@@ -80,6 +81,15 @@ class ProductsController < ApplicationController
     session['deffered'] << @product.id
     session['deffered'].uniq.compact
     render :partial => 'prod'
+  end
+
+  def show_full
+    @product = Product.find(params[:id])
+    @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
+    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    @height = params[:height].to_i + 200
+    @width = @height * 3 / 4
+    render :partial => 'full'
   end
 
   def get_deffered

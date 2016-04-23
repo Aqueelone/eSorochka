@@ -392,7 +392,7 @@ textarea.form-control {
 }
 #product{
     background-image: url('product.jpg');
-    min-height: 1120px;
+    min-height: 1170px;
     margin-top: -60px;
     background-origin: content-box;
     background-attachment: fixed;
@@ -1232,6 +1232,62 @@ legend{
 .product_cart .table-product-gallery-form{
     display: inline-block;
     background-color: rgba(204,204,204,0.4);
+}
+/* normal state */
+#product-full-image {
+    display:none;
+    background: #000;
+}
+
+/* Mozilla proposal (dash) */
+#product-full-image:full-screen {
+    display: block;
+    width:100%;
+    height:100%;
+}
+
+/* W3C proposal (no dash) */
+#product-full-image:fullscreen {
+    display: block;
+    width:100%;
+    height:100%;
+}
+
+/* currently working vendor prefixes */
+#product-full-image:-webkit-full-screen, #product-full-image:-moz-full-screen {
+    display: block;
+    width:100%;
+    height:100%;
+}
+#product-full-image #full-image{
+    display: inline-block;
+}
+#product-full-image .table-full-image{
+    display: inline-block;
+}
+#product-full-image .table-product-full-control{
+    display:inline-block;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+#product-full-image .table-product-full-control a{
+    font-size: 45px;
+}
+#product-full-image .full-image-gallery{
+    display: inline-block;
+    float: right;
+    width: 40%;
+}
+#product-full-image .full-image-gallery .image-block{
+    display: inline-block;
+    padding: 2px 5px;
+}
+#product-full-image .full-image-gallery .image-block .active img{
+    border: 3px solid #2a6496;
+}
+#product-full-image .full-image-gallery .image-block img{
+    border: 3px solid #000000;
 }
 #product .product-amount{
     font: normal normal normal 16px/1.4em 'okolaksitalic',sans-serif;

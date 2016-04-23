@@ -2,11 +2,11 @@
 - c.each do |d|
   - p = Product.find(d)
   - if !p.blank?
-    .prod_cel_deffered.wow.lightSpeedIn{class: "prod_cel#{d}", 'data-id' => "prod_cel#{d}", 'data-wow-duration' => '100ms', 'data-wow-delay' => '100ms'}
+    .prod_cel_deffered.wow.lightSpeedIn{'data-id' => "prod_cel#{d}", 'data-wow-duration' => '100ms', 'data-wow-delay' => '100ms'}
       %table.table-condensed.table-catalog-face{:role => "grid"}
         %tr
           %td
-            %a{href: "/products/#{d.to_s + "?locale=" + I18n.locale.to_s}", class: "btn-product cat-image-action", 'data-id' => "prod_cel#{d}"}
+            %a{href: "#{view_product_path(p)}", class: "btn-product cat-image-action", 'data-id' => "prod_cel#{d}"}
               = attachment_image_tag((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 120, 160, fallback: "default120x160.png", class: 'image_uploaded')
         %tr
           %td
@@ -20,7 +20,7 @@
                     %i.glyphicon.glyphicon-remove.icon-red
               %tr
                 %td
-                  %a.btn.btn-start.btn-more.btn-product.animated.scroll.topbutton.fadeInUpBig{ href: "/products/#{d.to_s + "?locale=" + I18n.locale.to_s}", id:"#prod#{d}", 'data-id' => "prod_cel#{d}", class: "btn-more-#{d}"}
+                  %a.btn.btn-start.btn-more.btn-product.animated.scroll.topbutton.fadeInUpBig{ href: "#{view_product_path(p)}", id:"#prod#{d}", 'data-id' => "prod_cel#{d}", class: "btn-more-#{d}"}
                     =t(:_furthermore)
 .nav-deff
   .deff-spacer.wow.lightSpeedIn{'data-wow-duration' => '100ms', 'data-wow-delay' => '100ms'}

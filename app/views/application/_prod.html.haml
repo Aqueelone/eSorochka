@@ -2,7 +2,7 @@
   %table.table-striped.table-condensed.table-product-picture{:role => "grid"}
     %tr
       %td#product-image
-        %a{href: "#", class: "product-image-action", 'data-gallery' => ''}
+        %a{href: "##{@product.id}", class: "product-image-action", 'data-gallery' => ''}
           = attachment_image_tag((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
           .cat-image-action-zone
           .cat-image-action-zoom{style: "background-image: url(#{attachment_url((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 1500, 2000, fallback: "default300x400.png")});"}
@@ -50,9 +50,10 @@
       - @galleries.each do |g|
         - Image.where("images.gallery_id = #{g.id}").each do |i|
           %td{:scope => "row"}
-            %input{type: 'hidden', value: "#{attachment_url(Image.find(i.id) || Image.new, :file, :fill, 1500, 2000, fallback: "default300x400.png")}"}
+            %input{type: 'hidden', id: "zoomImage", value: "#{attachment_url(Image.find(i.id) || Image.new, :file, :fill, 1500, 2000, fallback: "default300x400.png")}"}
+            %input{type: 'hidden', id: "mainImage", value: "#{attachment_url(Image.find(i.id) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png")}"}
             %a{href: "/#product-image", class: "product-gallery-image-action #{(i.id == @product.picture_id)? "active" : ""} pgia-#{i.id}"}
-              = attachment_image_tag(Image.find(i.id), :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
+              = attachment_image_tag(Image.find(i.id), :file, :fill, 75, 100, fallback: "default75x100.png", class: 'image_uploaded')
   %table.table-condensed.table-product-order-form{:role => "grid"}
     %tr
       %td
