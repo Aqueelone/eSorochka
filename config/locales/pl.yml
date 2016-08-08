@@ -29,6 +29,7 @@ pl:
   _furthermore: "dodatkowo..."
   _showcase: "showcase"
   _grid: "siatka"
+  _topic: "Tematy stron"
   account: "Konto"
   title: 'Sorochka OPT'
   orders:
@@ -60,7 +61,7 @@ pl:
       header: "Historia Zamówień"
       blank: "Historii jeszcze nie..."
       table:
-        order_status: "status zamówienia"
+        order_status: "status"
         payment_type: "typ płatności"
         updated_at: "aktualizowane w"
         your_manager: "Twój menedżer"
@@ -73,6 +74,9 @@ pl:
   category:
       two: "Koszule męskie z długim rękawem"
       three: "Koszule męskie z krótkim rękawem"
+      ten: "Koszulki męskie"
+  contactus:
+      desc: "Contact us and we answer to all Your questions!"
   activerecord:
     errors:
       models:

@@ -4,5 +4,7 @@
   .tab-content
     %fieldset
       %legend
-        New gallery
+        = t('activerecord.attributes.gallery.new')
       = render 'form'
+:javascript
+  admit_gallery();

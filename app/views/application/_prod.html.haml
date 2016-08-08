@@ -1,80 +1,108 @@
 .product_cart
-  %table.table-striped.table-condensed.table-product-picture{:role => "grid"}
-    %tr
-      %td#product-image
-        %a{href: "##{@product.id}", class: "product-image-action", 'data-gallery' => ''}
-          = attachment_image_tag((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
-          .cat-image-action-zone
-          .cat-image-action-zoom{style: "background-image: url(#{attachment_url((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 1500, 2000, fallback: "default300x400.png")});"}
-    %tr
-      %td
-        %table.table-striped.table-product-gallery-control{:role => "grid"}
-          %tr
-            %td= bootstrap_icon_link_to '    ', "#product", "glyphicon glyphicon-hand-left icon-white", :class => "button btn btn-primary left"
-            %td.divercity
-            %td= bootstrap_icon_link_to '    ', "#product", "glyphicon glyphicon-hand-right icon-white", :class => "button btn btn-primary right"
-  %table.table-condensed.table-catalog-face{:role => "grid"}
-    %tr
-      %td.cat-price
-        %span.cat-price
-          = '$'+@product.price_max.to_s
-        %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
-          %tr
-            - @product.sizes.each do |s|
-              %td
-                = s.sign
-  %table.table-condensed.table-product-color{:role => "grid"}
-    - @galleries.each do |g|
-      - if (!g.color_id.blank? && c = Color.find(g.color_id))
-        %tr
-          %td{:scope => "row"}
-            %a{href: '/#product-image', id: "color-#{Image.where("images.gallery_id = #{g.id}").first.id}", title: "#{c.name}", class: 'gallery_color_chooser'}
-              .color_square{style: "background-color: #{c.color_gid}"}
-  %table.table-striped.table-condensed.table-product-brand{:role => "grid"}
-    %tr
-      %td= attachment_image_tag(@product.brand || Brand.new, :image, :fill, 300, 100, fallback: "default300x100.png", class: 'image_uploaded')
-  %table.table-striped.table-product-form{:role => "grid"}
-    %tr
-      %td#product_label{:scope => "row"}
-        = @product.name
-    %tr
-      %td{:scope => "row"}
-        = @product.description
-        - deff = ''
-        - !session['deffered'].empty? && session['deffered'].each do |d|
-          - deff += " - " + d.to_s
-        %input{type: 'hidden', value: "#{deff}", id: 'test'}
-  .clear
-  %table.table-sort.table-product-gallery-form{:role => "grid"}
-    %tr
-      - @galleries.each do |g|
-        - Image.where("images.gallery_id = #{g.id}").each do |i|
-          %td{:scope => "row"}
-            %input{type: 'hidden', id: "zoomImage", value: "#{attachment_url(Image.find(i.id) || Image.new, :file, :fill, 1500, 2000, fallback: "default300x400.png")}"}
-            %input{type: 'hidden', id: "mainImage", value: "#{attachment_url(Image.find(i.id) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png")}"}
-            %a{href: "/#product-image", class: "product-gallery-image-action #{(i.id == @product.picture_id)? "active" : ""} pgia-#{i.id}"}
-              = attachment_image_tag(Image.find(i.id), :file, :fill, 75, 100, fallback: "default75x100.png", class: 'image_uploaded')
-  %table.table-condensed.table-product-order-form{:role => "grid"}
-    %tr
-      %td
-      %td
-      %td
-      %td
-      %td= bootstrap_icon_link_to t('product.move_to_order'), _order_path, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary scroll to_order"
-      %td= bootstrap_icon_link_to t('product.back_to_catalog'), catalog_path, "glyphicon glyphicon-list icon-white", method: :get, :class => "button btn btn-small btn-primary scroll"
-    - ProductCode.where("product_codes.product_id = #{@product.id}").each do |pc|
+  .product-view
+    %table.table-striped.table-condensed.table-product-picture{:role => "grid"}
       %tr
-        %td= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 45, 60, fallback: "default300x400.png", class: 'image_uploaded')
+        %td#product-image
+          %a{href: "##{@product.id}", class: "product-image-action", 'data-gallery' => ''}
+            = attachment_image_tag((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 300, 400, format: "jpeg", fallback: "default300x400.png",
+              class: 'image_uploaded', alt: "#{@product.opengraph_title}", title: "#{@product.opengraph_title}")
+            .cat-image-action-zone
+            .cat-image-action-zoom{style: "background-image: url(#{attachment_url((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 1500, 2000, format: "jpeg", fallback: "default300x400.png")});"}
+      %tr
         %td
-          - c = Color.find(pc.color_id)
-          .color_square{style: "background-color: #{c.color_gid}"}
-        %td.product_code
-          = pc.name
-        %td{class: "value-#{pc.id}"}
-          %input{type: 'number', value: "#{@amounts[pc.id]||1}", id: "#{pc.id}", class: "number_field product-amount product-#{pc.id}"}
+          %table.table-striped.table-product-gallery-control{:role => "grid"}
+            %tr
+              %td= bootstrap_icon_link_to '    ', "#product", "glyphicon glyphicon-hand-left icon-white", :class => "button btn btn-primary left"
+              %td.divercity
+              %td= bootstrap_icon_link_to '    ', "#product", "glyphicon glyphicon-hand-right icon-white", :class => "button btn btn-primary right"
+    %table.table-condensed.table-product-color{:role => "grid"}
+      - @galleries.each do |g|
+        - if (!g.color_id.blank? && c = Color.find(g.color_id))
+          %tr
+            %td{:scope => "row"}
+              %a{href: '/#product-image', id: "color-#{Image.where("images.gallery_id = #{g.id}").first.id}", title: "#{c.name}", class: 'gallery_color_chooser'}
+                .color_square{style: "background-color: #{c.color_gid}"}
+    .clear
+    %table.table-sort.table-product-gallery-form{:role => "grid"}
+      %tr
+        - odd = 0
+        - @galleries.each do |g|
+          - odd += 1
+          - if odd > 4
+            %tr
+            - odd = 0
+          - Image.where("images.gallery_id = #{g.id}").each do |i|
+            %td{:scope => "row"}
+              %input{type: 'hidden', id: "odd-value", value: "#{odd}"}
+              %input{type: 'hidden', id: "zoomImage", value: "#{attachment_url(Image.find(i.id) || Image.new, :file, :fill, 1500, 2000, format: "jpeg", fallback: "default300x400.png")}"}
+              %input{type: 'hidden', id: "mainImage", value: "#{attachment_url(Image.find(i.id) || Image.new, :file, :fill, 300, 400, format: "jpeg", fallback: "default300x400.png")}"}
+              %a{href: "/#product-image", class: "product-gallery-image-action #{(i.id == @product.picture_id)? "active" : ""} pgia-#{i.id}"}
+                = attachment_image_tag(Image.find(i.id), :file, :fill, 75, 100, format: "jpeg", fallback: "default75x100.png", class: 'image_uploaded')
+  .product-info
+    %table.table-condensed.table-catalog-face{:role => "grid"}
+      %tr
+        %td.cat-price
+          %span.cat-price
+            = '$'+@product.price_max.to_s
+          %table.table-bordered.table-condensed.table-size-show{:role => "grid"}
+            %tr
+              - @product.sizes.each do |s|
+                %td
+                  = s.sign
+    %table.table-striped.table-condensed.table-product-brand{:role => "grid"}
+      %tr
+        %td= attachment_image_tag(@product.brand || Brand.new, :image, :fill, 300, 100, format: "jpeg", fallback: "default300x100.png", class: 'image_uploaded')
+    %table.table-striped.table-product-form{:role => "grid"}
+      %tr
+        %td#product_label{:scope => "row"}
+          = @product.name
+      %tr
+        %td{:scope => "row"}
+          = @product.description
+    %table.table-striped.table-condensed.table-product-char-form{:role => "grid"}
+      %tr
+        %td{:scope => "row"}
+          = t('activerecord.attributes.product.cut_type')
+        %td.name_field= @product.cut_type
+      %tr
+        %td{:scope => "row"}
+          = t('activerecord.attributes.product.collar_type')
+        %td.name_field= @product.collar_type
+      %tr
+        %td{:scope => "row"}
+          = t('activerecord.attributes.product.sleeve_type')
+        %td.name_field= @product.sleeve_type
+      %tr
+        %td{:scope => "row"}
+          = t('activerecord.attributes.product.cuff_type')
+        %td.name_field= @product.cuff_type
+      %tr
+        %td{:scope => "row"}
+          = t('activerecord.attributes.product.style_type')
+        %td.name_field= @product.style_type
+  .clear
+  - if(!@order.blank?)
+    %table.table-condensed.table-product-order-form{:role => "grid"}
+      %tr
         %td
-          %input{type: 'hidden', id: 'order_id', name: 'order_id', value: "#{@order.id}"}
-          = bootstrap_icon_link_to t('product.add_order'), "#product", "glyphicon glyphicon-plus icon-white", id: "product-#{pc.id}", method: :get, :class => "button btn btn-small btn-primary product-add"
         %td
+        %td
+        %td
+        %td= bootstrap_icon_link_to '<span>' + t('product.move_to_order') + '</span>', _order_path, "glyphicon glyphicon-book icon-white", method: :get, title: "#{t('product.move_to_order')}", :class => "button btn btn-small btn-primary to_order"
+        %td= bootstrap_icon_link_to '<span>' + t('product.back_to_catalog') + '</span>', catalog_path, "glyphicon glyphicon-list icon-white", method: :get, title: "#{t('product.back_to_catalog')}", :class => "button btn btn-small btn-primary to_catalog"
+      - ProductCode.where("product_codes.product_id = #{@product.id}").each do |pc|
+        %tr
+          %td= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 45, 60, format: "jpeg", fallback: "default300x400.png", class: 'image_uploaded')
+          %td
+            - c = Color.find(pc.color_id)
+            .color_square{style: "background-color: #{c.color_gid}"}
+          %td.product_code
+            = pc.name
+          %td{class: "value-#{pc.id}"}
+            %input{type: 'number', value: "#{@amounts[pc.id]||1}", id: "#{pc.id}", class: "number_field product-amount product-#{pc.id}"}
+          %td
+            %input{type: 'hidden', id: 'order_id', name: 'order_id', value: "#{@order.id}"}
+            = bootstrap_icon_link_to '<span>' + t('product.add_order') + '</span>', "#product", "glyphicon glyphicon-plus icon-white", id: "product-#{pc.id}", method: :get, title: "#{t('product.add_order')}", :class => "button btn btn-small btn-primary product-add"
+          %td
 
 

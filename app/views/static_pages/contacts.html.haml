@@ -1,2 +1,10 @@
-.col-60perc-right
+.top25.clearfix
+.top25.clearfix
+%section#contact.inview-observer.parallax
+  = render partial: 'contact'
+%section#navpanel2.topwhite
+:javascript
+  start_up();
+  $('.main-nav li').removeClass('active');
+  $('.main-nav li.btn-nav-about').addClass('active');
 

@@ -15,5 +15,5 @@
       %td{:scope => "row"}= f.label :color_gid
       %td= f.input :color_gid, as: :minicolors, input_html: {data: {minicolors: {theme: :bootstrap, position: :right}}}, class: 'name_field'
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', colors_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), colors_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"

@@ -1,3 +1,16 @@
+= content_for :custom_meta_tags do
+  %link{rel: "canonical", href: "#{request.original_url}"}
+  %meta{property: "og:image", content: "http://sorochkaopt.com/bannerShare.jpg"}
+  %meta{property: "og:image:type", content: "image/jpeg"}
+  %meta{property: "og:image:width", content: "487"}
+  %meta{property: "og:image:height", content: "249"}
+  - keywords = ['сорочка', 'shirt', 'рубашка', 'сорочки', 'shirts', 'рубашки', 'гуртом', 'wholesale', 'оптом']
+  - keywords << ['turkey', 'турция', 'турція', 'турецкие', 'турецькі', 'turkish']
+  - @category || @category = Category.find(session['category'])
+  - keywords << @category.name_ua.split(' ')
+  - keywords << @category.name_en.split(' ')
+  - keywords << @category.name_ru.split(' ')
+  %meta{name: "keywords", content: "#{keywords.join(', ')}"}
 #home-slider.inview-observer.carousel.slide.carousel-fade.parallax{data: {:image => 'banner1.jpg'}}
   .slider
     .wow.lightSpeedIn.title1{'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
@@ -8,11 +21,8 @@
         =t('home-slider.t2')
   .wow.bounceInLeft.title3{'data-wow-duration' => '1200ms', 'data-wow-delay' => '1500ms'}
     %i.icon-catalog
-    %span
-      online
+    %img{src: '/online.png', alt: 'online'}
 %section#navpanel0.topwhite
-  %a.btn.btn-start.animated.scroll.topbutton.fadeInUpBig{href: '#catalog'}
-    =t(:_catalog)
   = render partial: 'nav0'
   .nav-catalog
     = render partial: 'nav1'
@@ -32,3 +42,5 @@
 %section#navpanel3.topwhite
 = render partial: 'leftpanel'
 = render partial: 'rightpanel'
+:javascript
+  start_up();

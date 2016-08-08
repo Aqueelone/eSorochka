@@ -6,37 +6,39 @@
     .controll-group-session
       = collection_select(:category, :category_id, Category.all, :id, :name_ua, {:selected => session["category"]})
     .controll-group-user
-      = bootstrap_icon_link_to 'User List', users_path, "glyphicon glyphicon-user icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New User', new_user_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.user_list'), users_path, "glyphicon glyphicon-user icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_user'), new_user_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-category
-      = bootstrap_icon_link_to 'Category List', categories_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New Category', new_category_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.category_list'), categories_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_category'), new_category_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-brand
-      = bootstrap_icon_link_to 'Brand List', brands_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New Brand', new_brand_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.brand_list'), brands_path, "glyphicon glyphicon-list-alt icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_brand'), new_brand_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-fabric
-      = bootstrap_icon_link_to 'Fabric List', fabrics_path, "glyphicon glyphicon-th icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New Fabric', new_fabric_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.fabric_list'), fabrics_path, "glyphicon glyphicon-th icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_fabric'), new_fabric_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-image
-      = bootstrap_icon_link_to 'Image List', images_path, "glyphicon glyphicon-picture icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New Image', new_image_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.image_list'), images_path, "glyphicon glyphicon-picture icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_image'), new_image_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-gallery
-      = bootstrap_icon_link_to 'Gallery List', galleries_path, "glyphicon glyphicon-cloud icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New Gallery', new_gallery_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.gallery_list'), galleries_path, "glyphicon glyphicon-cloud icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_gallery'), new_gallery_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-product
-      = bootstrap_icon_link_to 'Product List', products_path, "glyphicon glyphicon-chevron-right icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New Product', new_product_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.product_list'), products_path, "glyphicon glyphicon-chevron-right icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_product'), new_product_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-product
-      = bootstrap_icon_link_to 'ProductCode List', product_codes_path, "glyphicon glyphicon-chevron-right icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'New ProductCode', new_product_code_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
+      = bootstrap_icon_link_to t('admins.admin_panel.product_code_list'), product_codes_path, "glyphicon glyphicon-chevron-right icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.new_product_code'), new_product_code_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-success"
 
     .controll-group-order
-      = bootstrap_icon_link_to 'Order List', orders_path, "glyphicon glyphicon-check icon-white", :class => "button btn btn-info"
-      = bootstrap_icon_link_to 'Order Items', order_items_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-warning"
+      = bootstrap_icon_link_to t('admins.admin_panel.order_list'), orders_path, "glyphicon glyphicon-check icon-white", :class => "button btn btn-info"
+      = bootstrap_icon_link_to t('admins.admin_panel.order_items'), order_items_path, "glyphicon glyphicon-plus icon-white", :class => "button btn btn-warning"
+:javascript
+  choose_category();

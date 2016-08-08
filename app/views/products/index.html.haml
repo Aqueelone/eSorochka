@@ -3,13 +3,17 @@
   = show_flash
   .tab-content
     %fieldset
-      %legend List of products
+      %legend
+        = t('activerecord.attributes.product.index')
       %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
         %thead
           %tr
-            %th{:scope => "column"} Name
-            %th{:scope => "column"} Brand
-            %th{:scope => "column"} Picture
+            %th{:scope => "column"}
+              = t('activerecord.attributes.product.name')
+            %th{:scope => "column"}
+              = t('activerecord.attributes.product.brand')
+            %th{:scope => "column"}
+              = t('activerecord.attributes.product.picture')
             %th{:scope => "column"}
         %tbody
           - @products.each do |b|
@@ -18,6 +22,6 @@
               %td= attachment_image_tag(b.brand || Brand.new, :image, :fill, 300, 100, fallback: "default300x100.png", class: 'image_uploaded')
               %td= attachment_image_tag((b.picture_id && Image.find(b.picture_id)) || Image.new, :file, :fill, 150, 200, fallback: "default300x100.png", class: 'image_uploaded')
               %td
-                = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
-                = bootstrap_icon_link_to "Edit", edit_product_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
-                = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+                = bootstrap_icon_link_to t(:_show), b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to t(:_edit), edit_product_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to t(:_delete), b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

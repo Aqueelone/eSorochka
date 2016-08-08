@@ -33,5 +33,5 @@
           - else
             = f.hidden_field :temporary, value: @order_item.temporary
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', order_items_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), order_items_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"

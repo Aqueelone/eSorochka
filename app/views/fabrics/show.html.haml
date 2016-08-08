@@ -4,7 +4,7 @@
   .tab-content
     %fieldset
       %legend
-        Profile of #{@fabric.name}:
+        = t('activerecord.attributes.fabric.profile') + @fabric.name
       %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
         %tr
           %td{:scope => "row"} Name
@@ -24,6 +24,6 @@
         %tr
           %td{:scope => "row"}
           %td
-            = bootstrap_icon_link_to 'Edit', edit_fabric_path(@fabric), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_fabric_path(@fabric), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', @fabric, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), @fabric, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

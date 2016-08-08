@@ -1,29 +1,51 @@
+= content_for :custom_meta_tags do
+  %link{rel: "canonical", href: "#{request.original_url}"}
+  %meta{property: "og:image", content: "http://sorochkaopt.com/bannerShare.jpg"}
+  %meta{property: "og:image:type", content: "image/jpeg"}
+  %meta{property: "og:image:width", content: "487"}
+  %meta{property: "og:image:height", content: "249"}
+  - keywords = ['сорочка', 'shirt', 'рубашка', 'сорочки', 'shirts', 'рубашки', 'гуртом', 'wholesale', 'оптом']
+  - keywords << ['turkey', 'турция', 'турція', 'турецкие', 'турецькі', 'turkish']
+  - @category || @category = Category.find(session['category'])
+  - keywords << @category.name_ua.split(' ')
+  - keywords << @category.name_en.split(' ')
+  - keywords << @category.name_ru.split(' ')
+  %meta{name: "keywords", content: "#{keywords.join(', ')}"}
 #adminpanel
   = render 'admin_panel_controlls'
   = show_flash
   .tab-content
     %fieldset
       %legend
-        Profile of #{@category.name_ua}:
+        = t('activerecord.attributes.category.profile') + @category.name_ua
       %table.table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
         %tr
-          %td{:scope => "row"} Name UA
+          %td{:scope => "row"}
+            = t('activerecord.attributes.category.name_ua')
           %td= @category.name_ua
         %tr
-          %td{:scope => "row"} Name RU
+          %td{:scope => "row"}
+            = t('activerecord.attributes.category.name_ru')
           %td= @category.name_ru
         %tr
-          %td{:scope => "row"} Name EN
+          %td{:scope => "row"}
+            = t('activerecord.attributes.category.name_en')
           %td= @category.name_en
         %tr
-          %td{:scope => "row"} Visible
+          %td{:scope => "row"}
+            = t('activerecord.attributes.category.visible')
           %td= @category.visible
         %tr
-          %td{:scope => "row"} Parent
+          %td{:scope => "row"}
+            = t('activerecord.attributes.category.image')
+          %td= attachment_image_tag(@category, :image, :fill, 120, 120, fallback: "default120x120.png")
+        %tr
+          %td{:scope => "row"}
+            = t('activerecord.attributes.category.parent')
           %td= Category.find(@category.parent_id).name_ua
         %tr
           %td{:scope => "row"}
           %td
-            = bootstrap_icon_link_to 'Edit', edit_category_path(@category), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_category_path(@category), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', @category, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), @category, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

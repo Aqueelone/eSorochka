@@ -36,9 +36,9 @@
         %tr
           %td{:scope => "row"}
           %td
-            = bootstrap_icon_link_to 'Edit', edit_order_path(@order), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_order_path(@order), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', @order, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), @order, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
         %tr.total_label
           %td
           %td

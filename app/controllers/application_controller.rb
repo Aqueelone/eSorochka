@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   include HttpAcceptLanguage::AutoLocale
+  include Mobylette::RespondToMobileRequests
+  before_filter :store_request_in_thread
   before_action :set_locale
   before_action :set_session
   protect_from_forgery with: :exception
@@ -38,5 +40,9 @@ class ApplicationController < ActionController::Base
 
   def default_url_options(options={})
     { :locale => I18n.locale }
+  end
+
+  def store_request_in_thread
+    Thread.current[:request] = request.host_with_port
   end
 end

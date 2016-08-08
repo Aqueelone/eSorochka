@@ -34,7 +34,7 @@
       %td{:scope => "row"}= f.label :category
       %td= f.collection_select :category_id, Category.all, :id, :name_ua, {:selected => session["category"]}
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', galleries_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), galleries_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td
         = f.submit :class => "button btn btn-success"
         %td= bootstrap_icon_link_to 'New color', new_color_path, 'glyphicon glyphicon-choose icon-white', :class => "button btn btn-primary"

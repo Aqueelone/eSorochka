@@ -73,7 +73,7 @@
           - if !@order.user_id.blank?
             = f.hidden_field :stuff_id, :class => "span5 hidden"
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', orders_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), orders_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"
     %tr.total_label
       %td

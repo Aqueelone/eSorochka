@@ -1,9 +1,14 @@
-.contact-btn
-  %a.btn.btn-primary.btn-contact.scroll{ href: '#contact'}
-    =t(:_contact_us)
-.fb-btn
-  %a.btn{ href: 'https://www.facebook.com/sorochkaOpt/', target: '_blank'}
-    %img{ src: '/fb.png'}
-.vk-btn
-  %a.btn{ href: 'https://vk.com/public117521429', target: '_blank'}
-    %img{ src: '/vk.png'}
+#social
+  .contact-btn
+    %a.btn.btn-primary.btn-contact.scroll{ href: '#contact'}
+      %i.glyphicon.glyphicon-edit
+      =t(:_contact_us)
+      .insert
+  .fb-btn
+    %a.social.btn{ href: 'https://www.facebook.com/sorochkaoptcom/', target: '_blank', 'data-link' => 'facebook'}
+      %img{ src: '/tabsFB.png'}
+      .insert
+  .vk-btn
+    %a.social.btn{ href: 'https://vk.com/club117776763', target: '_blank', 'data-link' => 'vkontakte'}
+      %img{ src: '/tabsVK.png'}
+      .insert

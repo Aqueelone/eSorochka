@@ -34,6 +34,7 @@ en:
   _furthermore: "furthermore..."
   _showcase: "showcase"
   _grid: "grid"
+  _topic: "Site topics"
   orders:
     new:
       header: "New Order"
@@ -63,7 +64,7 @@ en:
       header: "Orders History"
       blank: "No history yet..."
       table:
-        order_status: "order status"
+        order_status: "status"
         payment_type: "payment type"
         updated_at: "updated at"
         your_manager: "Your manager"
@@ -76,6 +77,9 @@ en:
   category:
       two: "Men's shirt with long sleeves"
       three: "Men's shirts with short sleeves"
+      ten: "Men's t-shirts"
+  contactus:
+      desc: "Contact us and we answer to all Your questions!"
   ok: "OK"
   cancel: "Cancel"
   delete: "Delete"
@@ -112,6 +116,35 @@ en:
   # For reference translation; the real ActiveRecord English transations are actually
   # in the en-US, en-GB, and en-AU yml files.
   activerecord:
+    attributes:
+      product:
+        name: "name"
+        brand: "brand"
+        category: "category"
+        description: "description"
+        price: "price"
+        amount: "amount"
+        sizes: "sizes"
+        cut_type: "cut_type"
+        collar_type: "collar_type"
+        sleeve_type: "sleeve_type"
+        cuff_type: "cuff_type"
+        style_type: "style_type"
+        picture: "picture"
+        index: "Products list:"
+        profile: "Product profile: "
+        edit: "Product edit: "
+        new: "Product add: "
+      fabric:
+        name: "name"
+        category: "category"
+        description: "description"
+        image: "image"
+        composition: "composition"
+        index: "Fabrics list:"
+        profile: "Fabric profile: "
+        edit: "Fabric edit: "
+        new: "Fabric add: "
     errors:
       models:
         user:

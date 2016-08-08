@@ -7,6 +7,7 @@
       %ul
         - @category.errors.full_messages.each do |msg|
           %li= msg
+  = attachment_image_tag(@category, :image, :fill, 120, 120, fallback: "default120x120.png", class: 'image_uploaded')
   %table.table.table-striped.table-bordered.table-condensed.table-user-form{:role => "grid"}
     %tr
       %td{:scope => "row"}= f.label :name_ua
@@ -18,11 +19,14 @@
       %td{:scope => "row"}= f.label :name_en
       %td= f.text_field :name_en, class: "name_field"
     %tr
+      %td{:scope => "row"}= f.label :image
+      %td= f.attachment_field :image, direct: true, presigned: true, class: 'file_uploader'
+    %tr
       %td{:scope => "row"}= f.label :visible
       %td= f.check_box :visible, {}, 'true', 'false'
     %tr
       %td{:scope => "row"}= f.label :parent
       %td= f.select :parent_id, Category.order("parent_id ASC").map { |c| [c.name_ua, c.id] }, :include_blank => true
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', categories_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), categories_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"

@@ -15,6 +15,6 @@
         %tr
           %td{:scope => "row"}
           %td
-            = bootstrap_icon_link_to 'Edit', edit_size_path(@size), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_size_path(@size), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', @size, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), @size, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

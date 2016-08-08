@@ -26,6 +26,7 @@ tr:
   _furthermore: "ayrıca..."
   _showcase: "vitrin"
   _grid: "ızgara"
+  _topic: "Site konular"
   account: "Hesap"
   title: 'Sorochka OPT'
   orders:
@@ -57,7 +58,7 @@ tr:
       header: "Siparişler Tarih"
       blank: "Hayır tarih henüz..."
       table:
-        order_status: "sipariş durum"
+        order_status: "durum"
         payment_type: "ödeme şekli"
         updated_at: "güncellenen"
         your_manager: "Müdürünüz"
@@ -70,6 +71,9 @@ tr:
   category:
       two: "uzun kollu erkek gömlekler"
       three: "kısa kollu erkek gömlekler"
+      ten: "erkek t-shirt"
+  contactus:
+      desc: "Contact us and we answer to all Your questions!"
   activerecord:
     errors:
       models:

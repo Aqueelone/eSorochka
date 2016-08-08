@@ -25,5 +25,5 @@
       %td{:scope => "row"}= f.label :image
       %td= f.attachment_field :image, direct: true, presigned: true, class: 'file_uploader'
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', fabrics_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), fabrics_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"

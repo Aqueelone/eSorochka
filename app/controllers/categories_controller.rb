@@ -2,14 +2,16 @@
 #
 # Table name: categories
 #
-#  id         :integer          not null, primary key
-#  name_ua    :string(255)
-#  name_ru    :string(255)
-#  name_en    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  parent_id  :integer
-#  visible    :boolean          default(FALSE)
+#  id          :integer          not null, primary key
+#  name_ua     :string(255)
+#  name_ru     :string(255)
+#  name_en     :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  parent_id   :integer
+#  visible     :boolean          default(FALSE)
+#  attachement :string(255)
+#  image_id    :string(255)
 #
 # Indexes
 #
@@ -24,6 +26,7 @@ class CategoriesController < ApplicationController
 
   def catalog
     @categories = Category.where("categories.visible = 't'")
+    params[:id] && session['category'] = params[:id]
     render :template => 'categories/catalog'
   end
 
@@ -66,6 +69,6 @@ class CategoriesController < ApplicationController
   private
 
   def category_params
-    params.require(:category).permit(:name_ua, :name_ru, :name_en, :parent_id, :visible)
+    params.require(:category).permit(:name_ua, :name_ru, :name_en, :parent_id, :visible, :image)
   end
 end

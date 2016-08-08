@@ -1,15 +1,28 @@
+= content_for :custom_meta_tags do
+  %link{rel: "canonical", href: "#{request.original_url}"}
+  %meta{property: "og:image", content: "http://sorochkaopt.com/bannerShare.jpg"}
+  %meta{property: "og:image:type", content: "image/jpeg"}
+  %meta{property: "og:image:width", content: "487"}
+  %meta{property: "og:image:height", content: "249"}
+  - keywords = ['сорочка', 'shirt', 'рубашка', 'сорочки', 'shirts', 'рубашки', 'гуртом', 'wholesale', 'оптом']
+  - keywords << ['turkey', 'турция', 'турція', 'турецкие', 'турецькі', 'turkish']
+  - @category || @category = Category.find(session['category'])
+  - keywords << @category.name_ua.split(' ')
+  - keywords << @category.name_en.split(' ')
+  - keywords << @category.name_ru.split(' ')
+  %meta{name: "keywords", content: "#{keywords.join(', ')}"}
 .container
   .row
     .heading.text-center.col-sm-8.col-sm-offset-2.wow.fadeInUp.animated{ 'data-wow-duration' => "1500ms", 'data-wow-delay' => "500ms"}
       %h2
-        Contact Us
+        =t(:_contact_us)
       %p
-        Зв'яжіться з нами і ми відповимо на усі ваші запитання!
+        =t('contactus.desc')
     .contact-form.wow.fadeIn.animated{ 'data-wow-duration' => "2000ms", 'data-wow-delay' => "1000ms"}
       .col-sm-6
         .contact-feedback
           %h2
-            Write to Us:
+            =t(:_contact_us)
           .form-group
             %input.form-control{ type: "text", name: "name", id: "name", placeholder: "Your Name...", required: "required"}
             %input.form-control{ type: "text", name: "email", id: "email", placeholder: "Your Email...", required: "required"}

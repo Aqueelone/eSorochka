@@ -31,22 +31,21 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
-    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    ##!@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
   end
 
   def view
     @product = Product.find(params[:id])
+    @category = Category.find(@product.category_id)
     @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
-    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    ##!@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
     @orders = Order.uncached do
       Order.where(:temporary => session['temporary'], :closed => false)
     end
-    @orders.blank? && (redirect_to root_path)
     !@orders.blank? && (@order = @orders.last)
     @amounts = []
     @product_codes_ids = ProductCode.where(product_id: @product.id).map {|p| p.id}
-    @temper = session['temporary']
-    OrderItem.all.where(temporary: @temper, :product_code_id => @product_codes_ids).each do |oi|
+    session['temporary'] && OrderItem.all.where(temporary: session['temporary'], :product_code_id => @product_codes_ids).each do |oi|
       @amounts[oi.product_code_id] = oi.amount
     end
     session['deffered'].delete_if {|d| d == @product.id}
@@ -64,7 +63,7 @@ class ProductsController < ApplicationController
   def show_product
     @product = Product.find(params[:id])
     @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
-    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    ##!@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
     @orders = Order.uncached do
       Order.where(:temporary => session['temporary'], :closed => false)
     end
@@ -86,7 +85,7 @@ class ProductsController < ApplicationController
   def show_full
     @product = Product.find(params[:id])
     @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
-    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    ##!@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
     @height = params[:height].to_i + 200
     @width = @height * 3 / 4
     render :partial => 'full'
@@ -119,7 +118,7 @@ class ProductsController < ApplicationController
   def edit
     @product = Product.find(params[:id])
     @galleries = Gallery.where("galleries.product_id = '#{params[:id]}'")
-    !@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
+    ##!@galleries.blank? && (@fabric = Fabric.find(@galleries.first.fabric_id))
     @color_ids = @galleries.map { |g| g.color_id}
     !@color_ids.blank? && (@colors = Color.where("colors.id IN (#{@color_ids.join(',')})"))
     @galleries_for_add = Gallery.where("galleries.category_id = '#{session['category']}'")
@@ -143,12 +142,16 @@ class ProductsController < ApplicationController
   end
 
   def get_catalog
-    @products = Product.where("products.category_id = '#{session['category']}'").order('products.id ASC')
+    @products = Product.where("products.category_id = '#{session['category']}'").order('products.updated_at DESC')
     @width = params[:width].to_i
+    @size = 225
+    @width < 768 && @size = 200
+    @width < 478 && @size = 160
     @pointX = @width/2 -122
+    @width < 478 && @pointX = @width -200
     @point = @pointY = @pointX
     @top = 230
-    @step = 270
+    @step = @size * 1.1
     @topstep = 12
     @zindex = 100000
     @aspect = 0
@@ -162,7 +165,7 @@ class ProductsController < ApplicationController
         if(@pos == 'left')
           @pos = 'right'
           @point = @pointX -= @step
-          @point < 30 && @point = 30
+          @width > 768 && @point < 30 && @point = 30
           @aspect = -@pright +=1
           @top -= @topstep
           @top < 120 && @top = 120
@@ -170,7 +173,7 @@ class ProductsController < ApplicationController
         else
           @pos = 'left'
           @point = @pointY += @step
-          @point > @width * 0.78 && @point = @width * 0.78
+          @width > 768 && @point > @width * 0.78 && @point = @width * 0.78
           @aspect = @pleft += 1
           @step -= @step/(2*@k)
           @k++
@@ -196,6 +199,10 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path
+  end
+
+  def privatpolicy
+    redirect_to privatpolicy_path
   end
 
   private

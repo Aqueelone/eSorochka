@@ -10,14 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require open-sans/stylesheet
  *= require bootstrap
  *= require animate
  *= require bootstrap-wysihtml5
  *= require font-awesome
  *= require jquery.minicolors
- *= require_tree .
  *= require_self
+ *= require_tree .
  */
-
-@import "open-sans/stylesheet";

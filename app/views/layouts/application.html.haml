@@ -1,12 +1,18 @@
 !!!
 %html
   %head
+    = ' '
     %meta{charset: "utf-8"}
     %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
-    %meta{:content => content_for?(:description) ? yield(:description) : "Сорочка ОПТ", :name => "description"}
+    %link{rel: "dns-prefetch", href: "http://cdn.sorochkaopt.com"}
+    %link{rel: "dns-prefetch", href: "http://www.google-analytics.com"}
+    %meta{name: "fb:app_id", content: "469203883283146"}
+    %meta{property: "fb:app_id", content: "469203883283146"}
+    = yield :custom_meta_tags
+    = yield :opengraph_meta_tags
     %meta{content: "Sergy Nazarevich", name: "author"}
-    %meta{:content => "http://sorochkaopt.com", :property => "og:url"}
+    %link{rel: "author", href: "https://www.facebook.com/aqueelone"}
     %title= content_for?(:title) ? "#{t(:title)} | " + yield(:title) : "#{t(:title)}"
 
     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -16,9 +22,14 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+  = ' '
   %body
     %input{type: 'hidden', id: 'locale', value: "#{I18n.locale}"}
     %input{type: 'hidden', id: 'catalog-test', value: "#{session['category']}"}
+    .fb-root
+    .mod-loader
+      .div-loader
+        %img.loader{src: '/ajax-loading.gif', alt: 'loading..', title: 'loading...'}
     %header#home
       %nav.navbar.navbar-transparent.navbar-fixed-top
         .main-nav
@@ -31,7 +42,7 @@
                 %span.icon-bar
                 %span.icon-bar
               %a.navbar-brand{href: '/'}
-                %img{src: '/logo.png'}
+                %img{src: '/logo.png', alt: 'logo', title: "#{t('home-slider.t1')} #{t('home-slider.t2')} #{t('title')}"}
               = render partial: 'lang'
             .collapse.navbar-collapse
               = render partial: 'menu'

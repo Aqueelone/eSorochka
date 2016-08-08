@@ -27,6 +27,7 @@ be:
   _furthermore: "падрабязней..."
   _showcase: "вітрына"
   _grid: "сетка"
+  _topic: "тэматыкі сайта"
   account: "Аккаунт"
   title: 'Сорочка ОПТ'
   orders:
@@ -58,7 +59,7 @@ be:
       header: "Гісторыя Замовы"
       blank: "Гісторыі ще не маецца ..."
       table:
-        order_status: "стан замовы"
+        order_status: "стан"
         payment_type: "тып плацяжу"
         updated_at: "абноўлена ў"
         your_manager: "Ваш менеджэр"
@@ -71,6 +72,9 @@ be:
   category:
       two: "Мужчынскія кашулі з доўгімі рукавамі"
       three: "Мужчынскія кашулі з кароткімі рукавамі"
+      ten: "Мужчынскія футболкі"
+  contactus:
+      desc: "Свяжитесь с нами и мы ответим на все Ваши вопросы!"
   activerecord:
     errors:
       models:

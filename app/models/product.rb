@@ -23,6 +23,8 @@
 #
 
 class Product < ActiveRecord::Base
+  include ApplicationHelper
+  acts_as_opengraph
   has_many :galleries
   has_many :images, through: :galleries
   has_many :colors, through: :galleries
@@ -31,4 +33,11 @@ class Product < ActiveRecord::Base
   belongs_to :category
   belongs_to :brand
   has_and_belongs_to_many :sizes
+
+  def opengraph_title
+    self.brand.name + ' $' + self.price_max.to_s + '  ' + self.sizes.map {|s| s.sign}.join(':')
+  end
+  def opengraph_url
+    "http://" + Thread.current[:request] + "/product/" + self.id.to_s + "/view?locale="+I18n.locale.to_s
+  end
 end

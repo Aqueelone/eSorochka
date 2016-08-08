@@ -4,6 +4,10 @@ body {
   line-height: 24px;
   color: #080808;
   background-color: #fff;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -113,7 +117,7 @@ section {
   .container .navbar-right {
     .scroll a, .remote-modal a, .direct a{
       color: #042062;
-      font: normal normal normal 17px/1em 'okolaksregular',sans-serif;
+      font: normal normal normal 1.1em/1em 'okolaksregular',sans-serif;
       font-weight: bold;
       text-shadow: 0px 0px 2px #ffffff, 0px 0px 5px #ffffff, 0px 0px 10px #ffffff,
       0px 0px 20px #ffffff, 0px 0px 50px #ffffff;
@@ -149,7 +153,7 @@ section {
     text-align: center;
     text-transform: uppercase;
     z-index: 15;
-    font-size: 18px;
+    font-size: 1.2em;
     font-weight: 300;
     color: #fff;
     h1 {
@@ -163,7 +167,7 @@ section {
 
 .caption .btn-start {
   color: #fff;
-  font-size: 14px;
+  font-size: 1em;
   font-weight: 600;
   padding: 14px 40px;
   border: 1px solid #6e6d6c;

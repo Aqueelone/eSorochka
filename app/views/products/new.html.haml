@@ -4,5 +4,7 @@
   .tab-content
     %fieldset
       %legend
-        New product
+        = t('activerecord.attributes.product.new')
       = render 'form'
+:javascript
+  admit_product();

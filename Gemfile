@@ -4,6 +4,7 @@ gem 'bundler', '>= 1.8.4'
 gem 'rails', '4.1.8'
 # load enveronmets
 gem 'dotenv-rails', :groups => [:development, :test]
+#gem "browserify-rails"
 # Use postgresql9.4 as the database for Active Record
 gem 'pg'
 gem 'foreigner'
@@ -53,48 +54,35 @@ gem 'http_accept_language'
 gem "bower-rails", "~> 0.10.0"
 gem 'backbone-on-rails', '1.2.0.0'
 gem 'handlebars_assets', '0.21.0'
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+#gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'js_image_paths',    '0.0.2'
 gem 'js-routes',         '1.1.2'
-source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery',                              '1.11.2'
-  gem 'rails-assets-bootstrap'
-  gem 'rails-assets-angular'
-  gem 'rails-assets-leaflet'
-  # Should be kept in sync with jquery-rails
-  gem 'rails-assets-markdown-it',                         '5.0.2'
-  gem 'rails-assets-markdown-it-hashtag',                 '0.4.0'
-  gem 'rails-assets-markdown-it-sanitizer',               '0.4.1'
-  gem 'rails-assets-markdown-it--markdown-it-for-inline', '0.1.1'
-  gem 'rails-assets-markdown-it-sub',                     '1.0.0'
-  gem 'rails-assets-markdown-it-sup',                     '1.0.0'
-  gem 'rails-assets-highlightjs',                         '8.9.1'
-  gem 'rails-assets-typeahead.js',                        '0.11.1'
-  # jQuery plugins
-  gem 'rails-assets-jquery.documentsize'
-  gem 'rails-assets-jquery.isinview'
-  gem 'rails-assets-animate-css'
-  gem 'rails-assets-wow'
-  gem 'rails-assets-jquery-mousewheel'
-  gem 'rails-assets-jquery-placeholder'
-  gem 'rails-assets-jquery-textchange'
-  gem 'rails-assets-vanilla-masker'
-  gem 'rails-assets-perfect-scrollbar'
-  gem 'rails-assets-jquery-smooth-scroll'
-  gem 'rails-assets-Smooth-jQuery-Parallax'
-  gem 'rails-assets-jakobmattsson--jquery-elastic'
-  gem 'rails-assets-autosize'
-  gem 'rails-assets-blueimp-gallery'
-  gem 'rails-assets-blueimp-bootstrap-image-gallery'
-  gem 'rails-assets-blueimp-canvas-to-blob'
-  gem 'rails-assets-blueimp--JavaScript-Load-Image'
-  gem 'rails-assets-blueimp-tmpl'
-  gem 'rails-assets-blueimp-file-upload'
-  gem 'rails-assets-jquery.jscroll'
-end
+gem 'rails-assets-jquery',                              '1.11.2'
+gem 'rails-assets-bootstrap'
+gem 'rails-assets-angular'
+gem 'rails-assets-leaflet'
+# Should be kept in sync with jquery-rails
+gem 'rails-assets-markdown-it',                         '5.0.2'
+gem 'rails-assets-markdown-it-hashtag',                 '0.4.0'
+gem 'rails-assets-markdown-it-sanitizer',               '0.4.1'
+gem 'rails-assets-markdown-it--markdown-it-for-inline', '0.1.1'
+gem 'rails-assets-markdown-it-sub',                     '1.0.0'
+gem 'rails-assets-markdown-it-sup',                     '1.0.0'
+gem 'rails-assets-highlightjs',                         '8.9.1'
+gem 'rails-assets-typeahead.js',                        '0.11.1'
+# jQuery plugins
+gem 'rails-assets-jquery.documentsize'
+gem 'rails-assets-jquery.isinview'
+gem 'rails-assets-animate-css'
+gem 'rails-assets-wow'
+gem 'rails-assets-jquery-mousewheel'
+gem 'rails-assets-jquery-placeholder'
+gem 'rails-assets-jquery-textchange'
+gem 'rails-assets-jakobmattsson--jquery-elastic'
+gem 'rails-assets-autosize'
 gem 'bootstrap-wysihtml5-rails'
 gem 'tinymce-rails'
 # file uploads + S3
@@ -134,6 +122,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'annotate', :groups => [:development]
 gem 'kramdown', :groups => [:development], :require => false
 gem 'railroady', :groups => [:development, :test]
+# SEO
+gem 'acts_as_opengraph'
+gem "dynamic_sitemaps"
+# Mobiling
+gem 'mobylette'
+# Server
+gem 'puma'
+# gem 'passenger', '~> 5.0', '>= 5.0.26', require: "phusion_passenger/rack_handler"
 # Prevent occasions where minitest is not bundled in
 # packaged versions of ruby. See following issues/prs:
 # https://github.com/gitlabhq/gitlabhq/issues/3826
@@ -197,8 +193,7 @@ group :development, :test do
   # Jasmine (client side application tests (JS))
   gem 'jasmine',                   '2.3.1'
   gem 'jasmine-jquery-rails',      '2.0.3'
-  gem 'rails-assets-jasmine-ajax', '3.2.0',
-      source: 'https://rails-assets.org'
+  gem 'rails-assets-jasmine-ajax', '3.2.0'
   gem 'sinon-rails',               '1.15.0'
   # silence assets
   gem 'quiet_assets', '1.1.0'

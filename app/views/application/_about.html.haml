@@ -1,3 +1,12 @@
+= content_for :custom_meta_tags do
+  %link{rel: "canonical", href: "#{request.original_url}"}
+  %meta{property: "og:image", content: "http://sorochkaopt.com/bannerShare.jpg"}
+  %meta{property: "og:image:type", content: "image/jpeg"}
+  %meta{property: "og:image:width", content: "487"}
+  %meta{property: "og:image:height", content: "249"}
+  - keywords = ['сорочка', 'shirt', 'рубашка', 'сорочки', 'shirts', 'рубашки', 'гуртом', 'wholesale', 'оптом']
+  - keywords << ['turkey', 'турция', 'турція', 'турецкие', 'турецькі', 'turkish']
+  %meta{name: "keywords", content: "#{keywords.join(', ')}"}
 .container
   .col-sm-8
     .heading.text-left.col-sm-8.col-sm-offset-2.wow.fadeInUp.animated{ 'data-wow-duration' => "1500ms", 'data-wow-delay' => "500ms"}
@@ -5,13 +14,14 @@
         =t(:_about)
       %p
         =t('about.p1')
-      %p
         =t('about.p2')
       %p
         =t('about.p3')
       %h2
         =t('about.p4')
-  .col-sm-3.wow.lightSpeedIn{'data-wow-duration' => '1200ms', 'data-wow-delay' => '1500ms'}
+      %a.btn.btn-start.btn-submit.topbutton.animated.scroll.fadeInUpBig{ href: '/contacts'}
+        =t(:_contact_us)
+  .col-sm-3.wow.fadeInUp.animated{'data-wow-duration' => '1200ms', 'data-wow-delay' => '1500ms'}
     - Brand.all().order('brands.id ASC').each do |b|
       .brand_image
         = attachment_image_tag(b, :image, :fill, 300, 100, fallback: "default300x100.png", class: 'image_uploaded', title: b.description)

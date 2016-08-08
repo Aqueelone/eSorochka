@@ -13,11 +13,11 @@
           %td{:scope => "row"} Description
           %td= @brand.description
         %tr
-          %td{:scope => "row"} Parent
+          %td{:scope => "row"} Image
           %td= attachment_image_tag(@brand, :image, :fill, 300, 100, fallback: "default300x100.png")
         %tr
           %td{:scope => "row"}
           %td
-            = bootstrap_icon_link_to 'Edit', edit_brand_path(@brand), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_brand_path(@brand), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', @brand, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), @brand, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

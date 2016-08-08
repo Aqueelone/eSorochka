@@ -3,15 +3,23 @@
   = show_flash
   .tab-content
     %fieldset
-      %legend List of users
+      %legend
+        = t('activerecord.attributes.category.index')
       %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
         %thead
           %tr
-            %th{:scope => "column"} Name
-            %th{:scope => "column"} Name
-            %th{:scope => "column"} Name
-            %th{:scope => "column"} Visible
-            %th{:scope => "column"} Parent
+            %th{:scope => "column"}
+              = t('activerecord.attributes.category.name_ua')
+            %th{:scope => "column"}
+              = t('activerecord.attributes.category.name_ru')
+            %th{:scope => "column"}
+              = t('activerecord.attributes.category.name_en')
+            %th{:scope => "column"}
+              = t('activerecord.attributes.category.visible')
+            %th{:scope => "column"}
+              = t('activerecord.attributes.category.image')
+            %th{:scope => "column"}
+              = t('activerecord.attributes.category.parent')
             %th{:scope => "column"}
         %tbody
           - @categories.each do |c|
@@ -20,11 +28,12 @@
               %td= c.name_ru
               %td= c.name_en
               %td= c.visible
+              %td= attachment_image_tag(c, :image, :fill, 120, 120, fallback: "default120x120.png")
               - if(c.parent_id)
                 %td= Category.find(c.parent_id).name_ua
               - else
                 %td
               %td
-                = bootstrap_icon_link_to 'Show',c, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
-                = bootstrap_icon_link_to "Edit", edit_category_path(c), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
-                = bootstrap_icon_link_to 'Delete', c, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+                = bootstrap_icon_link_to t(:_show),c, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to t(:_edit), edit_category_path(c), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to t(:_delete), c, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

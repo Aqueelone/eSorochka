@@ -7,12 +7,15 @@
       %table.table.table-striped.table-bordered.table-condensed{:role => "grid"}
         %thead
           %tr
-            %th{:scope => "column"} Name
-            %th{:scope => "column"} Email
-            %th{:scope => "column"} Cell
-            %th{:scope => "column"} Networks
-            %th{:scope => "column"} SignInCount
-            %th{:scope => "column"} Temporary
+            %th{:scope => "column"}
+              = t('admins.headers.name_p')
+            %th{:scope => "column"} email
+            %th{:scope => "column"}
+              = t('admins.headers.cell')
+            %th{:scope => "column"} networks
+            %th{:scope => "column"} s.i.count
+            %th{:scope => "column"}
+              = t('admins.headers.temporary')
             %th{:scope => "column"}
         %tbody
           - @users.each do |user|
@@ -20,9 +23,11 @@
               %td
                 = user.name
                 - if user.is_admin
-                  %span.label.label-info Admin
+                  %span.label.label-info
+                    = t('admins.headers.is_admin')
                 - if user.is_moderator
-                  %span.label.label-info Moderator
+                  %span.label.label-info
+                    = t('admins.headers.is_moderator')
               %td= user.email
               %td= user.cell
               %td
@@ -32,6 +37,6 @@
               %td= user.sign_in_count
               %td= user.temporary
               %td
-                = bootstrap_icon_link_to 'Profile', user, "glyphicon glyphicon-user icon-white", method: :get, :class => "button btn btn-small btn-primary"
-                = bootstrap_icon_link_to "Edit", edit_user_path(user), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
-                = bootstrap_icon_link_to 'Delete', user, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+                = bootstrap_icon_link_to t('layouts.header.profile'), user, "glyphicon glyphicon-user icon-white", method: :get, :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to t(:_edit), edit_user_path(user), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+                = bootstrap_icon_link_to t(:_delete), user, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

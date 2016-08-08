@@ -2,6 +2,10 @@
   .col-sm-3
     %a{href: './privatpolicy'}
       Privacy Policy
+    %br
+    %a{href: "#{sitetopic_path}"}
+      = t(:_topic)
+  .col-sm-6
   .copyright
     %p
       \&copy; 2001 - #{Time.now.year}

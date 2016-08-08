@@ -1,0 +1,37 @@
+.top_box.clearfix
+%section#sitetopic
+  %table.table.table-striped.table-order-history-item{:role => "grid"}
+    %thead
+      %caption
+        = t(:_topic)
+    %tbody
+      %tr
+        %td= link_to t(:_home), home_path
+      %tr
+        %td= link_to t(:_about), about_path
+      %tr
+        %td= link_to t(:_contact_us), contacts_path
+      %tr
+        %td= link_to t('registrations.new.sign_up'), remote_sign_up_path
+      %tr
+        %td= link_to t('layouts.header.login'), remote_sign_in_path
+      %tr
+        %td= link_to t(:_order), _order_path
+      %tr
+        %td= link_to t(:_catalog), catalog_path
+      - @categories.each do |c|
+        %tr
+          %td
+            %a{href: "/catalog?id=#{c.id}"}
+              - if c.id == 2
+                = t('category.two')
+              - if c.id == 3
+                = t('category.three')
+              - if c.id == 10
+                = t('category.ten')
+        - Product.where("products.category_id = '#{c.id}'").each do |p|
+          %tr
+            %td
+              %a{href: "#{view_product_path(p)}", alt: "#{p.opengraph_title}", title: "#{p.opengraph_title}"}
+                = attachment_image_tag((p.picture_id && Image.find(p.picture_id)) || Image.new, :file, :fill, 90, 120, format: "jpeg", fallback: "default90x120.png", class: 'image_uploaded')
+                = p.name + " - " + p.opengraph_title

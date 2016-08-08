@@ -12,5 +12,5 @@
       %td{:scope => "row"}= f.label :name
       %td= f.text_field :name, class: "name_field"
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', order_statuses_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), order_statuses_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"

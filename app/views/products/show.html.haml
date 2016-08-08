@@ -4,34 +4,41 @@
   .tab-content
     %fieldset
       %legend
-        Profile of #{@product.name}:
+        = t('activerecord.attributes.product.profile') + @product.name
       %table.table-striped.table-bordered.table-condensed.table-product-picture{:role => "grid"}
         %tr
           %td= attachment_image_tag((@product.picture_id && Image.find(@product.picture_id)) || Image.new, :file, :fill, 300, 400, fallback: "default300x400.png", class: 'image_uploaded')
       %table.table-striped.table-bordered.table-condensed.table-product-form{:role => "grid"}
         %tr
-          %td{:scope => "row"} Name
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.name')
           %td.name_field= @product.name
         %tr
-          %td{:scope => "row"} Brand
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.brand')
           %td.name_field
             - if(@product.brand_id)
               - b = Brand.find(@product.brand_id)
               = attachment_image_tag(b, :image, :fill, 300, 100, fallback: "default300x100.png")
         %tr
-          %td{:scope => "row"} Category
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.category')
           %td.name_field= @product.category_id && Category.find(@product.category_id).name_ua
         %tr
-          %td{:scope => "row"} Description
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.description')
           %td.name_field= @product.description
         %tr
-          %td{:scope => "row"} Price
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.price')
           %td.name_field= @product.price_max && (@product.price_max.to_s + '$')
         %tr
-          %td{:scope => "row"} Amount min
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.amount')
           %td.name_field= @product.amount_max && (@product.amount_max.to_s)
         %tr
-          %td{:scope => "row"} Sizes
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.sizes')
           %td.name_field
             %table.table-striped.table-bordered.table-condensed.table-size-show{:role => "grid"}
               %tr
@@ -41,22 +48,29 @@
         %tr
           %td{:scope => "row"}
           %td.name_field
-            = bootstrap_icon_link_to 'Edit', edit_product_path(@product), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_product_path(@product), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', @product, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), @product, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
       %table.table-striped.table-bordered.table-condensed.table-product-char-form{:role => "grid"}
         %tr
-          %td{:scope => "row"} Cut type
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.cut_type')
           %td.name_field= @product.cut_type
         %tr
-          %td{:scope => "row"} Collar type
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.collar_type')
           %td.name_field= @product.collar_type
         %tr
-          %td{:scope => "row"} Sleeve_type
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.sleeve_type')
           %td.name_field= @product.sleeve_type
         %tr
-          %td{:scope => "row"} Cuff_type
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.cuff_type')
           %td.name_field= @product.cuff_type
         %tr
-          %td{:scope => "row"} Style_type
+          %td{:scope => "row"}
+            = t('activerecord.attributes.product.style_type')
           %td.name_field= @product.style_type
+:javascript
+  admit_product();

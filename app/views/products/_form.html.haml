@@ -27,16 +27,16 @@
       %td{:scope => "row"}= f.label :description
       %td= f.text_area :description, class: 'text_input'
     %tr
-      %td{:scope => "row"}= f.label 'Price'
+      %td{:scope => "row"}= f.label t('admins.headers.price')
       %td.number_field= f.number_field :price_max
     %tr
-      %td{:scope => "row"}= f.label 'Amount'
+      %td{:scope => "row"}= f.label  t('admins.headers.amount')
       %td.number_fiel= f.number_field :amount_max
     %tr
       %td{:scope => "row"}= f.label :sizes
       %td= f.collection_check_boxes(:size_ids, Size.all, :id, :sign)
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', products_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), products_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"
   %table.table-striped.table-bordered.table-condensed.table-product-picture{:role => "grid"}
     %tr
@@ -52,7 +52,7 @@
   %table.table-striped.table-bordered.table-condensed.table-product-char-form{:role => "grid"}
     - !@colors.blank? && @colors.each do |c|
       %tr
-        %td{:scope => "row"}= f.label 'Colors'
+        %td{:scope => "row"}= f.label  t('activerecord.models.color')
         %td.order_field
           = c.name
           .color_square{style: "background-color: #{c.color_gid}"}
@@ -79,7 +79,7 @@
         %tr
           %td
             %input{type: 'hidden', id: 'image_id', name: 'image_id', value: "#{i.id}"}
-            = bootstrap_icon_link_to 'Set as primary', '#', "glyphicon glyphicon-check icon-white", :class => "button btn btn-small btn-primary btn-picture-set"
+            = bootstrap_icon_link_to t('admins.headers.set_as_primary'), '#', "glyphicon glyphicon-check icon-white", :class => "button btn btn-small btn-primary btn-picture-set"
   %table.table-striped.table-bordered.table-condensed.table-product-gallery-form{:role => "grid"}
     - !@galleries.blank? && @galleries.each do |b|
       %tr
@@ -88,15 +88,15 @@
         %td= b.images.count
         %td
           %input{type: 'hidden', id: 'gallery_id', name: 'gallery_id', value: "#{b.id}"}
-          = bootstrap_icon_link_to 'Show', b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
-          = bootstrap_icon_link_to "Edit", edit_gallery_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
-          = bootstrap_icon_link_to 'Remove from product',"#", "glyphicon glyphicon-trash icon-white", :class => "button btn btn-small btn-warning btn-gallery-remove"
+          = bootstrap_icon_link_to t(:_show), b, "glyphicon glyphicon-book icon-white", method: :get, :class => "button btn btn-small btn-primary"
+          = bootstrap_icon_link_to t(:_edit), edit_gallery_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+          = bootstrap_icon_link_to t('admins.headers.remove_gallery'),"#", "glyphicon glyphicon-trash icon-white", :class => "button btn btn-small btn-warning btn-gallery-remove"
     %tr
       %td
-        = bootstrap_icon_link_to 'Add gallery', '#', "glyphicon glyphicon-plus icon-white", method: :get, :class => "button btn btn-small btn-primary"
+        = bootstrap_icon_link_to t('admins.headers.add_gallery'), '#', "glyphicon glyphicon-plus icon-white", method: :get, :class => "button btn btn-small btn-primary"
       %td.select_gallery
         - if(!@product.id.blank?)
-          = collection_select @product, 'gallery_id', @galleries_for_add, :id, :name, include_blank: 'select gallery...'
+          = collection_select @product, 'gallery_id', @galleries_for_add, :id, :name, include_blank: t('admins.headers.select_gallery')
   .gallery_insert_box
 
 

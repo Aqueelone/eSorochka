@@ -31,5 +31,5 @@
       %td{:scope => "row"}= f.label :password_confirmation
       %td= f.password_field :password_confirmation
     %tr
-      %td= bootstrap_icon_link_to 'Cancel', users_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
+      %td= bootstrap_icon_link_to t(:_cansel), users_path, 'glyphicon glyphicon-time icon-white', :class => "button btn btn-warning"
       %td= f.submit :class => "button btn btn-success"

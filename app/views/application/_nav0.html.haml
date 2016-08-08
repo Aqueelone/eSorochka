@@ -2,9 +2,16 @@
   .flash.wow.lightSpeedIn{data: {tabs: "tabs"}, 'data-wow-duration' => '1000ms', 'data-wow-delay' => '200ms'}
   %ul.nav0-tabs
     - Category.where("categories.visible = 't'").each do |c|
-      %li{class: "#{(c.id.to_s == session['category']) ? 'active' : ''}"}
-        %a{href: "#catalog", title: "#{c.name_ua}", id: "catalog-#{c.id}", class: "catalog-toggle"}
-          - if c.id == 2
-            = t('category.two')
-          - if c.id == 3
-            = t('category.three')
+      %li{class: "nav#{(c.id.to_s == session['category']) ? ' active' : ''}"}
+        %a{href: "#cat-#{c.id}", title: "#{c.name_ua}", id: "catalog-#{c.id}", 'data-toggle' => 'tab', class: "catalog-toggle"}
+          .cat-img
+            = attachment_image_tag(c, :image, :fill, 120, 120, fallback: "default120x120.png")
+  .tab-content
+    - Category.where("categories.visible = 't'").each do |c|
+      .tab-pane.fade{class: "#{(c.id.to_s == session['category']) ? 'in active' : ''}", id: "cat-#{c.id}"}
+        - if c.id == 2
+          = t('category.two')
+        - if c.id == 3
+          = t('category.three')
+        - if c.id == 10
+          = t('category.ten')

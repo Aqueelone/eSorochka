@@ -2,7 +2,7 @@
 - !@clear && !@err && (render partial: 'order_success')
 - if @orders_history.blank?
   =t('orders.history.blank')
--else
+- else
   %table.table.table-striped.table-condensed.table-order-history-box{:role => "grid"}
     %thead
       %tr

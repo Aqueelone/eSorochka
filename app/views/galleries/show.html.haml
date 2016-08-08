@@ -4,7 +4,7 @@
   .tab-content
     %fieldset
       %legend
-        Profile of #{@gallery.name}:
+        = t('activerecord.attributes.gallery.profile') + @gallery.name
       - @gallery.images.each do |b|
         %table.table-striped.table-bordered.table-condensed.table-image-profile{:role => "grid"}
           %tr
@@ -15,25 +15,30 @@
             %td= link_to 'edit image', edit_image_path(b)
       %table.table-striped.table-bordered.table-condensed.table-user-profile{:role => "grid"}
         %tr
-          %td{:scope => "row"} Name
+          %td{:scope => "row"}
+            = t('activerecord.attributes.gallery.name')
           %td= @gallery.name
         %tr
-          %td{:scope => "row"} Description
+          %td{:scope => "row"}
+            = t('activerecord.attributes.gallery.description')
           %td= @gallery.description
         %tr
-          %td{:scope => "row"} Category
+          %td{:scope => "row"}
+            = t('activerecord.attributes.gallery.category')
           %td= @gallery.category_id && Category.find(@gallery.category_id).name_ua
         %tr
-          %td{:scope => "row"} Color
+          %td{:scope => "row"}
+            = t('activerecord.models.color')
           %td
             .color_square{style: "background-color: #{Color.find(@gallery.color_id).color_gid};"}
         %tr
-          %td{:scope => "row"} Fabric
+          %td{:scope => "row"}
+            = t('activerecord.models.fabric')
           %td
             = attachment_image_tag(Fabric.find(@gallery.fabric_id), :image, :fill, 300, 300, fallback: "default300x300.png")
         %tr
           %td{:scope => "row"}
           %td
-            = bootstrap_icon_link_to 'Edit', edit_gallery_path(@gallery), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_gallery_path(@gallery), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', @gallery, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), @gallery, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

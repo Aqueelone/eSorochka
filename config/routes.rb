@@ -125,10 +125,14 @@
 #                          home GET       /home(.:format)                               static_pages#home
 #                      contacts GET       /contacts(.:format)                           static_pages#contacts
 #                         about GET       /about(.:format)                              static_pages#about
+#                        _order GET       /order(.:format)                              static_pages#order
 #                     userslist GET       /userslist(.:format)                          static_pages#userslist
 #                  privatpolicy GET       /privatpolicy(.:format)                       static_pages#privatpolicy
 #                       catalog GET       /catalog(.:format)                            categories#catalog
+#                     sitetopic GET       /sitetopic(.:format)                          static_pages#sitetopic
 #                    adminpanel GET       /adminpanel(.:format)                         static_pages#adminpanel
+#                       sitemap GET       /sitemap.xml(.:format)                        static_pages#sitemap
+#                        robots GET       /robots.txt(.:format)                         static_pages#robots
 #                remote_sign_up GET       /remote_sign_up(.:format)                     remote_content#remote_sign_up
 #                remote_sign_in GET       /remote_sign_in(.:format)                     remote_content#remote_sign_in
 #              remote_image_add POST      /remote_image_add(.:format)                   image#create_from_gallery
@@ -183,7 +187,11 @@
 #               picture_product POST      /products/:id/picture(.:format)               products#picture
 #           get_catalog_product GET       /products/:id/get_catalog(.:format)           products#get_catalog
 #          show_product_product GET       /products/:id/show_product(.:format)          products#show_product
+#                  view_product GET       /products/:id/view(.:format)                  products#view
+#             show_full_product GET       /products/:id/show_full(.:format)             products#show_full
 #             show_mode_product GET       /products/:id/show_mode(.:format)             products#show_mode
+#          get_deffered_product GET       /products/:id/get_deffered(.:format)          products#get_deffered
+#       remove_deffered_product GET       /products/:id/remove_deffered(.:format)       products#remove_deffered
 #                               GET       /products(.:format)                           products#index
 #                               POST      /products(.:format)                           products#create
 #                               GET       /products/new(.:format)                       products#new
@@ -235,6 +243,7 @@
 
 
 
+
 Rails.application.routes.draw do
   resources :categories
   resources :brands
@@ -250,7 +259,6 @@ Rails.application.routes.draw do
   resources :payment_types
   resources :order_statuses
 
-
   devise_for :users, :controllers => { registrations: 'registrations',
                                        omniauth_callbacks: 'omniauth_callbacks', sessions: 'sessions' }
   get 'home' => 'static_pages#home', :as => 'home'
@@ -260,7 +268,13 @@ Rails.application.routes.draw do
   get 'userslist' => 'static_pages#userslist', :as => 'userslist'
   get 'privatpolicy' => 'static_pages#privatpolicy', :as => 'privatpolicy'
   get 'catalog' => 'categories#catalog', :as => 'catalog'
+  post 'catalog' => 'categories#catalog', :as => 'catalog_post'
+  get 'sitetopic' => 'static_pages#sitetopic', :as => 'sitetopic'
   get 'adminpanel' => 'static_pages#adminpanel', :as => 'adminpanel'
+  get "sitemap.xml" => "static_pages#sitemap", format: :xml, as: :sitemap
+  get "robots.txt" => "static_pages#robots", format: :text, as: :robots
+  get 'facebook' => 'static_pages#facebook', :as => 'facebook'
+  get 'vkontakte' => 'static_pages#vkontakte', :as => 'vkontakte'
 
   match 'remote_sign_up', to: 'remote_content#remote_sign_up', via: [:get]
   match 'remote_sign_in', to: 'remote_content#remote_sign_in', via: [:get]
@@ -309,6 +323,7 @@ Rails.application.routes.draw do
       get :show_mode
       get :get_deffered
       get :remove_deffered
+      get :privatpolicy
     end
   end
 

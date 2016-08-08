@@ -42,6 +42,6 @@
           %td.image_preview= attachment_image_tag(Image.find(pc.picture_id), :file, :fill, 45, 60, fallback: "default300x400.png", class: 'image_uploaded')
           %td
             = fo.submit "Add", :class => "button btn btn-success"
-            = bootstrap_icon_link_to 'Edit', edit_order_item_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
+            = bootstrap_icon_link_to t(:_edit), edit_order_item_path(b), "glyphicon glyphicon-pencil icon-white", :class => "button btn btn-small btn-primary"
             - if current_user.is_admin
-              = bootstrap_icon_link_to 'Delete', b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"
+              = bootstrap_icon_link_to t(:_delete), b, "glyphicon glyphicon-trash icon-white", confirm: 'Are you sure?', method: :delete, :class => "button btn btn-small btn-danger"

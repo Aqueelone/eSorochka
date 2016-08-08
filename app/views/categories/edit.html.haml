@@ -4,5 +4,5 @@
   .tab-content
     %fieldset
       %legend
-        Edit category
+        = t('activerecord.attributes.category.edit') + @category.name_ua
       = render 'form'
